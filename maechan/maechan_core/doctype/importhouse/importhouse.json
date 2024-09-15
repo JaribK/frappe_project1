@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:IMPORTHOUSE-{YY}{MM}{DD}-{#####}",
+ "creation": "2023-09-07 10:39:51.295044",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "status",
+  "geojson_file",
+  "preview",
+  "import_preview"
+ ],
+ "fields": [
+  {
+   "fieldname": "geojson_file",
+   "fieldtype": "Attach",
+   "label": "GEOJSON File"
+  },
+  {
+   "fieldname": "preview",
+   "fieldtype": "Button",
+   "label": "preivew"
+  },
+  {
+   "fieldname": "import_preview",
+   "fieldtype": "HTML",
+   "label": "Import Preview"
+  },
+  {
+   "default": "Ready",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "status",
+   "options": "Ready\nIn Progress\nFinished",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-09-11 14:52:12.256420",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "ImportHouse",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

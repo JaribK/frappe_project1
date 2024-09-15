@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+
+    {{ include_style('/assets/maechan/css/output.css') }}
+
+    <style>
+        .print-format {
+            margin-top: 10mm;
+            margin-left: 10mm;
+            margin-right: 10mm;
+            padding: 0;
+            font-size: 14px !important;
+            font-family: 'Sarabun', sans-serif;
+
+        }
+
+        body {
+            font-size: 14px;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        .license-header {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .license-date {
+            font-size: 15px;
+        }
+
+        .test {
+            color: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            {% set requestLicense = frappe.get_doc('RequestLicense', doc.requestLicense_id) %}
+            <div class="tw-text-center license-header">แบบตรวจสถานที่{{requestLicense.license_type}}</div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <p>วันที่นัดหมาย</p>
+                                <p>กิจการ</p>
+                                <p>ข้อมูลผู้ขอใบอนุญาต</p>
+                                <p>ที่อยู่สถานประกอบการ</p>
+                                <p>สรุปผลการตรวจ</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <p>{{doc.checklist_date}}</p>
+                                <p>{{requestLicense.business}}</p>
+                                <p>ชื่อ-สกุล {{requestLicense.applicant_name}}, เบอร์โทรศัพท์ {{requestLicense.applicant_tel}}</p>
+                                <p>{{requestLicense.house_no}}</p>
+                                <p>{{doc.checklist_result}}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <div>
+                <p>รายละเอียดแบบตรวจสอบ</p>
+                <div>
+                    <table class="tw-w-full tw-table-fixed tw-text-left">
+                        <thead>
+                            <tr >
+                                <th class="tw-border-2">ลำดับ</th>
+                                <th class="tw-border-2">หัวข้อ</th>
+                                <th class="tw-border-2">รายละเอียนด</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%- for checklistextra in doc.checklist_extra -%}
+                            <tr>
+                                <td class="tw-border-2">{{loop.index}}</td>
+                                <td class="tw-border-2">{{checklistextra.key | handleNone}}</td>
+                                <td class="tw-border-2">{{checklistextra.value | handleNone}}</td>
+                            </tr>
+                            {%- endfor -%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tw-mt-auto tw-p-10">
+                <p>เกณฑ์พิจารณา</p>
+                <div>
+                    <table class="tw-w-full tw-table-fixed tw-text-left tw-border-2">
+                        <thead>
+                            <tr>
+                                <th class="tw-border-2 test">ลำดับ</th>
+                                <th class="tw-border-2">ข้อกำหนด</th>
+                                <th class="tw-border-2">รายละเอียด</th>
+                                <th class="tw-border-2">ผลการตรวจ</th>
+                                <th class="tw-border-2">หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%- for checklist in doc.checklist_list -%}
+                            <tr>
+                                <td class="tw-border-2">{{loop.index}}</td>
+                                <td class="tw-border-2">{{checklist.key | handleNone}}</td>
+                                <td class="tw-border-2">{{checklist.title_detail | handleNone}}</td>
+                                <td class="tw-border-2">{{checklist.value | handleNone}}</td>
+                                <td class="tw-border-2">{{checklist.comment | handleNone}}</td>
+                            </tr>
+                            {%- endfor -%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tw-flex tw-justify-center">
+            <div class="tw-mx-auto tw-text-center">
+                <p>ลงชื่อ.................................................</p>
+                <p>(.........................................................)</p>
+                <p>เจ้าของสถานประกอบการ</p>
+            </div>
+            <div class="tw-mx-auto tw-text-center">
+                <p>ลงชื่อ.................................................</p>
+                <p>(.........................................................)</p>
+                <p>เจ้าพนักงานสาธารณสุข</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

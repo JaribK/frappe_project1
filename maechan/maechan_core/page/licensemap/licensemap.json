@@ -1,0 +1,26 @@
+{
+ "content": null,
+ "creation": "2023-09-20 19:59:29.497482",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-09-20 19:59:29.497482",
+ "modified_by": "Administrator",
+ "module": "Maechan",
+ "name": "licensemap",
+ "owner": "Administrator",
+ "page_name": "licensemap",
+ "roles": [
+  {
+   "role": "Thedsaban Manager"
+  },
+  {
+   "role": "Thedsaban Mayor"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "licensemap"
+}

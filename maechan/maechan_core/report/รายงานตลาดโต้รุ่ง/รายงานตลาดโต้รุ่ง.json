@@ -1,0 +1,55 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "name",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d",
+   "width": 0
+  },
+  {
+   "fieldname": "Road",
+   "fieldtype": "Data",
+   "label": "\u0e1a\u0e23\u0e34\u0e40\u0e27\u0e13",
+   "width": 0
+  },
+  {
+   "fieldname": "Lot",
+   "fieldtype": "Data",
+   "label": "\u0e41\u0e1c\u0e07",
+   "width": 0
+  },
+  {
+   "fieldname": "Zone",
+   "fieldtype": "Data",
+   "label": "\u0e42\u0e0b\u0e19",
+   "width": 0
+  },
+  {
+   "fieldname": "Product",
+   "fieldtype": "Data",
+   "label": "\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32",
+   "width": 0
+  }
+ ],
+ "creation": "2023-12-04 16:49:19.007827",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2023-12-06 10:16:39.345698",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e15\u0e25\u0e32\u0e14\u0e42\u0e15\u0e49\u0e23\u0e38\u0e48\u0e07",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select tabLicense.name,\r\n    max(case when tabLicenseDetail.key = '\u0e1a\u0e23\u0e34\u0e40\u0e27\u0e13 (\u0e16\u0e19\u0e19)' then tabLicenseDetail.value end) as Road,\r\n    max(case tabLicenseDetail.key when '\u0e42\u0e0b\u0e19' then tabLicenseDetail.value end) as Zone,\r\n\r\n    max(case when tabLicenseDetail.key = '\u0e41\u0e1c\u0e07' then tabLicenseDetail.value end) as Lot,\r\n    max(case tabLicenseDetail.key when '\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17' then tabLicenseDetail.value end) as Product\r\n\r\n\r\nfrom tabLicense\r\n         join tabLicenseDetail on tabLicenseDetail.parent = tabLicense.name\r\nwhere tabLicense.license_main_type in ('\u0e08\u0e33\u0e2b\u0e19\u0e48\u0e32\u0e22\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\u0e43\u0e19\u0e17\u0e35\u0e48\u0e2b\u0e23\u0e37\u0e2d\u0e17\u0e32\u0e07\u0e2a\u0e32\u0e18\u0e32\u0e23\u0e13\u0e30 (\u0e15\u0e25\u0e32\u0e14\u0e42\u0e15\u0e49\u0e23\u0e38\u0e48\u0e07 V2)')\r\nand tabLicense.license_end_date >= CURDATE()\r\n\r\ngroup by tabLicense.name",
+ "ref_doctype": "License",
+ "report_name": "\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e15\u0e25\u0e32\u0e14\u0e42\u0e15\u0e49\u0e23\u0e38\u0e48\u0e07",
+ "report_script": "",
+ "report_type": "Query Report",
+ "roles": []
+}

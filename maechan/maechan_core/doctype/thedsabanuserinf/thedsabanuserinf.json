@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-02 15:40:27.980650",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "fullname",
+  "tel"
+ ],
+ "fields": [
+  {
+   "fieldname": "fullname",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d-\u0e2a\u0e01\u0e38\u0e25"
+  },
+  {
+   "fieldname": "tel",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e42\u0e17\u0e23\u0e28\u0e31\u0e1e\u0e17\u0e4c"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-01-02 15:41:16.285835",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "ThedsabanUserINF",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

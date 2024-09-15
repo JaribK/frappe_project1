@@ -1,0 +1,206 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "autoincrement",
+ "creation": "2023-08-24 21:41:39.363504",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_tqta",
+  "house_no",
+  "column_break_pcfk",
+  "district_id",
+  "house_moo",
+  "section_break_nfec",
+  "house_soi",
+  "column_break_fkmx",
+  "house_road",
+  "section_break_lxza",
+  "tambon_th",
+  "column_break_eprk",
+  "amphure_th",
+  "column_break_utud",
+  "province_th",
+  "section_break_kncp",
+  "populate_json",
+  "house_json",
+  "section_break_anwi",
+  "house_lat",
+  "column_break_sfnk",
+  "house_lng",
+  "section_break_vbjt",
+  "text_display"
+ ],
+ "fields": [
+  {
+   "fieldname": "house_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0e1a\u0e49\u0e32\u0e19\u0e40\u0e25\u0e02\u0e17\u0e35\u0e48",
+   "reqd": 1
+  },
+  {
+   "fieldname": "district_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u0e2b\u0e21\u0e39\u0e48",
+   "options": "District",
+   "reqd": 1
+  },
+  {
+   "fieldname": "house_json",
+   "fieldtype": "JSON",
+   "label": "GEOJSON"
+  },
+  {
+   "fieldname": "house_lat",
+   "fieldtype": "Float",
+   "label": "lat (\u0e1b\u0e23\u0e30\u0e21\u0e32\u0e13 5~22 )",
+   "precision": "6"
+  },
+  {
+   "fieldname": "house_lng",
+   "fieldtype": "Float",
+   "label": "lng (\u0e1b\u0e23\u0e30\u0e21\u0e32\u0e13 99~105 )",
+   "precision": "6"
+  },
+  {
+   "fieldname": "populate_json",
+   "fieldtype": "Button",
+   "label": "\u0e2d\u0e31\u0e1e\u0e40\u0e14\u0e17\u0e08\u0e32\u0e01 GEOJSON"
+  },
+  {
+   "fieldname": "section_break_lxza",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_kncp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_pcfk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "district_id.tambon_th",
+   "fieldname": "tambon_th",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e33\u0e1a\u0e25",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_eprk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "district_id.amphure_th",
+   "fieldname": "amphure_th",
+   "fieldtype": "Data",
+   "label": "\u0e2d\u0e33\u0e40\u0e20\u0e2d",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_utud",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "district_id.province_th",
+   "fieldname": "province_th",
+   "fieldtype": "Data",
+   "label": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "district_id.moo",
+   "fieldname": "house_moo",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "moo"
+  },
+  {
+   "fieldname": "text_display",
+   "fieldtype": "Data",
+   "label": "\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e41\u0e2a\u0e14\u0e07"
+  },
+  {
+   "fieldname": "section_break_tqta",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "section_break_nfec",
+   "fieldtype": "Section Break",
+   "hide_border": 1
+  },
+  {
+   "fieldname": "house_soi",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e23\u0e2d\u0e01/\u0e0b\u0e2d\u0e22"
+  },
+  {
+   "fieldname": "column_break_fkmx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "house_road",
+   "fieldtype": "Data",
+   "label": "\u0e16\u0e19\u0e19"
+  },
+  {
+   "fieldname": "section_break_anwi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_sfnk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_vbjt",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-27 12:40:14.773472",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "House",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "text_display",
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "text_display"
+}

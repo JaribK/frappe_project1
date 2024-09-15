@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{title}",
+ "creation": "2023-11-14 20:47:05.139199",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "status",
+  "id",
+  "fid",
+  "column_break_rmot",
+  "image",
+  "image_show",
+  "section_break_wvej",
+  "lat",
+  "lng",
+  "geojson"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "\u0e2a\u0e16\u0e32\u0e19\u0e30 [\u0e40\u0e1b\u0e34\u0e14/\u0e1b\u0e34\u0e14]",
+   "options": "\u0e40\u0e1b\u0e34\u0e14\n\u0e1b\u0e34\u0e14"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "\u0e23\u0e39\u0e1b"
+  },
+  {
+   "fieldname": "fid",
+   "fieldtype": "Data",
+   "label": "fid"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "id"
+  },
+  {
+   "fieldname": "geojson",
+   "fieldtype": "JSON",
+   "label": "GEOJson"
+  },
+  {
+   "fieldname": "lng",
+   "fieldtype": "Float",
+   "label": "lng",
+   "precision": "6"
+  },
+  {
+   "fieldname": "column_break_rmot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_wvej",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "lat",
+   "fieldtype": "Float",
+   "label": "lat",
+   "precision": "6"
+  },
+  {
+   "fieldname": "image_show",
+   "fieldtype": "Image",
+   "options": "image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-29 12:05:40.005238",
+ "modified_by": "Administrator",
+ "module": "maechan_water",
+ "name": "WaterGate",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

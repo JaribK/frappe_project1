@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-07 13:55:04.296442",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "land_section",
+  "id",
+  "no",
+  "road",
+  "moo",
+  "soi",
+  "sub_district",
+  "district",
+  "province",
+  "postal_code",
+  "p2_section",
+  "latitude",
+  "longitude"
+ ],
+ "fields": [
+  {
+   "fieldname": "land_section",
+   "fieldtype": "Section Break",
+   "label": "address"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "id",
+   "reqd": 1
+  },
+  {
+   "fieldname": "no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "no",
+   "reqd": 1
+  },
+  {
+   "fieldname": "road",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "road",
+   "reqd": 1
+  },
+  {
+   "fieldname": "moo",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "moo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "postal_code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "p2_section",
+   "fieldtype": "Section Break",
+   "label": "coordinates"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "longitude"
+  },
+  {
+   "fieldname": "soi",
+   "fieldtype": "Data",
+   "label": "soi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Data",
+   "label": "province",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sub_district",
+   "fieldtype": "Data",
+   "label": "sub_district",
+   "reqd": 1
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "district",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-12 22:17:46.006167",
+ "modified_by": "Administrator",
+ "module": "Billboard",
+ "name": "Billboard Land",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{request_type}",
+ "creation": "2023-12-09 14:12:22.234192",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_type",
+  "details",
+  "attachment",
+  "section_break_zmkz",
+  "checklist_details",
+  "checklist"
+ ],
+ "fields": [
+  {
+   "fieldname": "details",
+   "fieldtype": "Table",
+   "label": "\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14",
+   "options": "RequestTypeDetail"
+  },
+  {
+   "fieldname": "request_type",
+   "fieldtype": "Data",
+   "label": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Table",
+   "label": "\u0e2b\u0e25\u0e31\u0e01\u0e10\u0e32\u0e19\u0e17\u0e35\u0e48\u0e41\u0e19\u0e1a",
+   "options": "Attachment"
+  },
+  {
+   "fieldname": "section_break_zmkz",
+   "fieldtype": "Section Break",
+   "label": "\u0e41\u0e1a\u0e1a\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a"
+  },
+  {
+   "fieldname": "checklist_details",
+   "fieldtype": "Table",
+   "label": "\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e41\u0e1a\u0e1a\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a",
+   "options": "CheckListTypeDetail"
+  },
+  {
+   "fieldname": "checklist",
+   "fieldtype": "Table",
+   "label": "\u0e40\u0e01\u0e13\u0e11\u0e4c\u0e1e\u0e34\u0e08\u0e32\u0e23\u0e13\u0e32",
+   "options": "CheckList"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-02 08:28:35.642111",
+ "modified_by": "Administrator",
+ "module": "maechan_license",
+ "name": "RequestLicenseType",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban User",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

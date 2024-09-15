@@ -1,0 +1,27 @@
+{% extends "templates/web.html" %}
+
+{% block title %} {{_("Register")}} {% endblock %}
+{% block head_include %}
+{% endblock %}
+
+
+{% block page_content %}
+{{ include_style('/assets/maechan/css/output.css') }}
+{{ include_style('login.bundle.css') }}
+
+
+<div class="page-card-head">
+    <img class="app-logo" style="display: inline;" src="{{ logo }}">
+    <h4>Create a เทศบาลตำบลแม่จัน Account</h4>
+</div>
+   <div id="register_app"></div>
+<!-- {{xxx}} -->
+
+
+
+{% endblock %}
+
+{% block script %}
+{{ include_script('register.bundle.js') }}
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "creation": "2023-09-28 19:31:56.107116",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-09-28 19:31:56.107116",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "thedsaban-profile",
+ "owner": "Administrator",
+ "page_name": "thedsaban-profile",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

@@ -1,0 +1,16 @@
+{% extends "templates/fullscreen.html" %}
+
+
+{% block content %}
+
+<div id="watergate_app"></div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    var water_gate = {{watergates}}
+
+</script>
+{{ include_script('watergate_public.bundle.js') }}
+{% endblock %}

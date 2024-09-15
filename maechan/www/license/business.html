@@ -1,0 +1,38 @@
+{% extends "templates/web.html" %}
+
+{% block header %}
+ตรวจสอบธุรกิจ {% if business %} : {{ business }} {% endif %}
+{% endblock %}
+
+{% block page_content %}
+
+<table class="table table-striped" style="margin-top: 1em;">
+    <thead>
+      <tr>
+        <th>ชื่อกิจการ</th>
+        <th>ประเภทใบอนุญาต</th>
+        <th>ผู้ได้รับใบอนุญาต</th>
+        <th>วันเริ่มต้น</th>
+        <th>วันสิ้นสุด</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in list %}
+        <tr class="small">
+            <td>{{i['name']}}</td>
+            <td>{{i['license_type']}}</td>
+            <td>{{i['license_applicant']}}</td>
+            <td>{{i['license_start_date']}}</td>
+            <td>{{i['license_end_date']}}</td>
+
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

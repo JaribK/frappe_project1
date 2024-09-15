@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-08-29 10:47:12.057918",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "address_section",
+  "land_id",
+  "no",
+  "road",
+  "moo",
+  "soi",
+  "sub_district",
+  "district",
+  "province",
+  "postal_code",
+  "coordinates_section",
+  "latitude",
+  "longitude",
+  "geojson"
+ ],
+ "fields": [
+  {
+   "fieldname": "address_section",
+   "fieldtype": "Section Break",
+   "label": "address"
+  },
+  {
+   "fieldname": "no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "no"
+  },
+  {
+   "fieldname": "road",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "road"
+  },
+  {
+   "fieldname": "moo",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "moo"
+  },
+  {
+   "fieldname": "soi",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "soi"
+  },
+  {
+   "fieldname": "sub_district",
+   "fieldtype": "Data",
+   "label": "sub_district"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "district"
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Data",
+   "label": "province"
+  },
+  {
+   "fieldname": "postal_code",
+   "fieldtype": "Data",
+   "label": "postal_code"
+  },
+  {
+   "fieldname": "coordinates_section",
+   "fieldtype": "Section Break",
+   "label": "coordinates"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "longitude"
+  },
+  {
+   "fieldname": "land_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "land_id"
+  },
+  {
+   "fieldname": "geojson",
+   "fieldtype": "JSON",
+   "label": "GEOJson"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-09-14 15:42:53.076009",
+ "modified_by": "Administrator",
+ "module": "Billboard1",
+ "name": "Billboard Land2",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

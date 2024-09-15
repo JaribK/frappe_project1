@@ -1,0 +1,25 @@
+{
+  "name": "billboard_services",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=/assets/maechan/billboard_services/ && yarn copy-html-entry",
+    "preview": "vite preview",
+    "copy-html-entry": "cp ../maechan/public/billboard_services/index.html ../maechan/www/billboard_services.html"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "vue": "^3.4.37",
+    "vue-router": "^4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.10",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11",
+    "vite": "^5.4.1"
+  }
+}

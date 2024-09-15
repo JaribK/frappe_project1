@@ -1,0 +1,179 @@
+{% if doc.license_applicant_type == "บุคคลธรรมดา" %}
+<div class="tw-flex tw-flex-row  tw-mt-1">
+    <div class="tw-indent-12">อนุญาตให้</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant | handleNone}}</div>
+
+    <div class="tw-ml-3 tw-pr-3 whitespace-nowrap">สัญชาติ</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_nationality | handleNone}}
+    </div>
+
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">เชื้อชาติ</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_ethnicity | handleNone}}
+    </div>
+</div>
+
+{% elif doc.license_applicant_type == "นิติบุคคล" %}
+
+<div class="tw-flex tw-flex-row tw-mt-1">
+    <div class="tw-indent-12">อนุญาตให้</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant | handleNone}}</div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">โดย</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_by | handleNone}}</div>
+</div>
+{%endif%}
+
+
+
+<div class="tw-flex tw-justify-between  tw-mt-1">
+    {% if doc.license_applicant_type == "บุคคลธรรมดา" %}
+    <div class="tw-pr-3 tw-whitespace-nowrap">อยู่บ้านเลขที่</div>
+
+    {% elif doc.license_applicant_type == "นิติบุคคล" %}
+
+    <div class="tw-pr-3 tw-whitespace-nowrap">สำนักงานใหญ่ตั้งอยู่เลขที่</div>
+    {% elif doc.license_applicant_type == "นิติบุคคล" %}
+
+    {%endif%}
+
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_no | handleNone}}
+    </div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">หมู่ที่</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_moo| handleNone}}
+    </div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">ตรอก/ซอย</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_soi| handleNone}}
+    </div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">ถนน</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_road| handleNone}}
+    </div>
+
+</div>
+<div class="tw-flex tw-justify-between tw-mt-1">
+    <div class="tw-pr-3 tw-whitespace-nowrap">ตำบล</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_district_th|
+        handleNone}}</div>
+    <div class="tw-ml-3 tw-whitespace-nowrap">อำเภอ</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_amphur_th|
+        handleNone}}</div>
+    <div class="tw-ml-3 tw-whitespace-nowrap">จังหวัด</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_address_province_th|
+        handleNone}}</div>
+</div>
+<div class="tw-flex tw-mt-1">
+    <div class="tw-pr-3 tw-whitespace-nowrap">โทรศัพท์</div>
+    <div class="tw-ml-3 tw-pr-3 tw-font-medium">{{doc.license_applicant_telephone | handleNone}}</div>
+    <div class="tw-ml-3 tw-pr-3 ">แฟกซ์</div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap tw-font-medium">{{doc.license_applicant_fax | handleNone}}</div>
+</div>
+
+
+<div class="tw-flex tw-mt-1">
+    <div class="tw-indent-12 tw-pr-2 tw-whitespace-nowrap">ข้อ 1. ประกอบกิจการที่เป็นอันตรายต่อสุขภาพ ประเภท</div>
+    {% set license_type = frappe.get_doc('LicenseType',doc.license_type) %}
+
+    <div class="tw-font-medium">{{license_type.title | handleNone}}</div>
+</div>
+
+<div class="tw-flex tw-mt-1">
+    <div class="tw-pr-2 tw-whitespace-nowrap">โดยใช้ชื่อสถานประกอบการ</div>
+    <div class="tw-pr-3 tw-font-medium">{{doc.license_applicant_title | handleNone}}</div>
+</div>
+
+<div class="tw-flex tw-justify-between  tw-mt-1">
+    {% set house = frappe.get_doc('House',doc.house_id) %}
+    <div class="tw-pr-3 tw-whitespace-nowrap">ตั้งอยู่ ณ เลขที่</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.house_no | handleNone}}</div>
+    <div class="tw-tw-ml-3 tw-pr-3 tw-whitespace-nowrap">หมู่ที่</div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">ตรอก/ซอย</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.house_soi| handleNone}}</div>
+    <div class="tw-ml-3 tw-pr-3 tw-whitespace-nowrap">ถนน</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.house_road| handleNone}}</div>
+
+</div>
+<div class="tw-flex tw-justify-between tw-mt-1">
+    <div class="tw-pr-3 tw-whitespace-nowrap">ตำบล</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.tambon_th| handleNone}}</div>
+    <div class="tw-ml-3 tw-whitespace-nowrap">อำเภอ</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.amphure_th| handleNone}}</div>
+    <div class="tw-ml-3 tw-whitespace-nowrap">จังหวัด</div>
+    <div class="tw-mx-auto tw-text-center tw-grow tw-whitespace-nowrap tw-font-medium">{{house.province_th| handleNone}}</div>
+</div>
+
+<div class="tw-flex tw-mt-1">
+    <div class="tw-pr-3 tw-whitespace-nowrap">โทรศัพท์</div>
+    <div class="tw-ml-3 tw-pr-3 tw-font-medium">{{doc.telephone | handleNone}}</div>
+</div>
+
+{#เริ่มต้นส่วนของความแตกต่างแต่ละกลุ่ม#}
+<div class="tw-flex tw-flex-row tw-justify-between  tw-mt-1">
+    <div>มีพื้นที่ประกอบการ</div>
+    <div class="tw-font-medium">{{doc.license_extra[0].value | handleNone}}</div>
+    <div>ตารางเมตร</div>
+    <div>ใช้เครื่องจักรที่มีกำลังขนาด</div>
+    <div class="tw-font-medium">{{doc.license_extra[1].value | handleNone}}</div>
+    <div>แรงม้า</div>
+</div>
+
+<div class="tw-flex tw-flex-row tw-justify-between  tw-mt-1">
+    <div class="">จำนวนตามลักษณะกิจกาาร</div>
+    <div class="tw-font-medium">{{doc.license_extra[2].value | handleNone}}</div>
+    <div>ตัว / ที่ / ห้อง / หลัง / ลิตร</div>
+    <div>จำนวนคนงาน</div>
+    <div class="tw-font-medium">{{doc.license_extra[3].value | handleNone}}</div>
+    <div>คน</div>
+</div>
+{#สิ้นสุดส่วนของความแตกต่างแต่ละกลุ่ม#}
+
+<div class="tw-flex tw-flex-row tw-justify-between  tw-mt-1">
+    <div class="tw-indent-12">ทั้งนี้ ได้เสียค่าธรรมเนียมใบอนุญาต</div>
+    <div class="tw-font-medium">{{doc.license_fee}}</div>
+    <div>บาท</div>
+    <div class="tw-font-medium">({{ toBahtText(doc.license_fee) }})</div>
+    <div>/ ปี</div>
+</div>
+<div class="tw-flex tw-flex-row tw-justify-between  tw-mt-1">
+    <div class="">ตามใบเสร็จรับเงินเล่มที่</div>
+    <div class="tw-font-medium">{{doc.license_receipt_number}}</div>
+    <div>ลงวันที่</div>
+    {% set date = strToDate(doc.receipt_date) %}
+    <div class="tw-font-medium">{{date.strftime("%d")}}</div>
+    <div>เดือน</div>
+    <div class="font-medium">{{getThaiFullMonth(date)}}</div>
+    <div>พ.ศ.</div>
+    <div class="tw-font-medium">{{getThaiFullYear(date)}}</div>
+</div>
+
+
+<div class="tw-flex tw-flex-row tw-justify-between tw-mt-1">
+    <div class="tw-indent-12">ข้อ 2. ผู้ได้รับอนุญาตต้องปฏิบัติตามเงื่อนไขโดยเฉพาะดังต่อไปนี้</div>
+</div>
+<div class="tw-flex tw-flex-row tw-justify-between tw-mt-1">
+    <div class="tw-indent-24">2.1 ปฏิบัติตามเทศบัญญัติเทศบาลตำบลแม่จัน เรื่องกิจการที่เป็นอันตรายต่อสุขภาพ พ.ศ.2543
+        และฉบับแก้ไข
+        เพิ่มเติม พ.ศ.2548 และตามพระราชบัญญัติการสาธารณสุข พ.ศ.2535 และที่แก้ไขเพิ่มเติม
+        พร้อมทั้งปฏิบัติการอื่นใดเกี่ยวด้วยสุขลักษณะตามคำแนะนำของเจ้าพนักงานสาธารณสุขฯ
+        คำสั่งของเจ้าพนักงานท้องถิ่น คำแนะนำของพนักงานเจ้าหน้าที่ ตลอดจนระเบียบ ข้อบังคับ และประกาศของเทศบาลตำบลแม่จัน
+    </div>
+</div>
+{% set start_date = strToDate(doc.license_start_date) %}
+{% set end_date = strToDate(doc.license_end_date) %}
+
+<div class="tw-flex tw-flex-row tw-font-bold  tw-mt-2 tw-license-date">
+    <div class="tw-w-12"></div>
+    <div class="tw-w-60 tw-text-end tw-mr-3">ใบอนุญาตฉบับนี้ให้ใช้ได้ถึงวันที่</div>
+    <div class="tw-text-center tw-mr-3">{{end_date.strftime("%d")}}</div>
+    <div class="tw-text-center tw-mr-3">เดือน</div>
+    <div class="tw-text-center tw-mr-3">{{getThaiFullMonth(end_date)}}</div>
+    <div class="tw-text-center tw-mr-3">พ.ศ.</div>
+    <div class="tw-text-center tw-mr-3">{{getThaiFullYear(end_date)}}</div>
+</div>
+
+<div class="tw-flex tw-flex-row tw-font-bold  tw-mt-2 license-date">
+    <div class="tw-w-12"></div>
+    <div class="tw-w-60 tw-text-end tw-mr-3">ออกให้ ณ วันที่</div>
+    <div class="tw-text-center tw-mr-3">{{start_date.strftime("%d")}}</div>
+    <div class="tw-text-center tw-mr-3">เดือน</div>
+    <div class="tw-text-center tw-mr-3">{{getThaiFullMonth(start_date)}}</div>
+    <div class="tw-text-center tw-mr-3">พ.ศ.</div>
+    <div class="tw-text-center tw-mr-3">{{getThaiFullYear(start_date)}}</div>
+</div>

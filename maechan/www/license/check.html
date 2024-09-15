@@ -1,0 +1,14 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+{{ include_style('/assets/maechan/css/output.css') }}
+
+<div id="license_check"></div>
+
+
+
+{% endblock %}
+
+{% block script %}
+{{ include_script('licensecheck.bundle.js') }}
+{% endblock %}

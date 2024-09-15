@@ -1,0 +1,70 @@
+{{ frappe.render_template('templates/license/header.html', {'doc':doc}) }}
+
+<div class="tw-flex tw-flex-col tw-justify-center tw-static">
+    <div class="tw-w-full tw-relative  ">
+        <div class="tw-mx-auto">
+            {% if doc.docstatus == 0%}
+
+                {% if doc.workflow_state == "Approve" %}
+
+                {% elif doc.workflow_state == "Expired" %}
+                <div class="tw-text-center tw-font-bold">(หมดอายุ)</div>
+                {% else %}
+                <div class="tw-text-center tw-font-bold">(ร่าง)</div>
+                {% endif %}
+
+
+            {% elif doc.docstatus == 2%}
+            <div class="tw-text-center tw-font-bold">(ยกเลิก)</div>
+            {% elif doc.docstatus == 1%}
+                {% if doc.license_approve_status and doc.license_approve_status == 'ยกเลิก' %}
+                <div class="tw-text-center tw-font-bold">(ยกเลิก)</div>
+                {% elif doc.workflow_state == 'Expired' %}
+                <div class="tw-text-center tw-font-bold">(หมดอายุ)</div>
+                {% endif %}
+            {% endif %}
+            <img class="tw-mx-auto" src="/files/thai_garuda.jpg" style="height:20mm" />
+        </div>
+        <div class="tw-absolute tw-top-1 -tw-left-2">
+            {% if doc.qr_code_base64 %}
+            <img class="tw-w-24" src="{{doc.qr_code_base64}}" />
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% set license = frappe.get_doc("LicenseType",doc.license_type) %}
+{% set license_main = frappe.get_doc("LicenseGroup",doc.license_main_type)%}
+<div class="tw-flex tw-justify-center">
+    <div class="license-header tw-mx-auto tw-text-center">{{license.license_type}}
+        <br />
+        {{license_main.title}}
+    </div>
+</div>
+
+<div class="tw-flex tw-justify-end tw-text-right tw-my-2">
+    สำนักงาน{{frappe.db.get_single_value("MaechanConfig", "title") }}
+</div>
+
+{% if doc.license_main_type == "test" %}
+{{ frappe.render_template('templates/license/health_form.html', {'doc':doc}) }}
+{% elif doc.license_main_type == "test2" %}
+{{ frappe.render_template('templates/license/food_small.html', {'doc':doc}) }}
+{% else %}
+{% set license_type = frappe.get_doc("LicenseType",doc.license_type)%}
+{% set license_group = frappe.get_doc("LicenseGroup",license_type.group)%}
+
+{% if license_type != None and license_group != None %}
+{{frappe.render_template(license_group.template,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_2,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_3,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_4,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_5,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_6,{'doc' : doc})}}
+{{frappe.render_template(license_group.template_7,{'doc' : doc})}}
+
+{%endif%}
+
+{%endif%}
+
+{{ frappe.render_template('templates/license/footer.html', {'doc':doc}) }}

@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-06 14:33:56.813509",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "allow",
+  "for_value"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "username",
+   "options": "User"
+  },
+  {
+   "fetch_from": "username.email",
+   "fieldname": "for_value",
+   "fieldtype": "Dynamic Link",
+   "label": "for value",
+   "options": "allow"
+  },
+  {
+   "fetch_from": "username.email",
+   "fieldname": "allow",
+   "fieldtype": "Link",
+   "label": "allow",
+   "options": "DocType"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-01-30 16:59:07.419704",
+ "modified_by": "Administrator",
+ "module": "Maechan",
+ "name": "UserProfileTest",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,39 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-02-09 13:18:31.887419",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-02-09 13:25:13.550692",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e41\u0e22\u0e01\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT `tabLicense`.license_main_type AS `LicenseType`,\r\n       count(*) AS `License Count`\r\n  FROM `tabLicense` AS `tabLicense`\r\n GROUP BY `tabLicense`.license_main_type\r\n LIMIT 100",
+ "ref_doctype": "License",
+ "report_name": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e41\u0e22\u0e01\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Thedsaban Manager"
+  },
+  {
+   "role": "Guest"
+  },
+  {
+   "role": "Thedsaban Mayor"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Thedsaban User"
+  }
+ ]
+}

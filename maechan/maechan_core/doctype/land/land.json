@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:parcel_cod",
+ "creation": "2023-08-30 15:41:46.854975",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "geojson",
+  "update_from_geojson",
+  "lat",
+  "lng",
+  "lot",
+  "parcel_cod",
+  "parcel_no",
+  "zone_id",
+  "block_id",
+  "district_id",
+  "land_owner",
+  "land_size",
+  "land_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "geojson",
+   "fieldtype": "JSON",
+   "in_list_view": 1,
+   "label": "geojson",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lat",
+   "fieldtype": "Float",
+   "label": "LAT",
+   "precision": "6"
+  },
+  {
+   "fieldname": "lng",
+   "fieldtype": "Float",
+   "label": "LNG",
+   "precision": "6"
+  },
+  {
+   "fieldname": "lot",
+   "fieldtype": "Data",
+   "label": "LOT"
+  },
+  {
+   "fieldname": "parcel_cod",
+   "fieldtype": "Data",
+   "label": "PARCEL_COD",
+   "unique": 1
+  },
+  {
+   "fieldname": "zone_id",
+   "fieldtype": "Data",
+   "label": "ZONE_ID"
+  },
+  {
+   "fieldname": "block_id",
+   "fieldtype": "Data",
+   "label": "BLOCK_ID"
+  },
+  {
+   "fieldname": "district_id",
+   "fieldtype": "Link",
+   "label": "district_id",
+   "options": "District"
+  },
+  {
+   "fieldname": "update_from_geojson",
+   "fieldtype": "Button",
+   "label": "Update from GEOJSON "
+  },
+  {
+   "fieldname": "land_owner",
+   "fieldtype": "Data",
+   "label": "land owner"
+  },
+  {
+   "fieldname": "land_size",
+   "fieldtype": "Data",
+   "label": "RAI-NGAN-W"
+  },
+  {
+   "fieldname": "parcel_no",
+   "fieldtype": "Data",
+   "label": "PARCEL_NO"
+  },
+  {
+   "fieldname": "land_type",
+   "fieldtype": "Data",
+   "label": "land_type"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-01 16:05:21.460087",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "Land",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

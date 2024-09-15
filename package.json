@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@studiometa/vue-mapbox-gl": "^2.2.0",
+    "dayjs": "^1.11.10",
+    "mapbox-gl": "^2.15.0",
+    "tailwindcss": "^3.3.3",
+    "underscore": "^1.13.6",
+    "utm-latlng": "^1.0.7",
+    "vue": "^3.3.4",
+    "vue-multiselect": "^3.0.0-beta.2",
+    "vue-router": "4",
+    "vue3-google-map": "^0.18.0"
+  },
+  "devDependencies": {
+    "daisyui": "^4.5.0",
+    "frappe-ui": "^0.1.21",
+    "html5-qrcode": "^2.3.8"
+  }
+}

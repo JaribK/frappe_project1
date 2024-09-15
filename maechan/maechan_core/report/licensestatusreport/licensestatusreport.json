@@ -1,0 +1,51 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-09-20 21:29:53.195938",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "default": "",
+   "fieldname": "license_start_date_start",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "",
+   "fieldname": "license_start_date_end",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 24,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2024-06-22 11:17:57.273604",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "LicenseStatusReport",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select \r\n    tabLicense.name,\r\n    case when tabLicense.docstatus = 0 then '\u0e23\u0e48\u0e32\u0e07' else '\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34' end as status,\r\n    case when DATEDIFF(tabLicense.license_end_date,curdate()) > 0 then '\u0e01\u0e33\u0e25\u0e31\u0e07\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19' else '\u0e2b\u0e21\u0e14\u0e2d\u0e32\u0e22\u0e38' end AS `active_expired`,\r\n    case when DATEDIFF(tabLicense.license_end_date,curdate()) > 0 then DATEDIFF(tabLicense.license_end_date,curdate()) else 0 end AS `expired in`,\r\n    \r\n    tabLicenseType.title,\r\n    tabLicense.license_main_type,\r\n    tabLicense.license_applicant,\r\n    tabLicense.license_applicant_title,\r\n    tabLicense.license_start_date,\r\n    tabLicense.license_end_date,\r\n    tabHouse.house_no as house_no,\r\n    tabHouse.house_soi as house_soi,\r\n    tabHouse.house_road as house_road,\r\n    tabHouse.house_moo as house_moo,\r\n    tabHouse.tambon_th as house_tambon,\r\n    tabHouse.amphure_th as house_amphure,\r\n    tabHouse.province_th as house_province\r\n    \r\n\r\nfrom \r\n    tabLicense\r\n    \r\njoin tabHouse on tabLicense.house_id = tabHouse.name\r\njoin `tabLicenseType` on `tabLicenseType`.name = tabLicense.license_type\r\n\r\n",
+ "ref_doctype": "License",
+ "reference_report": "",
+ "report_name": "LicenseStatusReport",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Guest"
+  },
+  {
+   "role": "Thedsaban Mayor"
+  }
+ ]
+}

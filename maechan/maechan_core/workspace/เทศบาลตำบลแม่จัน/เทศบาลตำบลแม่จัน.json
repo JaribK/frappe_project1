@@ -1,0 +1,343 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"4xsUdwkRdH\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15</b></span>\",\"col\":12}},{\"id\":\"Uj7vxy96Yu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"\u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\",\"col\":3}},{\"id\":\"5ngos-5uGN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"\u0e23\u0e27\u0e21\u0e41\u0e1c\u0e19\u0e20\u0e39\u0e21\u0e34\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\",\"col\":9}},{\"id\":\"U3oblgpRSs\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\",\"col\":4}},{\"id\":\"ApH7z_gq05\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e01\u0e32\u0e23\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15 (\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23)\",\"col\":8}},{\"id\":\"MSJp8ikka7\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u0e40\u0e17\u0e28\u0e1a\u0e32\u0e25\u0e41\u0e21\u0e48\u0e08\u0e31\u0e19</span>\",\"col\":12}},{\"id\":\"Safhruxbd8\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e23\u0e30\u0e1a\u0e1a\u0e19\u0e49\u0e33\",\"col\":3}},{\"id\":\"iMiPnEa0hh\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e01\u0e25\u0e32\u0e07\",\"col\":3}},{\"id\":\"nCMP00-7gR\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d\",\"col\":3}},{\"id\":\"qBw-9kIB-6\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19</b></span>\",\"col\":12}},{\"id\":\"Y5XEf6ViCh\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\",\"col\":3}},{\"id\":\"2SHK4iJF-j\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e15\u0e32\u0e23\u0e32\u0e07\",\"col\":4}},{\"id\":\"qA6NCEGxxo\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e41\u0e22\u0e01\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\",\"col\":12}},{\"id\":\"6nHFH8a4gj\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b</b></span>\",\"col\":12}},{\"id\":\"o3W0w-N4J_\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2b\u0e21\u0e39\u0e48\u0e1a\u0e49\u0e32\u0e19\u0e17\u0e35\u0e48\u0e14\u0e39\u0e41\u0e25\",\"col\":5}},{\"id\":\"PkgcZwOwT6\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e38\u0e21\u0e0a\u0e19\",\"col\":4}},{\"id\":\"RswLFsA9c3\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"test\",\"col\":12}},{\"id\":\"v7pixFsnjS\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"LandCustomHtmlBlock\",\"col\":12}}]",
+ "creation": "2023-08-23 23:09:25.958706",
+ "custom_blocks": [
+  {
+   "custom_block_name": "HouseCountByDistrict",
+   "label": "test"
+  },
+  {
+   "custom_block_name": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e41\u0e22\u0e01\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17",
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e41\u0e22\u0e01\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17"
+  },
+  {
+   "custom_block_name": "LandCustomHtmlBlock",
+   "label": "LandCustomHtmlBlock"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "organization",
+ "idx": 1,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "\u0e40\u0e17\u0e28\u0e1a\u0e32\u0e25\u0e15\u0e33\u0e1a\u0e25\u0e41\u0e21\u0e48\u0e08\u0e31\u0e19",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "License",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "LicenseType",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e01\u0e25\u0e38\u0e48\u0e21\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15 (Template)",
+   "link_count": 0,
+   "link_to": "LicenseGroup",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e01\u0e25\u0e32\u0e07",
+   "link_count": 5,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e1a\u0e49\u0e32\u0e19",
+   "link_count": 0,
+   "link_to": "House",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e0a\u0e38\u0e21\u0e0a\u0e19",
+   "link_count": 0,
+   "link_to": "Community",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e2b\u0e21\u0e39\u0e48",
+   "link_count": 0,
+   "link_to": "District",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e14\u0e34\u0e19",
+   "link_count": 0,
+   "link_to": "Land",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e16\u0e19\u0e19",
+   "link_count": 0,
+   "link_to": "Road",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e19\u0e33\u0e40\u0e02\u0e49\u0e32\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1a\u0e49\u0e32\u0e19",
+   "link_count": 0,
+   "link_to": "ImportHouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e19\u0e33\u0e40\u0e02\u0e49\u0e32\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e14\u0e34\u0e19",
+   "link_count": 0,
+   "link_to": "ImportLand",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e25\u0e32\u0e22\u0e40\u0e0b\u0e47\u0e19\u0e15\u0e4c",
+   "link_count": 0,
+   "link_to": "MaechanUserProfile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e19\u0e33\u0e40\u0e02\u0e49\u0e32\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e15\u0e39\u0e19\u0e49\u0e33",
+   "link_count": 0,
+   "link_to": "ImportWaterGate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e23\u0e30\u0e1a\u0e1a\u0e19\u0e49\u0e33",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e1b\u0e23\u0e30\u0e15\u0e39\u0e19\u0e49\u0e33",
+   "link_count": 0,
+   "link_to": "WaterGate",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e1a\u0e49\u0e32\u0e19",
+   "link_count": 0,
+   "link_to": "housemap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e14\u0e34\u0e19",
+   "link_count": 0,
+   "link_to": "landmap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "licensemap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e1b\u0e23\u0e30\u0e15\u0e39\u0e19\u0e49\u0e33",
+   "link_count": 0,
+   "link_to": "watergatemap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e01\u0e32\u0e23\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15 (\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23)",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e04\u0e33\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e43\u0e2b\u0e21\u0e48",
+   "link_count": 0,
+   "link_to": "RequestLicense",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e01\u0e32\u0e23\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48",
+   "link_count": 0,
+   "link_to": "RequestLicenseInspect",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e15\u0e32\u0e23\u0e32\u0e07",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "LicenseStatusReport2",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e15\u0e25\u0e32\u0e14\u0e42\u0e15\u0e49\u0e23\u0e38\u0e48\u0e07",
+   "link_count": 0,
+   "link_to": "\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e15\u0e25\u0e32\u0e14\u0e42\u0e15\u0e49\u0e23\u0e38\u0e48\u0e07",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-06-22 11:59:46.313925",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "\u0e40\u0e17\u0e28\u0e1a\u0e32\u0e25\u0e15\u0e33\u0e1a\u0e25\u0e41\u0e21\u0e48\u0e08\u0e31\u0e19",
+ "number_cards": [
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e38\u0e21\u0e0a\u0e19",
+   "number_card_name": "CoummunityCount"
+  },
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2b\u0e21\u0e39\u0e48\u0e1a\u0e49\u0e32\u0e19\u0e17\u0e35\u0e48\u0e14\u0e39\u0e41\u0e25",
+   "number_card_name": "DistrictCount"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Thedsaban Manager"
+  },
+  {
+   "role": "Thedsaban Mayor"
+  }
+ ],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "\u0e23\u0e27\u0e21\u0e41\u0e1c\u0e19\u0e20\u0e39\u0e21\u0e34\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "type": "URL",
+   "url": "https://maechan.chaow.dev/insights/public/dashboard/40a0a2a59f13553f9f96ddde8c81e89d5a3d1531305b6b86d14b3eea"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "Kanban",
+   "kanban_board": "LicenseKanban",
+   "label": "\u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_to": "License",
+   "type": "DocType"
+  }
+ ],
+ "title": "\u0e40\u0e17\u0e28\u0e1a\u0e32\u0e25\u0e15\u0e33\u0e1a\u0e25\u0e41\u0e21\u0e48\u0e08\u0e31\u0e19"
+}

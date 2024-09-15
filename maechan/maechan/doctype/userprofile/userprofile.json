@@ -1,0 +1,205 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-01-14 02:42:00.198281",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "information",
+  "fullname",
+  "tel",
+  "personal_id",
+  "column_break_yuhs",
+  "birthdate",
+  "email",
+  "column_break_vkzo",
+  "nationality",
+  "race",
+  "section_break_fntk",
+  "address_no",
+  "address_road",
+  "column_break_hwdm",
+  "address_moo",
+  "column_break_iogv",
+  "address_soi",
+  "section_break_fptz",
+  "address_province",
+  "column_break_efxv",
+  "address_amphur",
+  "column_break_oyeq",
+  "address_district"
+ ],
+ "fields": [
+  {
+   "fieldname": "fullname",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d-\u0e2a\u0e01\u0e38\u0e25"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34"
+  },
+  {
+   "fieldname": "birthdate",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e35\u0e40\u0e01\u0e34\u0e14"
+  },
+  {
+   "fieldname": "tel",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e42\u0e17\u0e23\u0e28\u0e31\u0e1e\u0e17\u0e4c"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "email"
+  },
+  {
+   "fieldname": "section_break_fntk",
+   "fieldtype": "Section Break",
+   "label": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48"
+  },
+  {
+   "fieldname": "address_no",
+   "fieldtype": "Data",
+   "label": "\u0e1a\u0e49\u0e32\u0e19\u0e40\u0e25\u0e02\u0e17\u0e35\u0e48"
+  },
+  {
+   "fieldname": "address_moo",
+   "fieldtype": "Data",
+   "label": "\u0e2b\u0e21\u0e39\u0e48"
+  },
+  {
+   "fieldname": "address_soi",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e23\u0e2d\u0e01/\u0e0b\u0e2d\u0e22"
+  },
+  {
+   "fieldname": "address_road",
+   "fieldtype": "Data",
+   "label": "\u0e16\u0e19\u0e19 "
+  },
+  {
+   "fieldname": "address_district",
+   "fieldtype": "Link",
+   "label": "\u0e15\u0e33\u0e1a\u0e25",
+   "options": "Tambon"
+  },
+  {
+   "fieldname": "address_amphur",
+   "fieldtype": "Link",
+   "label": "\u0e2d\u0e33\u0e40\u0e20\u0e2d",
+   "options": "Amphure"
+  },
+  {
+   "fieldname": "address_province",
+   "fieldtype": "Link",
+   "label": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
+   "options": "Province"
+  },
+  {
+   "fieldname": "column_break_yuhs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vkzo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hwdm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_iogv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "information",
+   "fieldtype": "Section Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27"
+  },
+  {
+   "fieldname": "race",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e0a\u0e32\u0e15\u0e34"
+  },
+  {
+   "fieldname": "section_break_fptz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_efxv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_oyeq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "personal_id",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e25\u0e02\u0e1a\u0e31\u0e15\u0e23\u0e1b\u0e23\u0e30\u0e0a\u0e32\u0e0a\u0e19",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-05-18 15:44:20.194514",
+ "modified_by": "Administrator",
+ "module": "Maechan",
+ "name": "UserProfile",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban User",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

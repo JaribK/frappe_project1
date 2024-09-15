@@ -1,0 +1,58 @@
+
+
+<div class="tw-relative tw-flex tw-flex-row tw-mt-4">
+    <div class="tw-w-1/2 tw-text-end">(ลงชื่อ)</div>
+    <div class="tw-pl-6 tw-min-w-10 tw-max-w-24 tw-flex tw-flex-col tw-text-center">
+        <div class="tw-min-h-10 tw-max-h-16 tw-relative">
+            {% if doc.license_signature_img %}
+            <img class="tw-min-h-10 tw-max-h-16 tw-mx-auto" src="{{doc.license_signature_img}}"/>
+            {%endif%}
+        </div>
+        <div class="tw-font-bold tw-mt-1">({{doc.issuer_name | handleNone }})
+            <br />
+            {{doc.issue_position | handleNone}}
+        </div>
+    </div>
+
+    {% if doc.license_seal %}
+    <img class="tw-right-14 -tw-top-8 tw-opacity-50 tw-absolute" src="{{doc.license_seal}}"/>
+    {%endif%}
+</div>
+
+
+
+<div class="tw-flex">
+    <div class="tw-border-solid tw-border-2 tw-border-red-500 tw-text-3xl tw-p-2 tw-text-red-500 ">ปิดไว้ในที่เปิดเผย</div>
+</div>
+
+
+{% set license_type = frappe.get_doc("LicenseType",doc.license_type)%}
+{% set license_group = frappe.get_doc("LicenseGroup",license_type.group)%}
+
+{% if license_type != None and license_group != None %}
+    {% if license_group.template_warning != "" or license_group.template_warning != None %}
+        {{frappe.render_template(license_group.template_warning,{'doc' : doc})}}
+    {% else %}
+    <div class="tw-flex tw-flex-row tw-mt-3">
+        <div class="tw-w-36 tw-font-medium">คำเตือน</div>
+        <div>
+            <ol class="tw-list-decimal">
+                <li>ต้องแสดงใบอนุญาตนี้ไว้ในที่เปิดเผย ณ สถานที่ได้รับใบอนุญาตให้ประกอบกิจการ หากฝ่าฝืนมีโทษปรับไม่เกิน
+                    2,500 บาท </li>
+                <li>ผู้ใดดำเนินกิจการตามประเภทที่กำหนดให้เป็นกิจการที่ต้องมีการควบคุมตามเทศบัญญัติเทศบาลตำบลแม่จัน
+                    โดยไม่ได้รับ อนุญาตจากเจ้าพนักงานท้องถิ่น มีโทษจำคุกไม่เกิน 6 เดือน หรือปรับไม่เกิน 50,000 บาท
+                    หรือทั้งจำทั้งปรับ</li>
+                <li>
+                    หากประสงค์จะประกอบกิจการในปีต่อไปต้องยื่นคำขอต่ออายุใบอนุญาตก่อนใบอนุญาตสิ้นอายุ
+                </li>
+                <li>
+                    กรณีที่ไม่ชำระค่าธรรมเนียมตามระยะเวลาที่กำหนดจะต้องเสียค่าปรับเพิ่มขึ้นอีก 20 % ของจำนวนเงินที่ค้างชำระ
+                </li>
+                <li>
+                    หากมีปัญหาหรือข้อสงสัย สามารถติดต่อได้ที่กองสาธารณสุขฯ สำนักงานเทศบาลตำบลแม่จัน โทร.053-771-222
+                </li>
+            </ol>
+        </div>
+    </div>
+    {%endif%}
+{%endif%}

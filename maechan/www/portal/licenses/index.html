@@ -1,0 +1,11 @@
+{% from "frappe/templates/includes/avatar_macro.html" import avatar %}
+{% extends "templates/web.html" %}
+{% block title %}
+{{ _("My Account")}} : {{ _("License") }}
+{% endblock %}
+{% block page_content %}
+
+
+{{ licenses_count }}
+
+{% endblock %}

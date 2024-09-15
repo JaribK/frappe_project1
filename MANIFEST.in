@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include maechan *.css
+recursive-include maechan *.csv
+recursive-include maechan *.html
+recursive-include maechan *.ico
+recursive-include maechan *.js
+recursive-include maechan *.json
+recursive-include maechan *.md
+recursive-include maechan *.png
+recursive-include maechan *.py
+recursive-include maechan *.svg
+recursive-include maechan *.txt
+recursive-exclude maechan *.pyc

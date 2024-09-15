@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:community_name",
+ "creation": "2023-08-25 15:14:17.802410",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "community_name",
+  "community_district"
+ ],
+ "fields": [
+  {
+   "fieldname": "community_name",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d\u0e0a\u0e38\u0e21\u0e0a\u0e19",
+   "unique": 1
+  },
+  {
+   "fieldname": "community_district",
+   "fieldtype": "Table",
+   "label": "\u0e2b\u0e21\u0e39\u0e48",
+   "options": "CommunityDistrict"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-28 11:24:18.180507",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "Community",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

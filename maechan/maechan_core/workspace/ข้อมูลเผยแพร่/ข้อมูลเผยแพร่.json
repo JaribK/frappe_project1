@@ -1,0 +1,124 @@
+{
+ "charts": [
+  {
+   "chart_name": "LicneseChart",
+   "label": "\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  }
+ ],
+ "content": "[{\"id\":\"kCFNwI0Aj2\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\",\"col\":4}},{\"id\":\"9SzlIsm675\",\"type\":\"card\",\"data\":{\"card_name\":\"\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\",\"col\":4}},{\"id\":\"Nu_H15yq4c\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e0a\u0e32\u0e01\u0e23</b></span>\",\"col\":12}},{\"id\":\"bFY7r-GCxM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e38\u0e21\u0e0a\u0e19\",\"col\":4}},{\"id\":\"v6hD4uRHq5\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e40\u0e02\u0e15\",\"col\":4}},{\"id\":\"eIUgUcjm74\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"LandCustomHtmlBlock\",\"col\":6}},{\"id\":\"LiZjVgQadn\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"HouseCountByDistrict\",\"col\":6}},{\"id\":\"7GKSViVfuJ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15</b></span>\",\"col\":12}},{\"id\":\"AOGg6-F7wB\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\",\"col\":4}},{\"id\":\"DWmCqoswmh\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e01\u0e33\u0e25\u0e31\u0e07\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23\",\"col\":4}},{\"id\":\"vl9wkOQDlI\",\"type\":\"chart\",\"data\":{\"chart_name\":\"\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\",\"col\":12}}]",
+ "creation": "2023-09-15 08:07:37.959477",
+ "custom_blocks": [
+  {
+   "custom_block_name": "HouseCountByDistrict",
+   "label": "HouseCountByDistrict"
+  },
+  {
+   "custom_block_name": "LandCustomHtmlBlock",
+   "label": "LandCustomHtmlBlock"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "folder-open",
+ "idx": 2,
+ "indicator_color": "gray",
+ "is_hidden": 0,
+ "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1c\u0e22\u0e41\u0e1e\u0e23\u0e48",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e1a\u0e49\u0e32\u0e19",
+   "link_count": 0,
+   "link_to": "housemap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e41\u0e1b\u0e25\u0e07\u0e17\u0e35\u0e48\u0e14\u0e34\u0e19",
+   "link_count": 0,
+   "link_to": "landmap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "licensemap",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "link_count": 0,
+   "link_to": "LicenseStatusReport",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-04-17 18:51:59.326535",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1c\u0e22\u0e41\u0e1e\u0e23\u0e48",
+ "number_cards": [
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e38\u0e21\u0e0a\u0e19",
+   "number_card_name": "CoummunityCount"
+  },
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e01\u0e33\u0e25\u0e31\u0e07\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23",
+   "number_card_name": "PendingLicenseCount"
+  },
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19",
+   "number_card_name": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e40\u0e02\u0e15",
+   "number_card_name": "DistrictCount"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Thedsaban Manager"
+  },
+  {
+   "role": "Maintenance Manager"
+  }
+ ],
+ "sequence_id": 11.0,
+ "shortcuts": [],
+ "title": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1c\u0e22\u0e41\u0e1e\u0e23\u0e48"
+}

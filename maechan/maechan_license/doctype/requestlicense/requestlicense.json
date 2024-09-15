@@ -1,0 +1,568 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "autoname",
+ "creation": "2023-12-09 12:39:33.871560",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "request_information_tab",
+  "section_break_kexm",
+  "renew_license",
+  "column_break_sniw",
+  "old_request_license",
+  "date_section",
+  "column_break_gzha",
+  "date",
+  "column_break_szso",
+  "business",
+  "operatetype",
+  "license_applicant_type",
+  "column_break_yqke",
+  "license_applicant",
+  "section_break_ouuy",
+  "applicant_name",
+  "applicant_tel",
+  "column_break_vyrl",
+  "applicant_age",
+  "applicant_fax",
+  "column_break_qpwa",
+  "applicant_nationality",
+  "applicant_ethnicity",
+  "applicant_address",
+  "applicant_no",
+  "applicant_road",
+  "column_break_wjvk",
+  "applicant_moo",
+  "column_break_mygs",
+  "applicant_soi",
+  "section_break_kqru",
+  "applicant_distict",
+  "applicant_distict_th",
+  "column_break_alvl",
+  "applicant_amphur",
+  "applicant_amphur_th",
+  "column_break_dulk",
+  "applicant_province",
+  "applicant_province_th",
+  "house",
+  "house_no",
+  "column_break_ykko",
+  "house_tel",
+  "request",
+  "request_type",
+  "btn_request_type",
+  "request_extra",
+  "section_break_qnoj",
+  "attachment_extra",
+  "request_checklist_tab",
+  "check_datatable",
+  "section_break_zqzh",
+  "applicant_title",
+  "license_type",
+  "license_fee",
+  "extra_information",
+  "btn_dialog_extra",
+  "license_extra",
+  "payment_section",
+  "payment_column",
+  "payment_attachment",
+  "request_state_tab",
+  "approve_section",
+  "workflow_state",
+  "column_break_ajiu",
+  "request_status",
+  "section_break_bgqy",
+  "comment",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "request_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e01\u0e32\u0e23\u0e02\u0e2d\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15(\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19)"
+  },
+  {
+   "fieldname": "column_break_gzha",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_szso",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ouuy",
+   "fieldtype": "Section Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1c\u0e39\u0e49\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "fieldname": "applicant_name",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "\u0e0a\u0e37\u0e48\u0e2d-\u0e2a\u0e01\u0e38\u0e25",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applicant_tel",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e42\u0e17\u0e23\u0e28\u0e31\u0e1e\u0e17\u0e4c",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_vyrl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicant_age",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "\u0e2d\u0e32\u0e22\u0e38",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applicant_fax",
+   "fieldtype": "Data",
+   "label": "\u0e41\u0e1f\u0e01\u0e0b\u0e4c"
+  },
+  {
+   "fieldname": "column_break_qpwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicant_nationality",
+   "fieldtype": "Data",
+   "label": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34"
+  },
+  {
+   "fieldname": "applicant_ethnicity",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e0a\u0e32\u0e15\u0e34"
+  },
+  {
+   "fieldname": "applicant_address",
+   "fieldtype": "Section Break",
+   "label": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e1c\u0e39\u0e49\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "fieldname": "applicant_no",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e25\u0e02\u0e17\u0e35\u0e48"
+  },
+  {
+   "fieldname": "applicant_road",
+   "fieldtype": "Data",
+   "label": "\u0e16\u0e19\u0e19"
+  },
+  {
+   "fieldname": "column_break_wjvk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicant_moo",
+   "fieldtype": "Data",
+   "label": "\u0e2b\u0e21\u0e39\u0e48"
+  },
+  {
+   "fieldname": "column_break_mygs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "applicant_soi",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e23\u0e2d\u0e01/\u0e0b\u0e2d\u0e22"
+  },
+  {
+   "fieldname": "section_break_kqru",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "applicant_distict",
+   "fieldtype": "Link",
+   "label": "\u0e15\u0e33\u0e1a\u0e25",
+   "options": "Tambon"
+  },
+  {
+   "fetch_from": "applicant_distict.name_th",
+   "fieldname": "applicant_distict_th",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "\u0e15\u0e33\u0e1a\u0e25(\u0e2a\u0e48\u0e07\u0e2d\u0e2d\u0e01)"
+  },
+  {
+   "fieldname": "column_break_alvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "applicant_distict.amphure_id",
+   "fieldname": "applicant_amphur",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "\u0e2d\u0e33\u0e40\u0e20\u0e2d",
+   "options": "Amphure",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "applicant_distict.amphure_th",
+   "fieldname": "applicant_amphur_th",
+   "fieldtype": "Data",
+   "label": "\u0e2d\u0e33\u0e40\u0e20\u0e2d"
+  },
+  {
+   "fieldname": "column_break_dulk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "applicant_distict.province_id",
+   "fieldname": "applicant_province",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
+   "options": "Province",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "applicant_distict.province_th",
+   "fieldname": "applicant_province_th",
+   "fieldtype": "Data",
+   "label": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14"
+  },
+  {
+   "fieldname": "house",
+   "fieldtype": "Section Break",
+   "label": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e2a\u0e16\u0e32\u0e19\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a\u0e01\u0e32\u0e23"
+  },
+  {
+   "fieldname": "house_no",
+   "fieldtype": "Link",
+   "label": "\u0e17\u0e35\u0e48\u0e15\u0e31\u0e49\u0e07\u0e2a\u0e16\u0e32\u0e19\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a\u0e01\u0e32\u0e23",
+   "options": "House"
+  },
+  {
+   "fieldname": "column_break_ykko",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "house_tel",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e42\u0e17\u0e23\u0e28\u0e31\u0e1e\u0e17\u0e4c"
+  },
+  {
+   "fieldname": "request",
+   "fieldtype": "Section Break",
+   "label": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "fieldname": "request_type",
+   "fieldtype": "Link",
+   "label": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e04\u0e33\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "options": "RequestLicenseType"
+  },
+  {
+   "fieldname": "btn_request_type",
+   "fieldtype": "Button",
+   "label": "\u0e01\u0e23\u0e2d\u0e01\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a"
+  },
+  {
+   "fieldname": "request_extra",
+   "fieldtype": "Table",
+   "options": "RequestDetail"
+  },
+  {
+   "fieldname": "section_break_qnoj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachment_extra",
+   "fieldtype": "Table",
+   "label": "\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e17\u0e35\u0e48\u0e41\u0e19\u0e1a",
+   "options": "Attachment"
+  },
+  {
+   "fieldname": "request_checklist_tab",
+   "fieldtype": "Tab Break",
+   "label": "\u0e41\u0e1a\u0e1a\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48(\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e40\u0e08\u0e49\u0e32\u0e2b\u0e19\u0e49\u0e32\u0e17\u0e35\u0e48)"
+  },
+  {
+   "fieldname": "applicant_title",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d\u0e2a\u0e16\u0e32\u0e19\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a\u0e01\u0e32\u0e23"
+  },
+  {
+   "fieldname": "license_type",
+   "fieldtype": "Link",
+   "label": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "options": "LicenseType"
+  },
+  {
+   "fieldname": "request_state_tab",
+   "fieldtype": "Tab Break",
+   "label": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23"
+  },
+  {
+   "fieldname": "approve_section",
+   "fieldtype": "Section Break",
+   "label": "\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e31\u0e15\u0e34"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Workflow State"
+  },
+  {
+   "fieldname": "column_break_ajiu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_bgqy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "RequestLicense",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "business",
+   "fieldtype": "Link",
+   "label": "\u0e01\u0e34\u0e08\u0e01\u0e32\u0e23",
+   "options": "Business"
+  },
+  {
+   "fieldname": "request_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23",
+   "no_copy": 1,
+   "options": "\u0e2a\u0e23\u0e49\u0e32\u0e07\n\u0e23\u0e2d\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\n\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e44\u0e21\u0e48\u0e04\u0e23\u0e1a\n\u0e41\u0e01\u0e49\u0e44\u0e02\n\u0e23\u0e2d\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48\n\u0e44\u0e21\u0e48\u0e1c\u0e48\u0e32\u0e19\n\u0e23\u0e2d\u0e2d\u0e2d\u0e01\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\n\u0e23\u0e2d\u0e0a\u0e33\u0e23\u0e30\u0e40\u0e07\u0e34\u0e19\n\u0e04\u0e33\u0e23\u0e49\u0e2d\u0e07\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\n\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01"
+  },
+  {
+   "fieldname": "check_datatable",
+   "fieldtype": "HTML",
+   "label": "\u0e15\u0e32\u0e23\u0e32\u0e07\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a"
+  },
+  {
+   "fieldname": "operatetype",
+   "fieldtype": "Section Break",
+   "label": "\u0e25\u0e31\u0e01\u0e29\u0e13\u0e30\u0e01\u0e32\u0e23\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e01\u0e32\u0e23"
+  },
+  {
+   "fieldname": "license_applicant_type",
+   "fieldtype": "Select",
+   "label": "\u0e2a\u0e16\u0e32\u0e19\u0e30",
+   "options": "\u0e1a\u0e38\u0e04\u0e04\u0e25\u0e18\u0e23\u0e23\u0e21\u0e14\u0e32\n\u0e19\u0e34\u0e15\u0e34\u0e1a\u0e38\u0e04\u0e04\u0e25"
+  },
+  {
+   "fieldname": "column_break_yqke",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "license_applicant",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e34\u0e15\u0e34\u0e1a\u0e38\u0e04\u0e04\u0e25\u0e17\u0e35\u0e48\u0e02\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "\u0e01\u0e32\u0e23\u0e0a\u0e33\u0e23\u0e30\u0e40\u0e07\u0e34\u0e19"
+  },
+  {
+   "fieldname": "payment_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "payment_attachment",
+   "fieldtype": "Attach",
+   "label": "\u0e2b\u0e25\u0e31\u0e01\u0e10\u0e32\u0e19\u0e01\u0e32\u0e23\u0e0a\u0e33\u0e23\u0e30\u0e40\u0e07\u0e34\u0e19"
+  },
+  {
+   "fieldname": "section_break_zqzh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "license_fee",
+   "fieldtype": "Currency",
+   "label": "\u0e04\u0e48\u0e32\u0e18\u0e23\u0e23\u0e21\u0e40\u0e19\u0e35\u0e22\u0e21"
+  },
+  {
+   "fieldname": "extra_information",
+   "fieldtype": "Section Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a"
+  },
+  {
+   "fieldname": "btn_dialog_extra",
+   "fieldtype": "Button",
+   "label": "\u0e01\u0e23\u0e2d\u0e01\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1b\u0e23\u0e30\u0e01\u0e2d\u0e1a"
+  },
+  {
+   "fieldname": "license_extra",
+   "fieldtype": "Table",
+   "options": "LicenseDetail"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e2b\u0e15\u0e38"
+  },
+  {
+   "fieldname": "renew_license",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u0e15\u0e48\u0e2d\u0e2d\u0e32\u0e22\u0e38\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15",
+   "options": "License"
+  },
+  {
+   "fieldname": "section_break_kexm",
+   "fieldtype": "Section Break",
+   "label": "\u0e01\u0e32\u0e23\u0e15\u0e48\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15 (\u0e2d\u0e49\u0e32\u0e07\u0e2d\u0e34\u0e07\u0e01\u0e32\u0e23\u0e15\u0e48\u0e2d\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15)"
+  },
+  {
+   "fetch_from": "renew_license.request_license",
+   "fieldname": "old_request_license",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u0e2d\u0e49\u0e32\u0e07\u0e2d\u0e34\u0e07\u0e43\u0e1a\u0e04\u0e33\u0e23\u0e49\u0e2d\u0e07\u0e40\u0e14\u0e34\u0e21",
+   "options": "RequestLicense"
+  },
+  {
+   "fieldname": "column_break_sniw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_section",
+   "fieldtype": "Section Break",
+   "label": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2024-05-13 18:32:55.968870",
+ "modified_by": "Administrator",
+ "module": "maechan_license",
+ "name": "RequestLicense",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Thedsaban Health Officer",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "\u0e2a\u0e23\u0e49\u0e32\u0e07"
+  },
+  {
+   "color": "Pink",
+   "title": "\u0e23\u0e2d\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23"
+  },
+  {
+   "color": "Yellow",
+   "title": "\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e44\u0e21\u0e48\u0e04\u0e23\u0e1a"
+  },
+  {
+   "color": "Light Blue",
+   "title": "\u0e41\u0e01\u0e49\u0e44\u0e02"
+  },
+  {
+   "color": "Orange",
+   "title": "\u0e23\u0e2d\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48"
+  },
+  {
+   "color": "Red",
+   "title": "\u0e44\u0e21\u0e48\u0e1c\u0e48\u0e32\u0e19"
+  },
+  {
+   "color": "Orange",
+   "title": "\u0e23\u0e2d\u0e2d\u0e2d\u0e01\u0e43\u0e1a\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15"
+  },
+  {
+   "color": "Green",
+   "title": "\u0e04\u0e33\u0e23\u0e49\u0e2d\u0e07\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08"
+  },
+  {
+   "color": "Red",
+   "title": "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01"
+  }
+ ],
+ "track_changes": 1
+}

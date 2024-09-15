@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2023-09-04 12:24:11.881104",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 41,
+ "modified": "2023-11-21 22:18:26.513964",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "landmap",
+ "owner": "Administrator",
+ "page_name": "landmap",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Land Map"
+}

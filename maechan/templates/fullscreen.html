@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Built on Frappe. https://frappeframework.com/ -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="frappe">
+
+	{% block meta_block %}
+	{% include "templates/includes/meta_block.html" %}
+	{% endblock %}
+	{% include "templates/includes/head.html" %}
+	<script>
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function(fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = {{ dev_server }};
+		window.socketio_port = {{ (frappe.socketio_port or 9000) }};
+		window.show_language_picker = {{ show_language_picker or 'false' }};
+	</script>
+	</head>
+	<body>
+		{% block content %}
+
+		{%  endblock %}
+
+
+
+
+		{% block base_scripts %}
+		<!-- js should be loaded in body! -->
+		<script>
+			frappe.boot = {{ boot }}
+			// for backward compatibility of some libs
+			frappe.sys_defaults = frappe.boot.sysdefaults;
+		</script>
+		{{ include_script('frappe-web.bundle.js') }}
+		{% endblock %}
+
+
+		{% block script %}
+
+		{% endblock %}
+		
+	</body>
+</html>

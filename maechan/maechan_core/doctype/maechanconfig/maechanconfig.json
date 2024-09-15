@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-28 14:58:27.702896",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "basic_information",
+  "title",
+  "column_break_tqpc",
+  "seal",
+  "section_break_lazw",
+  "mayor_name",
+  "mayor_position",
+  "column_break_effb",
+  "mayor_signature",
+  "applicataion_inforamtion",
+  "google_api_key",
+  "column_break_txfx",
+  "garuda_logo"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u0e0a\u0e37\u0e48\u0e2d",
+   "reqd": 1
+  },
+  {
+   "fieldname": "seal",
+   "fieldtype": "Attach Image",
+   "label": "\u0e15\u0e23\u0e32\u0e1b\u0e31\u0e49\u0e21 (\u0e02\u0e19\u0e32\u0e14 200x200)"
+  },
+  {
+   "fieldname": "mayor_name",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e32\u0e22\u0e01\u0e40\u0e17\u0e28\u0e21\u0e19\u0e15\u0e23\u0e35 (\u0e1b\u0e31\u0e08\u0e08\u0e38\u0e1a\u0e31\u0e19)"
+  },
+  {
+   "fieldname": "google_api_key",
+   "fieldtype": "Data",
+   "label": "GOOGLE API KEY"
+  },
+  {
+   "fieldname": "basic_information",
+   "fieldtype": "Tab Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e15\u0e49\u0e19"
+  },
+  {
+   "fieldname": "applicataion_inforamtion",
+   "fieldtype": "Tab Break",
+   "label": "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32"
+  },
+  {
+   "fieldname": "column_break_txfx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "garuda_logo",
+   "fieldtype": "Attach Image",
+   "label": "\u0e04\u0e23\u0e38\u0e11"
+  },
+  {
+   "fieldname": "mayor_position",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07"
+  },
+  {
+   "fieldname": "column_break_tqpc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_lazw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_effb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mayor_signature",
+   "fieldtype": "Attach Image",
+   "label": "\u0e25\u0e32\u0e22\u0e40\u0e0b\u0e47\u0e19\u0e15\u0e4c\u0e19\u0e32\u0e22\u0e01\u0e40\u0e17\u0e28\u0e21\u0e19\u0e15\u0e23\u0e35 (\u0e1b\u0e31\u0e08\u0e08\u0e38\u0e1a\u0e31\u0e19)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-01-09 19:00:39.874212",
+ "modified_by": "Administrator",
+ "module": "maechan_core",
+ "name": "MaechanConfig",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

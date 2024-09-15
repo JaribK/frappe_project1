@@ -1,1 +1,0 @@
-import{_ as t,c as s,o,a as c}from"./index-C3f3iefS.js";const a={inject:["$auth"],resources:{ping(){return{method:"frappe.ping",onSuccess(e){alert(e)}}}}},n={class:"text-black"},r=c("h1",{class:"text-2xl mb-4"},"ยินดีต้อนรับสู่ระบบบริการจัดการป้ายภาษี",-1),_=[r];function p(e,i,d,l,u,f){return o(),s("div",n,_)}const m=t(a,[["render",p]]);export{m as default};

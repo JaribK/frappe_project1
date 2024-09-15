@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Management Agreement</title>
+  <style>
+    .container {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      border: 1px solid #ddd;
+    }
+
+    h1, h3 {
+      text-align: center;
+    }
+
+    p, ul {
+      margin-bottom: 15px;
+    }
+
+    .input-field {
+      border: 1px solid #000;
+      padding: 5px;
+      margin: 5px;
+      display: inline-block;
+      width: 200px;
+      font-size: 14px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="agreement" class="container">
+    <h1>PROPERTY MANAGEMENT AGREEMENT</h1>
+
+    <section>
+      <h3>PARTIES</h3>
+      <p>
+        This Property Management Agreement is entered into on 
+        <input type="date" id="effectiveDate" class="input-field">
+        by and between
+        <input type="text" id="owner" placeholder="Owner's Name" class="input-field">
+        (the "Owner") with an address of
+        <input type="text" id="ownerAddress" placeholder="Owner's Address" class="input-field">
+        and
+        <input type="text" id="agent" placeholder="Agent's Name" class="input-field">
+        (the "Agent") with an address of
+        <input type="text" id="agentAddress" placeholder="Agent's Address" class="input-field">
+      </p>
+    </section>
+
+    <section>
+      <h3>GENERAL</h3>
+      <p>
+        Hereby, the Owner exclusively appoints the Agent to manage the property located at
+        <input type="text" id="propertyAddress" placeholder="Property Address" class="input-field">
+      </p>
+    </section>
+
+    <section>
+      <h3>TERM</h3>
+      <p>
+        This Agreement shall be effective on the date of signing this Agreement and will end on
+        <input type="date" id="endDate" class="input-field">
+      </p>
+    </section>
+
+    <section>
+      <h3>THE RESPONSIBILITIES OF THE AGENT</h3>
+      <ul>
+        <li>To rent and lease as well as operate the property.</li>
+        <li>To collect rent from tenants in due time.</li>
+        <li>To provide a monthly accounting of rents and paid expenses.</li>
+        <li>To repair and maintain the property when needed.</li>
+        <li>To hire and supervise employees if necessary.</li>
+        <li>To inform the Owner of any repairs that exceed
+          <input type="number" id="repairLimit" placeholder="Amount" class="input-field">
+        </li>
+      </ul>
+    </section>
+
+    <button id="downloadPdf">Download PDF</button>
+  </div>
+
+  <!-- Include html2pdf.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('downloadPdf').addEventListener('click', function () {
+      const element = document.getElementById('agreement');
+      const options = {
+        margin: 1,
+        filename: 'Property_Management_Agreement.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 1 },  // Lower scale for better performance
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+
+      // Generate PDF
+      html2pdf().from(element).set(options).save();
+    });
+  </script>
+
+</body>
+</html>

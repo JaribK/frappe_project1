@@ -1,11 +1,15 @@
+<template>
+    <div class="text-black">
+        test
+    </div>
+</template>
+
 <script>
     export default {
         
     }
 </script>
 
-<template>
-    <div class="text-black">
-        test
-    </div>
-</template>
+<style lang="scss" scoped>
+
+</style>

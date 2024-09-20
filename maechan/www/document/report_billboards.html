@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Replica A4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+        }
+
+        .a4 {
+            width: 210mm;
+            height: 297mm;
+        }
+
+        #content {
+            padding: 20mm;
+            height: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div id="document" class="a4 bg-white border border-gray-300 shadow-md mx-auto">
+        <div id="content" class="flex justify-between flex-col">
+            <!-- Header Section -->
+            <div>
+                <div class="text-center mb-10 ">
+                    <h1 class="text-lg font-bold">รายงานผลการสำรวจป้ายภาษี</h1>
+                    <p class="text-sm">อำเภอแม่จัน จังหวัดเชียงราย</p>
+                    <p class="text-sm">ออกรายงานเมื่อวันที่ {{ thai_date }}</p>
+                </div>
+                
+                <div class="mb-10">
+                    <p>เอกสารนี้เป็นการรายงานผลการสำรวจป้ายภาษีของปีก่อนหน้า - ปีปัจจุบันเท่านั้น ({{thai_year - 1}} - {{thai_year}})</p>
+                    {% if curr_amount_billboards > 0 %}
+                    <p class="mt-4 mb-4 font-bold">การสำรวจในปี {{ thai_year }}</p>
+                    <p class="ml-8">ในปี {{ thai_year }} จนถึง ณ ปัจจุบันนี้มีการสำรวจป้ายภาษีทั้งหมด จำนวน {{ curr_amount_billboards }} ป้าย</p>
+                    <p class="mt-4 mb-4 font-bold">โดยแบ่งเป็น 4 ประเภทดังนี้</p>
+                    <ul>
+                        <li>1. ป้ายอักษรไทยล้วน จำนวน {{ curr_type1_amount }} ป้าย</li>
+                        <li>2. ป้ายอักษรไทย,อังกฤษ,ปนภาพ,เครื่องหมาย จำนวน {{ curr_type2_amount }} ป้าย</li>
+                        <li>3. ป้ายไม่มีอักษรไทย จำนวน {{ curr_type3_amount }} ป้าย</li>
+                        <li>4. ป้ายที่แก้ไข ข้อความ,รูป,เครื่องหมาย(จ่ายแล้ว) จำนวน {{ curr_type4_amount }} ป้าย</li>
+                    </ul>
+                    {% else %}
+                    <p class="mt-4 mb-4 font-bold">การสำรวจในปี {{ thai_year - 1 }}</p>
+                    <p class="ml-8">ในปี {{ thai_year - 1 }} ไม่มีการสำรวจป้ายภาษี</p>
+                    {% endif %}
+                    
+                </div>
+                
+                <div class="mb-10">
+                    {% if prev_amount_billboards > 0 %}
+                    <p class="mt-4 mb-4 font-bold">การสำรวจในปี {{ thai_year - 1 }}</p>
+                    <p class="ml-8">ในปี {{ thai_year - 1 }} มีการสำรวจป้ายภาษีทั้งหมด จำนวน {{ prev_amount_billboards }} ป้าย</p>
+                    <p class="mt-4 mb-4 font-bold">โดยแบ่งเป็น 4 ประเภทดังนี้</p>
+                    <ul>
+                        <li>1. ป้ายอักษรไทยล้วน จำนวน {{ prev_type1_amount }} ป้าย</li>
+                        <li>2. ป้ายอักษรไทย,อังกฤษ,ปนภาพ,เครื่องหมาย จำนวน {{ prev_type2_amount }} ป้าย</li>
+                        <li>3. ป้ายไม่มีอักษรไทย จำนวน {{ prev_type3_amount }} ป้าย</li>
+                        <li>4. ป้ายที่แก้ไข ข้อความ,รูป,เครื่องหมาย(จ่ายแล้ว) จำนวน {{ prev_type4_amount }} ป้าย</li>
+                    </ul>
+                    {% else %}
+                    <p class="mt-4 mb-4 font-bold">การสำรวจในปี {{ thai_year - 1 }}</p>
+                    <p class="ml-8">ในปี {{ thai_year - 1 }} ไม่มีการสำรวจป้ายภาษี</p>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-10">
+                    {% if amount_billboards > 0 %}
+                    <p class="mt-4 mb-4 font-bold">สรุปผลการสำรวจป้ายภาษีในปี {{thai_year - 1}} - {{thai_year}}</p>
+                    <p class="ml-8">มีการสำรวจป้ายภาษีไปทั้งหมด {{ amount_billboards }} ป้าย</p>
+                    
+                    {% else %}
+                    <p class="mt-4 mb-4 font-bold">ผลสรุปการสำรวจป้ายภาษีในปี {{thai_year - 1}} - {{thai_year}}</p>
+                    <p class="ml-8">ยังไม่มีการสำรวจป้ายภาษี</p>
+                    {% endif %}
+                </div>
+            </div>
+                
+                <!-- Footer Section -->
+            <div>
+                <div class="mt-6 text-sm">
+                    <p>สำนักงานส่งเสริมการปกครองท้องถิ่นจังหวัดเชียงราย</p>
+                    <p>โทร 012-345-6789</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    </script>
+</body>
+</html>

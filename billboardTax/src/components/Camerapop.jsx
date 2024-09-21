@@ -6,7 +6,7 @@ const CameraPopup = ({ isOpen, onClose }) => {
   const [image, setImage] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-
+  //commment
   useEffect(() => {
     if (isCameraOn) {
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -43,8 +43,8 @@ const CameraPopup = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000]">
       <div className="bg-white p-5 rounded-lg w-4/5 max-w-[600px] relative">
-        <button className="absolute top-2.5 right-2.5 text-red-500 text-2xl bg-transparent border-none cursor-pointer" onClick={onClose}>×</button>
-        <div className="flex justify-center items-center w-full h-[200px] border-2 border-dashed border-gray-400 rounded-sm mb-5">
+        <button className="absolute top-2.5 right-2.5 text-red-500 text-2xl bg-transparent border-none " onClick={onClose}>×</button>
+        <div className="flex justify-center items-center w-full h-[200px] border-2 border-dashed border-gray-400 rounded-sm mb-5 mt-1.5">
           {image ? (
             <img src={image} alt="Captured" />
           ) : (
@@ -54,12 +54,12 @@ const CameraPopup = ({ isOpen, onClose }) => {
         <div className="flex flex-col items-center">
           {isCameraOn ? (
             <>
-              <button class="m-1" onClick={handleCapture}>จับภาพ</button>
-              <button class="m-1" onClick={() => setIsCameraOn(false)}>ปิดกล้อง</button>
+              <button class="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleCapture}>จับภาพ</button>
+              <button class="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={() => setIsCameraOn(false)}>ปิดกล้อง</button>
             </>
           ) : (
             <>
-              <button class="m-1" onClick={() => setIsCameraOn(true)}>เปิดกล้อง</button>
+              <button class="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={() => setIsCameraOn(true)}>เปิดกล้อง</button>
             </>
           )}
         </div>

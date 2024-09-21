@@ -53,6 +53,7 @@ def post_billboard_document(data):
 
         doc = frappe.get_doc({
             'doctype': 'Billboard Document2',
+            'land_id': data.get('land_id'),
             'owner_cid': data.get('owner_cid'),
             'owner_name': data.get('owner_name'),
             'status': data.get('status'),
@@ -63,7 +64,6 @@ def post_billboard_document(data):
         for entry in data.get('land', []):
             if isinstance(entry, dict):
                 doc.append('land', {
-                    'land_id': entry.get('land_id'),
                     'no': entry.get('no'),
                     'road': entry.get('road'),
                     'moo': entry.get('moo'),
@@ -116,7 +116,6 @@ def get_billboard_document(name):
 
         for land in doc.land:
             land_entries["address"].append({
-                "land_id": land.land_id,
                 "no": land.no,
                 "road": land.road,
                 "moo": land.moo,
@@ -142,6 +141,7 @@ def get_billboard_document(name):
             })
         response = {
             "name": doc.name,
+            "land_id": doc.land_id,
             "created_date": doc.creation,
             "owner_cid": doc.owner_cid,
             "owner_name": doc.owner_name,
@@ -167,7 +167,7 @@ def get_all_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
-            fields=['name', 'owner_cid', 'owner_name', 'total_price', 'status', 'no_receipt', 'research_by', 'creation'],
+            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'status', 'no_receipt', 'research_by', 'creation'],
         )
 
         results = []
@@ -182,7 +182,6 @@ def get_all_billboard_documents():
 
             for land in detailed_doc.land:
                 land_entries["address"].append({
-                    "land_id": land.land_id,
                     "no": land.no,
                     "road": land.road,
                     "moo": land.moo,
@@ -210,6 +209,7 @@ def get_all_billboard_documents():
 
             response = {
                 "name": detailed_doc.name,
+                "land_id": detailed_doc.land_id,
                 "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
                 "owner_cid": detailed_doc.owner_cid,
                 "owner_name": detailed_doc.owner_name,
@@ -238,7 +238,7 @@ def update_billboard_document(name, data):
         data = frappe.parse_json(data)
 
         doc = frappe.get_doc('Billboard Document2', name)
-
+        doc.land_id = data.get('land_id')
         doc.owner_cid = data.get('owner_cid')
         doc.owner_name = data.get('owner_name')
         doc.status = data.get('status')
@@ -250,7 +250,6 @@ def update_billboard_document(name, data):
         for entry in data.get('land', []):
             if isinstance(entry, dict):
                 doc.append('land', {
-                    'land_id': entry.get('land_id'),
                     'no': entry.get('no'),
                     'road': entry.get('road'),
                     'moo': entry.get('moo'),

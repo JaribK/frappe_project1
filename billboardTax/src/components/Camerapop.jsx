@@ -6,7 +6,9 @@ const CameraPopup = ({ isOpen, onClose }) => {
   const [image, setImage] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  //commment
+  
+  //!!จับกับปิดไม่ได้
+  //!!ปรับขนาด จอรูป
   useEffect(() => {
     if (isCameraOn) {
       navigator.mediaDevices.getUserMedia({ video: true })

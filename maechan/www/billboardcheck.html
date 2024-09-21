@@ -52,37 +52,38 @@
     </div>
 
     {% if show_results %}
-    <div id="resultsContainer" class="bg-white rounded-lg shadow-lg p-8 mt-8 w-[800px] mx-auto transform transition-all duration-700 ease-out -translate-x-full opacity-0 fade-from-above">
-        <div class="space-y-4">
-            <p>ชื่อเจ้าของกิจการ: {{ owner_name }}</p>
-            <p>รหัสที่ดิน: {{ land_id }}</p>
-            <p>จำนวนป้าย: {{ billboard_count }}</p>
-            <h3 class="text-lg font-semibold mb-4">รายละเอียดป้าย:</h3>
-            <ul class="space-y-4">
-                {% for billboard in data_billboards %}
-                    <li class="flex items-center space-x-4 p-4 border rounded-lg shadow-sm bg-gray-50">
-                        <img src="{{ billboard.picture }}" alt="Billboard Image" class="w-24 h-24 object-cover rounded-lg">
-                        <div class="text-sm">
-                            <p>ความกว้าง: {{ billboard.width }} เซนติเมตร</p>
-                            <p>ความสูง: {{ billboard.height }} เซนติเมตร</p>
-                            <p>ประเภท: {{ billboard.type_of_billboards }}</p>
-                            <p>ราคา: {{ billboard.price }} บาท</p>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            <p>จำนวนเงินทั้งหมด: {{ total_price }} บาท</p>
-        </div>
-    </div>
+        {% for result in results %}
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-8 w-[800px] mx-auto">
+                <p>ชื่อเจ้าของกิจการ: {{ result.owner_name }}</p>
+                <p>รหัสที่ดิน:{{ result.land_id }}</p>
+                <p>จำนวนป้าย: {{ result.billboard_count }}</p>
+                <p>รายละเอียดป้าย:</p>
+                <ul class="space-y-4">
+                    {% for i in result.data_billboards %}
+                        <li class="flex items-center space-x-4 p-4 border rounded-lg shadow-sm bg-gray-50">
+                            <img src="{{ i.picture }}" alt="Billboard Image" class="w-24 h-24 object-cover rounded-lg">
+                            <div class="text-sm">
+                                <p>ความกว้าง: {{ i.width }} เซนติเมตร</p>
+                                <p>ความสูง: {{ i.height }} เซนติเมตร</p>
+                                <p>ประเภท: {{ i.type_of_billboards }}</p>
+                                <p>ราคา: {{ i.price }} บาท</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <p>จำนวนเงินทั้งหมด: {{ result.total_price }} บาท</p>
+            </div>
+        {% endfor %}
     {% elif show_no_results %}
-    <div class="bg-white rounded-lg shadow-lg p-8 mt-8 w-[800px] mx-auto text-center text-red-500 transform transition-all duration-700 ease-out -translate-x-full opacity-0 fade-from-above">
-        <p>ไม่พบข้อมูลสำหรับเลขบัตรประชาชนที่ป้อน</p>
-    </div>
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-8 w-[800px] mx-auto text-center text-red-500">
+            <p>ไม่พบข้อมูลสำหรับเลขบัตรประชาชนที่ป้อน</p>
+        </div>
     {% else %}
-    <div class="bg-white rounded-lg tw-font-bold shadow-lg p-8 mt-8 w-96 mx-auto text-center text-yellow-500 transform transition-all duration-700 ease-out -translate-x-full opacity-0 fade-from-above">
-        <p>หากพบปัญหาใดโปรดติดต่อผู้ดูแลระบบ</p>
-    </div>
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-8 w-96 mx-auto text-center text-yellow-500">
+            <p>หากพบปัญหาใดโปรดติดต่อผู้ดูแลระบบ</p>
+        </div>
     {% endif %}
+
     </div>
 </body>
 </html>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import SignCard from './SignCard';
+import Fromsurvey from './Fromsurvey';
 import ConfirmPopup from './Confirmpop';
 
 
@@ -66,8 +67,8 @@ export default function ExploreFrom() {
   
   return (
     
-    <div className='flex justify-center bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 '>
-      <div className=''>
+    <div className='flex justify-center min-h-screen bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 '>
+      <div className='w-5/6'>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
             <i className="fa fa-times" aria-hidden="true"></i>
           </button>
@@ -85,12 +86,15 @@ export default function ExploreFrom() {
           <p>รหัสที่ดิน</p>
             <input 
               type="text" 
-              value={landNumber} readOnly
-              className='h-8 w-5/6 mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' />
+              value={landNumber} 
+              className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' />
           </div>
           <div className='mt-3'>
             <p>ชื่อเจ้าของกิจการ/บริษัท</p>
-            <input type="text" />
+            <input type="text"
+              
+              className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' 
+            />
           </div>
           
           
@@ -115,7 +119,7 @@ export default function ExploreFrom() {
           </div>
 
           {isCancelPopupOpen && (
-            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5 z-50'>
+            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5 z-50 '>
               <div className='bg-gray-300 w-1/2 p-4 rounded-lg text-center shadow-lg'>
                 <i className="fa-regular fa-circle-xmark custom-size text-red-700"></i>
                 <p>ยกเลิกแล้ว</p>
@@ -175,19 +179,30 @@ export default function ExploreFrom() {
             </div>
           </div>
           
-          <div className='mt-3'>
+          {/* <div className='mt-3 inline-flex'>
             <p>จำนวนป้าย : </p>
-          </div>
+            <input type="text" className='bg-inherit border-b ml-2  border-curious-blue-950 focus:border-curious-blue-700 outline-none'/>
+          </div> */}
 
-          <div className='mt-3'>
+          <div className='mt-3 inline-flex'>
             <p>จำนวนเงินทั้งหมด (บาท) :</p>
+            <input type="text" className='bg-inherit border-b ml-2  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/>
+
           </div>
 
           <div className='flex flex-col items-center mt-4'>
-            <button className='mb-5 px-2.5 py-5 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
-            <button className='self-end mb-5 px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
+            <button className='my-5 px-3 py-4 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
+            <button className='self-end  px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
 
+          <div className=''>
+            <SignCard/>
+          </div>
+
+          {isAddSignModalOpen && (
+            <Fromsurvey onClose={() => setIsAddSignModalOpen(false)} />
+          )}
+          
           {showPopup && (
             <div className="">
               <p>บันทึกสำเร็จ</p>

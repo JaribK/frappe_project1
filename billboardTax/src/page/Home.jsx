@@ -14,19 +14,19 @@ import { FrappeContext, useSWR } from 'frappe-react-sdk';
 
 export default function Home() {
 
-  const {
-    currentUser,
-    isValidating,
-    isLoading,
-    login,
-    logout,
-    error,
-    updateCurrentUser,
-    getUserCookie,
+  // const {
+  //   currentUser,
+  //   isValidating,
+  //   isLoading,
+  //   login,
+  //   logout,
+  //   error,
+  //   updateCurrentUser,
+  //   getUserCookie,
 
-  } = useFrappeAuth()
+  // } = useFrappeAuth()
 
-  const { call } = useContext(FrappeContext);
+  // const { call } = useContext(FrappeContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState('');
   const [showAllCards, setShowAllCards] = useState(false);

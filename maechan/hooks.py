@@ -204,3 +204,4 @@ scheduler_events = {
 
 website_route_rules = [{'from_route': '/billboard_services/<path:app_path>', 'to_route': 'billboard_services'},
                         {'from_route': '/service/<path:app_path>', 'to_route': 'service'},]
+website_route_rules = [{'from_route': '/billboardTax/<path:app_path>', 'to_route': 'billboardTax'}, {'from_route': '/billboardTax/<path:app_path>', 'to_route': 'billboardTax'},]

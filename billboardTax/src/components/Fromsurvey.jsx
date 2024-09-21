@@ -90,7 +90,7 @@ export default function Fromsurvey({ onClose }) {
         <div className="grid grid-cols-2 gap-6 my-2">
           <div className='flex flex-col'>
             <p className='mb-1'>กว้าง (ตร.ซม.)</p>
-            <input type="text" className='border  rounded-md'/>
+            <input type="text" className='border rounded-md'/>
           </div>
           <div className='flex flex-col'>
           <p className='mb-1'>ยาว (ตร.ซม.)</p>
@@ -116,7 +116,7 @@ export default function Fromsurvey({ onClose }) {
                 </>
               ) : (
                 <>
-                  <button onClick={handleOpenCameraPopup} className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded'>เปิดกล้อง</button>
+                  <button onClick={handleOpenCameraPopup} className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded '>เปิดกล้อง</button>
                   <CameraPopup isOpen={isCameraPopupOpen} onClose={handleCloseCameraPopup} />
                   <button className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded' onClick={() => fileInputRef.current.click()}>แนบไฟล์</button>
                   <input 

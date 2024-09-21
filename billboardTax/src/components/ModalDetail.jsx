@@ -61,7 +61,7 @@ const CardDetailPage = () => {
   return (
     <div className='bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 flex justify-center'>
       {card ? (
-        <div className=''>
+        <div>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
             <i className="fa fa-times" aria-hidden="true"></i>
           </button>
@@ -175,7 +175,7 @@ const CardDetailPage = () => {
           </div>
 
           <div className='flex flex-col items-center mt-4'>
-            <button className='mb-5 px-2.5 py-5 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
+            <button className='mb-5 mt-2 px-3 py-4 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
             <button className='self-end mb-5 px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
 

@@ -6,6 +6,7 @@ import PieChart from '../components/ChartSwitcher';
 import Card from '../components/CardSurvey';
 import axios from 'axios';
 import { FrappeContext, useSWR } from 'frappe-react-sdk';
+import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 
 // !dropdown ทำแก้ 
 // *placeholder="Search..."
@@ -346,22 +347,27 @@ function Navbar({ toggleSidebar }) {
 
 function Sidebar({ isSidebarOpen, toggleSidebar }) {
   const navigate = useNavigate();
+    const {
+    currentUser,
+    isValidating,
+    isLoading,
+    login,
+    logout,
+    error,
+    updateCurrentUser,
+    getUserCookie,
 
-  const logout = async () => {
+  } = useFrappeAuth()
+
+  const dologout = async () => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        console.error('Token not found');
+      if (!currentUser) {
+        console.error('user not found');
         return;
       }
 
-      await axios.get('http://localhost:8000/api/method/maechan.api.logout', {}, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      await logout();
 
-      localStorage.removeItem('token');
       console.log('logout succeed')
       navigate('/');
     } catch (error) {
@@ -397,7 +403,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
         </div>
       </div>
       <div className='self-end m-5'>
-        <i className="fas fa-sign-out-alt text-2xl" onClick={logout}></i>
+        <i className="fas fa-sign-out-alt text-2xl" onClick={dologout}></i>
       </div>
     </div>
   );

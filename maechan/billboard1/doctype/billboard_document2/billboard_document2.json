@@ -6,7 +6,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "land",
+  "land_id",
   "data_billboards",
   "total_price",
   "owner_cid",
@@ -14,15 +14,10 @@
   "research_by",
   "status",
   "no_receipt",
-  "land_id"
+  "lat",
+  "lng"
  ],
  "fields": [
-  {
-   "fieldname": "land",
-   "fieldtype": "Table",
-   "label": "land",
-   "options": "Billboard Land2"
-  },
   {
    "fieldname": "data_billboards",
    "fieldtype": "Table",
@@ -65,11 +60,23 @@
    "fieldtype": "Link",
    "label": "land_id",
    "options": "Land"
+  },
+  {
+   "fetch_from": "land_id.lat",
+   "fieldname": "lat",
+   "fieldtype": "Data",
+   "label": "lat"
+  },
+  {
+   "fetch_from": "land_id.lng",
+   "fieldname": "lng",
+   "fieldtype": "Data",
+   "label": "lng"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-26 19:49:43.624911",
+ "modified": "2024-09-26 23:34:38.408256",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

@@ -14,15 +14,11 @@ class BillboardDocument2(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 		from maechan.billboard1.doctype.billboard_data2.billboard_data2 import BillboardData2
-		from maechan.billboard1.doctype.billboard_land2.billboard_land2 import BillboardLand2
 
 		data_billboards: DF.Table[BillboardData2]
-		land: DF.Table[BillboardLand2]
-<<<<<<< HEAD
 		land_id: DF.Link | None
-=======
-		land_id: DF.Data | None
->>>>>>> be936b8099c7e9254df8741b15c968ee4d3bd7c5
+		lat: DF.Data | None
+		lng: DF.Data | None
 		no_receipt: DF.Data | None
 		owner_cid: DF.Data | None
 		owner_name: DF.Data | None

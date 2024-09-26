@@ -61,20 +61,20 @@ def post_billboard_document(data):
             'research_by': data.get('research_by')
         })
 
-        for entry in data.get('land', []):
-            if isinstance(entry, dict):
-                doc.append('land', {
-                    'no': entry.get('no'),
-                    'road': entry.get('road'),
-                    'moo': entry.get('moo'),
-                    'soi': entry.get('soi'),
-                    'sub_district': entry.get('sub_district'),
-                    'district': entry.get('district'),
-                    'province': entry.get('province'),
-                    'postal_code': entry.get('postal_code'),
-                    'latitude': entry.get('latitude'),
-                    'longitude': entry.get('longitude')
-                })
+        # for entry in data.get('land', []):
+        #     if isinstance(entry, dict):
+        #         doc.append('land', {
+        #             'no': entry.get('no'),
+        #             'road': entry.get('road'),
+        #             'moo': entry.get('moo'),
+        #             'soi': entry.get('soi'),
+        #             'sub_district': entry.get('sub_district'),
+        #             'district': entry.get('district'),
+        #             'province': entry.get('province'),
+        #             'postal_code': entry.get('postal_code'),
+        #             'latitude': entry.get('latitude'),
+        #             'longitude': entry.get('longitude')
+        #         })
 
         for billboard in data.get('data_billboards', []):
             if isinstance(billboard, dict):
@@ -109,26 +109,26 @@ def get_billboard_document(name):
     try:
         doc = frappe.get_doc('Billboard Document2', name)
 
-        land_entries = {
-            "address": [],
-            "coordinates": []
-        }
+        # land_entries = {
+        #     "address": [],
+        #     "coordinates": []
+        # }
 
-        for land in doc.land:
-            land_entries["address"].append({
-                "no": land.no,
-                "road": land.road,
-                "moo": land.moo,
-                "soi": land.soi,
-                "sub_district": land.sub_district,
-                "district": land.district,
-                "province": land.province,
-                "postal_code": land.postal_code
-            })
-            land_entries["coordinates"].append({
-                "latitude": land.latitude,
-                "longitude": land.longitude
-            })
+        # for land in doc.land:
+        #     land_entries["address"].append({
+        #         "no": land.no,
+        #         "road": land.road,
+        #         "moo": land.moo,
+        #         "soi": land.soi,
+        #         "sub_district": land.sub_district,
+        #         "district": land.district,
+        #         "province": land.province,
+        #         "postal_code": land.postal_code
+        #     })
+        #     land_entries["coordinates"].append({
+        #         "latitude": land.latitude,
+        #         "longitude": land.longitude
+        #     })
 
         data_billboards_entries = []
         for data in doc.data_billboards:
@@ -149,7 +149,8 @@ def get_billboard_document(name):
             "status": doc.status,
             "no_receipt": doc.no_receipt,
             "research_by": doc.research_by,
-            "land": land_entries,
+            "lat":doc.lat,
+            "lng":doc.lng,
             "data_billboards": data_billboards_entries
         }
 
@@ -167,7 +168,7 @@ def get_all_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
-            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'status', 'no_receipt', 'research_by', 'creation'],
+            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'status', 'no_receipt', 'research_by', 'creation', "lat", "lng"],
         )
 
         results = []
@@ -175,27 +176,27 @@ def get_all_billboard_documents():
         for doc in documents:
             detailed_doc = frappe.get_doc('Billboard Document2', doc['name'])
 
-            land_entries = {
-                "address": [],
-                "coordinates": []
-            }
+            # land_entries = {
+            #     "address": [],
+            #     "coordinates": []
+            # }
 
-            for land in detailed_doc.land:
-                land_entries["address"].append({
-                    "no": land.no,
-                    "road": land.road,
-                    "moo": land.moo,
-                    "soi": land.soi,
-                    "sub_district": land.sub_district,
-                    "district": land.district,
-                    "province": land.province,
-                    "postal_code": land.postal_code
-                })
-                if land.latitude and land.longitude:
-                    land_entries["coordinates"].append({
-                        "latitude": land.latitude,
-                        "longitude": land.longitude
-                    })
+            # for land in detailed_doc.land:
+            #     land_entries["address"].append({
+            #         "no": land.no,
+            #         "road": land.road,
+            #         "moo": land.moo,
+            #         "soi": land.soi,
+            #         "sub_district": land.sub_district,
+            #         "district": land.district,
+            #         "province": land.province,
+            #         "postal_code": land.postal_code
+            #     })
+            #     if land.latitude and land.longitude:
+            #         land_entries["coordinates"].append({
+            #             "latitude": land.latitude,
+            #             "longitude": land.longitude
+            #         })
 
             data_billboards_entries = []
             for data in detailed_doc.data_billboards:
@@ -217,7 +218,8 @@ def get_all_billboard_documents():
                 "status": detailed_doc.status,
                 "no_receipt": detailed_doc.no_receipt,
                 "research_by": detailed_doc.research_by,
-                "land": land_entries,
+                "lat":detailed_doc.lat,
+                "lng":detailed_doc.lng,
                 "data_billboards": data_billboards_entries
             }
 
@@ -247,20 +249,20 @@ def update_billboard_document(name, data):
 
         doc.set('land', [])
 
-        for entry in data.get('land', []):
-            if isinstance(entry, dict):
-                doc.append('land', {
-                    'no': entry.get('no'),
-                    'road': entry.get('road'),
-                    'moo': entry.get('moo'),
-                    'soi': entry.get('soi'),
-                    'sub_district': entry.get('sub_district'),
-                    'district': entry.get('district'),
-                    'province': entry.get('province'),
-                    'postal_code': entry.get('postal_code'),
-                    'latitude': entry.get('latitude'),
-                    'longitude': entry.get('longitude')
-                })
+        # for entry in data.get('land', []):
+        #     if isinstance(entry, dict):
+        #         doc.append('land', {
+        #             'no': entry.get('no'),
+        #             'road': entry.get('road'),
+        #             'moo': entry.get('moo'),
+        #             'soi': entry.get('soi'),
+        #             'sub_district': entry.get('sub_district'),
+        #             'district': entry.get('district'),
+        #             'province': entry.get('province'),
+        #             'postal_code': entry.get('postal_code'),
+        #             'latitude': entry.get('latitude'),
+        #             'longitude': entry.get('longitude')
+        #         })
 
         doc.set('data_billboards', [])
 

@@ -1,11 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:BB-Doc-{owner_name}-{#####}",
+ "autoname": "format:{land_id}",
  "creation": "2024-08-29 10:48:01.226666",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "land_id",
   "land",
   "data_billboards",
   "total_price",
@@ -58,11 +59,16 @@
    "fieldname": "no_receipt",
    "fieldtype": "Data",
    "label": "no_receipt"
+  },
+  {
+   "fieldname": "land_id",
+   "fieldtype": "Data",
+   "label": "land_id"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-29 13:47:42.500705",
+ "modified": "2024-09-26 20:20:50.977413",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

@@ -39,6 +39,7 @@ export default function Home() {
     setLoading(true);
     call.get("maechan.api.get_all_billboard_documents")
     .then(response => {
+      console.log(response.message)
       setBillboards(response.message);  
       setLoading(false);  
     })

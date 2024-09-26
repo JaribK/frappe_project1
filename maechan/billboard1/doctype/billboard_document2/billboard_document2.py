@@ -18,7 +18,11 @@ class BillboardDocument2(Document):
 
 		data_billboards: DF.Table[BillboardData2]
 		land: DF.Table[BillboardLand2]
+<<<<<<< HEAD
 		land_id: DF.Link | None
+=======
+		land_id: DF.Data | None
+>>>>>>> be936b8099c7e9254df8741b15c968ee4d3bd7c5
 		no_receipt: DF.Data | None
 		owner_cid: DF.Data | None
 		owner_name: DF.Data | None

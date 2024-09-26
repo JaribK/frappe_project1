@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:BB-Doc-{owner_name}-{#####}",
+ "autoname": "format:{land_id}",
  "creation": "2024-08-29 10:48:01.226666",
  "doctype": "DocType",
  "engine": "InnoDB",

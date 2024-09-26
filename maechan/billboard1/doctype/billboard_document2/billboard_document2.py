@@ -12,12 +12,13 @@ class BillboardDocument2(Document):
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
-		from frappe.billboard1.doctype.billboard_data2.billboard_data2 import BillboardData2
-		from frappe.billboard1.doctype.billboard_land2.billboard_land2 import BillboardLand2
 		from frappe.types import DF
+		from maechan.billboard1.doctype.billboard_data2.billboard_data2 import BillboardData2
+		from maechan.billboard1.doctype.billboard_land2.billboard_land2 import BillboardLand2
 
 		data_billboards: DF.Table[BillboardData2]
 		land: DF.Table[BillboardLand2]
+		land_id: DF.Link | None
 		no_receipt: DF.Data | None
 		owner_cid: DF.Data | None
 		owner_name: DF.Data | None

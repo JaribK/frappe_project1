@@ -13,7 +13,8 @@
   "owner_name",
   "research_by",
   "status",
-  "no_receipt"
+  "no_receipt",
+  "land_id"
  ],
  "fields": [
   {
@@ -58,11 +59,17 @@
    "fieldname": "no_receipt",
    "fieldtype": "Data",
    "label": "no_receipt"
+  },
+  {
+   "fieldname": "land_id",
+   "fieldtype": "Link",
+   "label": "land_id",
+   "options": "Land"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-29 13:47:42.500705",
+ "modified": "2024-09-26 19:49:43.624911",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

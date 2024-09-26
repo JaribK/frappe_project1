@@ -12,6 +12,7 @@ import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 // *placeholder="Search..."
 // !dropdown ใส่ map
 // !ใส่พิกัดในแผนที่
+// !แก้ปี
 
 export default function Home() {
   const { call } = useContext(FrappeContext);
@@ -40,6 +41,7 @@ export default function Home() {
     call.get("maechan.api.get_all_billboard_documents")
     .then(response => {
       setBillboards(response.message);  
+      console.log(response.message)
       setLoading(false);  
     })
     .catch(err => {

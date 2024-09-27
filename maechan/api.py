@@ -56,9 +56,9 @@ def post_billboard_document(data):
             'land_id': data.get('land_id'),
             'owner_cid': data.get('owner_cid'),
             'owner_name': data.get('owner_name'),
-            'status': data.get('status'),
             'no_receipt': data.get('no_receipt'),
-            'research_by': data.get('research_by')
+            'research_by': data.get('research_by'),
+            'payment_status': data.get('payment_status')
         })
 
         for billboard in data.get('data_billboards', []):
@@ -67,7 +67,8 @@ def post_billboard_document(data):
                     'picture': billboard.get('picture'),
                     'width': billboard.get('width'),
                     'height': billboard.get('height'),
-                    'type_of_billboards': billboard.get('type_of_billboards')
+                    'type_of_billboards': billboard.get('type_of_billboards'),
+                    'billboard_status': billboard.get('billboard_status')
                 })
 
         doc.insert()
@@ -95,6 +96,7 @@ def get_billboard_document(name):
                 "height": data.height,
                 "price": data.price,
                 "type_of_billboards": data.type_of_billboards,
+                "billboard_status": data.billboard_status
             })
         response = {
             "name": doc.name,
@@ -103,9 +105,9 @@ def get_billboard_document(name):
             "owner_cid": doc.owner_cid,
             "owner_name": doc.owner_name,
             "total_price": doc.total_price,
-            "status": doc.status,
             "no_receipt": doc.no_receipt,
             "research_by": doc.research_by,
+            "payment_status": doc.payment_status,
             "lat":doc.lat,
             "lng":doc.lng,
             "data_billboards": data_billboards_entries
@@ -125,7 +127,7 @@ def get_all_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
-            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'status', 'no_receipt', 'research_by', 'creation', "lat", "lng"],
+            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'no_receipt', 'research_by', 'creation', "lat", "lng", "payment_status"],
         )
 
         results = []
@@ -141,6 +143,7 @@ def get_all_billboard_documents():
                     "height": data.height,
                     "price": data.price,
                     "type_of_billboards": data.type_of_billboards,
+                    "billboard_status": data.billboard_status
                 })
 
             response = {
@@ -150,9 +153,9 @@ def get_all_billboard_documents():
                 "owner_cid": detailed_doc.owner_cid,
                 "owner_name": detailed_doc.owner_name,
                 "total_price": detailed_doc.total_price,
-                "status": detailed_doc.status,
                 "no_receipt": detailed_doc.no_receipt,
                 "research_by": detailed_doc.research_by,
+                "payment_status": detailed_doc.payment_status,
                 "lat":detailed_doc.lat,
                 "lng":detailed_doc.lng,
                 "data_billboards": data_billboards_entries
@@ -178,9 +181,9 @@ def update_billboard_document(name, data):
         doc.land_id = data.get('land_id')
         doc.owner_cid = data.get('owner_cid')
         doc.owner_name = data.get('owner_name')
-        doc.status = data.get('status')
         doc.no_receipt = data.get('no_receipt')
         doc.research_by = data.get('research_by')
+        doc.payment_status = data.get('payment_status')
 
         doc.set('data_billboards', [])
 
@@ -190,7 +193,8 @@ def update_billboard_document(name, data):
                     'picture': billboard.get('picture'),
                     'width': billboard.get('width'),
                     'height': billboard.get('height'),
-                    'type_of_billboards': billboard.get('type_of_billboards') 
+                    'type_of_billboards': billboard.get('type_of_billboards'), 
+                    'billboard_status': billboard.get('billboard_status')
                 })
 
         doc.save()

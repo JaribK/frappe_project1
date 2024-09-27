@@ -19,6 +19,7 @@ class BillboardDocument2(Document):
 		land_id: DF.Link | None
 		lat: DF.Data | None
 		lng: DF.Data | None
+		moo: DF.Data | None
 		no_receipt: DF.Data | None
 		owner_cid: DF.Data | None
 		owner_name: DF.Data | None

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{land_id}",
+ "autoname": "format:\u0e1b\u0e49\u0e32\u0e22\u0e02\u0e2d\u0e07 {owner_name} \u0e17\u0e35\u0e48 {land_id} [DocBB-{#####}]",
  "creation": "2024-08-29 10:48:01.226666",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -15,7 +15,8 @@
   "status",
   "no_receipt",
   "lat",
-  "lng"
+  "lng",
+  "moo"
  ],
  "fields": [
   {
@@ -63,20 +64,29 @@
   },
   {
    "fetch_from": "land_id.lat",
+   "fetch_if_empty": 1,
    "fieldname": "lat",
    "fieldtype": "Data",
    "label": "lat"
   },
   {
    "fetch_from": "land_id.lng",
+   "fetch_if_empty": 1,
    "fieldname": "lng",
    "fieldtype": "Data",
    "label": "lng"
+  },
+  {
+   "fetch_from": "land_id.district_id",
+   "fetch_if_empty": 1,
+   "fieldname": "moo",
+   "fieldtype": "Data",
+   "label": "moo"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-26 23:34:38.408256",
+ "modified": "2024-09-27 13:48:47.673800",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

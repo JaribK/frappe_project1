@@ -61,21 +61,6 @@ def post_billboard_document(data):
             'research_by': data.get('research_by')
         })
 
-        # for entry in data.get('land', []):
-        #     if isinstance(entry, dict):
-        #         doc.append('land', {
-        #             'no': entry.get('no'),
-        #             'road': entry.get('road'),
-        #             'moo': entry.get('moo'),
-        #             'soi': entry.get('soi'),
-        #             'sub_district': entry.get('sub_district'),
-        #             'district': entry.get('district'),
-        #             'province': entry.get('province'),
-        #             'postal_code': entry.get('postal_code'),
-        #             'latitude': entry.get('latitude'),
-        #             'longitude': entry.get('longitude')
-        #         })
-
         for billboard in data.get('data_billboards', []):
             if isinstance(billboard, dict):
                 doc.append('data_billboards', {
@@ -84,13 +69,6 @@ def post_billboard_document(data):
                     'height': billboard.get('height'),
                     'type_of_billboards': billboard.get('type_of_billboards')
                 })
-
-        # total_price = sum(
-        #     (billboard.get('width', 0) * billboard.get('height', 0) / 500) * 3
-        #     for billboard in data.get('data_billboards', [])
-        # )
-
-        # doc.total_price = total_price
 
         doc.insert()
         frappe.db.commit()
@@ -108,27 +86,6 @@ def post_billboard_document(data):
 def get_billboard_document(name):
     try:
         doc = frappe.get_doc('Billboard Document2', name)
-
-        # land_entries = {
-        #     "address": [],
-        #     "coordinates": []
-        # }
-
-        # for land in doc.land:
-        #     land_entries["address"].append({
-        #         "no": land.no,
-        #         "road": land.road,
-        #         "moo": land.moo,
-        #         "soi": land.soi,
-        #         "sub_district": land.sub_district,
-        #         "district": land.district,
-        #         "province": land.province,
-        #         "postal_code": land.postal_code
-        #     })
-        #     land_entries["coordinates"].append({
-        #         "latitude": land.latitude,
-        #         "longitude": land.longitude
-        #     })
 
         data_billboards_entries = []
         for data in doc.data_billboards:
@@ -175,28 +132,6 @@ def get_all_billboard_documents():
 
         for doc in documents:
             detailed_doc = frappe.get_doc('Billboard Document2', doc['name'])
-
-            # land_entries = {
-            #     "address": [],
-            #     "coordinates": []
-            # }
-
-            # for land in detailed_doc.land:
-            #     land_entries["address"].append({
-            #         "no": land.no,
-            #         "road": land.road,
-            #         "moo": land.moo,
-            #         "soi": land.soi,
-            #         "sub_district": land.sub_district,
-            #         "district": land.district,
-            #         "province": land.province,
-            #         "postal_code": land.postal_code
-            #     })
-            #     if land.latitude and land.longitude:
-            #         land_entries["coordinates"].append({
-            #             "latitude": land.latitude,
-            #             "longitude": land.longitude
-            #         })
 
             data_billboards_entries = []
             for data in detailed_doc.data_billboards:
@@ -246,23 +181,6 @@ def update_billboard_document(name, data):
         doc.status = data.get('status')
         doc.no_receipt = data.get('no_receipt')
         doc.research_by = data.get('research_by')
-
-        doc.set('land', [])
-
-        # for entry in data.get('land', []):
-        #     if isinstance(entry, dict):
-        #         doc.append('land', {
-        #             'no': entry.get('no'),
-        #             'road': entry.get('road'),
-        #             'moo': entry.get('moo'),
-        #             'soi': entry.get('soi'),
-        #             'sub_district': entry.get('sub_district'),
-        #             'district': entry.get('district'),
-        #             'province': entry.get('province'),
-        #             'postal_code': entry.get('postal_code'),
-        #             'latitude': entry.get('latitude'),
-        #             'longitude': entry.get('longitude')
-        #         })
 
         doc.set('data_billboards', [])
 

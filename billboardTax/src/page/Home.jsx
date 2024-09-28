@@ -108,7 +108,7 @@ export default function Home() {
         >
           <option value="" disabled></option>
           {billboards.map((billboard, index) =>
-            <option key={index} value={billboard.land_id.district_id}>{billboard.land_id.district_id}</option>
+            <option key={index} value={billboard.district_id}>{billboard.district_id}</option>
           )}
         </select>
         {/* <div className="absolute inset-y-0 right-0 flex items-end pr-7 pointer-events-none">

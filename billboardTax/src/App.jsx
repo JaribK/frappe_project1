@@ -1,4 +1,3 @@
-import logo from '../public/billboard.png'
 import './App.css';
 import '@fontsource/inter';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
@@ -22,7 +21,7 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/manual" element={<Home />} />
             <Route path="/help" element={<Home />} />
-            <Route path='/card-detail/:cardId' element={<CardDetail />} />
+            <Route path='/card-detail/:billboardname' element={<CardDetail />} />
             <Route path='/explorefrom/:landNumber' element={<ExploreFrom />} />
             <Route path='/explorefrom' element={<ExploreFrom />} />
           </Routes>
@@ -46,6 +45,7 @@ function Login() {
 
   } = useFrappeAuth()
 
+  const logo = '/billboard.png';
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [credentials, setCredentials] = useState({ username: '', password: '' });

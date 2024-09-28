@@ -1,15 +1,16 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Fromsurvey from './Fromsurvey';
 import ConfirmPopup from './Confirmpop';
 import SignCard from './SignCard';
+import { FrappeContext } from 'frappe-react-sdk';
 
 const CardDetailPage = () => {
   const location = useLocation();
-  const card = location.state?.card ;
+  const billboard = location.state?.billboard; 
   const navigate = useNavigate();
+  const { call } = useContext(FrappeContext);
   const [selectedStatus, setSelectedStatus] = useState('');
   const [isAddSignModalOpen, setIsAddSignModalOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
@@ -17,15 +18,18 @@ const CardDetailPage = () => {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [idCardNumber, setIdCardNumber] = useState('');
   const [receiptNumber, setReceiptNumber] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  
-  const handleStatusChange = (status) => {
-    setSelectedStatus(status);
-    if (status === 'cancel') {
-      setIsCancelPopupOpen(true);
-    }
-    console.log(`Selected status: ${status}`);
-  };
+
+  console.log(billboard)
+  // const handleStatusChange = (status) => {
+  //   setSelectedStatus(status);
+  //   if (status === 'cancel') {
+  //     setIsCancelPopupOpen(true);
+  //   }
+  //   console.log(`Selected status: ${status}`);
+  // };
 
   const closeCancelPopup = () => setIsCancelPopupOpen(false);
 
@@ -58,10 +62,56 @@ const CardDetailPage = () => {
 
   const handleAddSign = () => setIsAddSignModalOpen(true);
 
+  
+  useEffect(() => {
+    if (billboard && billboard.status) {
+      setSelectedStatus(billboard.status);
+    }
+  }, [billboard]);
+
+  const handleStatusChange = (status) => {
+    setSelectedStatus(status);
+    console.log(`Selected status: ${status}`);
+  };
+
+  const [formData, setFormData] = useState({
+    land_id: '',
+    owner_cid: '',
+    owner_name: '',
+    no_receipt: '',
+    research_by: '',
+    payment_status: '',
+    data_billboards: [{ picture: '', width: '', height: '', type_of_billboards: '', billboard_status: '' }]
+  });
+
+  useEffect(() => {
+    const billboradData = () =>{
+    setLoading(true);
+    console.log(formData)
+    if (!formData) return;
+     call.post("maechan.post_billboard_document", {
+        formdata: formData
+    }).then(r =>{
+      setLoading(false);
+      console.log(r.message)
+    })
+    .catch(err => {
+      setError('Error post billboard data'); 
+      if (err.r && err.r.data && err.r.data.message) {
+        console.log(err.r.data.message);
+      } else {
+        console.log(err);
+      }
+      setLoading(false);  
+    });
+  };
+    billboradData();
+  },[formData])
+
   return (
-    <div className='bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 flex justify-center'>
-      {card ? (
-        <div>
+    <div className='min-h-screen bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 flex justify-center'>
+      {billboard ? (
+        <div className='w-5/6'>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
             <i className="fa fa-times" aria-hidden="true"></i>
           </button>
@@ -77,31 +127,31 @@ const CardDetailPage = () => {
           </div> */}
           <div>
             <p>รหัสที่ดิน</p>
-            <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{card.landCode}</p>
+            <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{billboard.land_id}</p>
           </div>
           <div className='mt-3'>
             <p>ชื่อเจ้าของกิจการ/บริษัท</p>
-            <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{card.owner_name}</p>
+            <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{billboard.owner_name}</p>
           </div>
           
           
           <div className='mt-3'>
             <p>สถานะของป้าย</p>
             <div className="flex flex-col ">
-            <p
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base  overflow-hidden ${selectedStatus === 'change' ? 'active' : ''}`}
-              onClick={() => handleStatusChange('change')}
+            <div
+              className={`flex items-center border-none rounded-full px-4 py-2 text-base  overflow-hidden ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'active' : ''}`}
+              onClick={() => handleStatusChange('เปลี่ยนแปลงแล้ว')}
             >
-                <span className={` inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'change' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}></span>
+                <span className={` inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}></span>
                 <span >เปลี่ยนแปลง</span>
-            </p>
-            <p
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden  ${selectedStatus === 'cancel' ? 'active' : ''}`}
-              onClick={() => handleStatusChange('cancel')}
+            </div>
+            <div
+              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden  ${selectedStatus === 'ยกเลิกแล้ว' ? 'active' : ''}`}
+              onClick={() => handleStatusChange('ยกเลิกแล้ว')}
             >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'cancel' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500': 'bg-white'}`}></span>
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500': 'bg-white'}`}></span>
                 <span >ยกเลิก</span>
-            </p>
+            </div>
             </div>
           </div>
 
@@ -120,19 +170,19 @@ const CardDetailPage = () => {
             <div className="flex flex-col ">
             <p
               className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${
-                selectedPaymentStatus === 'not_paid' ? '' : ''}
+                selectedPaymentStatus === 'ยังไม่จ่าย' ? '' : ''}
               }`}
-              onClick={() => handlePaymentStatusChange('not_paid')}
+              onClick={() => handlePaymentStatusChange('ยังไม่จ่าย')}
             >
               <span
                 className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
-                  selectedPaymentStatus === 'not_paid' ? 'bg-curious-blue-500' : 'bg-white'
+                  selectedPaymentStatus === 'ยังไม่จ่าย' ? 'bg-curious-blue-500' : 'bg-white'
                 }`}
               ></span>
               <span>ยังไม่ได้ชำระ</span>
             </p>
 
-              {selectedPaymentStatus === 'not_paid' && (
+              {selectedPaymentStatus === 'ยังไม่จ่าย' && (
                 <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
                   <p>เลขบัตรประชาชน</p>
                   <input 
@@ -145,14 +195,14 @@ const CardDetailPage = () => {
               )}
 
               <p
-                className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${selectedPaymentStatus === 'paid' ? 'active' : ''}`}
-                onClick={() => handlePaymentStatusChange('paid')}
+                className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'active' : ''}`}
+                onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
               >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedPaymentStatus === 'paid' ? 'bg-blue-500' : 'bg-white'}`}></span>
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
                 <span >ชำระแล้ว</span>
               </p>
 
-              {selectedPaymentStatus === 'paid' && (
+              {selectedPaymentStatus === 'จ่ายแล้ว' && (
                 <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
                   <p>เลขที่ใบเสร็จชำระเงิน</p>
                   <input 
@@ -167,11 +217,11 @@ const CardDetailPage = () => {
           </div>
           
           <div className='mt-3'>
-            <p>จำนวนป้าย : {card.signCount}</p>
+            <p>จำนวนป้าย : {billboard.data_billboards.length}</p>
           </div>
 
           <div className='mt-3'>
-            <p>จำนวนเงินทั้งหมด (บาท) : {card.Totel_Price}</p>
+            <p>จำนวนเงินทั้งหมด (บาท) : {billboard.total_price}</p>
           </div>
 
           <div className='flex flex-col items-center mt-4'>

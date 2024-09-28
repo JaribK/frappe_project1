@@ -13,6 +13,9 @@ import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 // !dropdown ใส่ map
 // !ใส่พิกัดในแผนที่
 // !แก้ปี
+// !นับจน.ป้ายเอง
+// !totolpice ยังใช้ไม่ได้
+// *get success
 
 export default function Home() {
   const { call } = useContext(FrappeContext);
@@ -36,7 +39,7 @@ export default function Home() {
   //useSWR()
 
  useEffect(() => {
-  const cardData = () => {
+  const fetchData = () => {
     setLoading(true);
     call.get("maechan.api.get_all_billboard_documents")
     .then(response => {
@@ -55,25 +58,42 @@ export default function Home() {
       setLoading(false);  
     });
   };
-    cardData();
+    fetchData();
   }, [call]);
 
 
-  const sortedYears = billboards ? Object.keys(billboards).sort((a, b) => b - a) : [];
-  const displayedYears = showAllCards ? sortedYears : sortedYears.slice(0, 1);
+  
+  //const displayedYears = showAllCards ? sortedYears : sortedYears.slice(0, 1);
 
   const handleToggleShowAll = () => {
     setShowAllCards(prev => !prev);
   };
 
-  const handleCardClick = (card) => {
-    navigate(`/card-detail/${card.id}`, { state: { card } });
+  const handleCardClick = (billboard) => {
+    console.log(billboard)
+    navigate(`/card-detail/${billboard.name}`, { state: { billboard } });
   };
 
   // const handleCloseModal = () => {
   //   setSelectedCard(null);
   // };
 
+  // const formatDate = (dateString) => {
+  //   const date = new Date(dateString);
+  //   return date.toLocaleDateString('th-TH', { 
+  //     year: 'numeric',
+  //     month: 'long',
+  //     day: 'numeric',
+  //   });
+  // };
+  const sortedBillboards = billboards.sort((a, b) => {
+      return new Date(a.created_date) - new Date(b.created_date);
+  });
+  const uniqueYears = [...new Set(billboards.map(billboard => new Date(billboard.created_date).getFullYear()))];
+  const sortedYears = uniqueYears.sort((a, b) => a - b);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className='bg-sky-200'>
@@ -87,36 +107,36 @@ export default function Home() {
           className="w-11/12 h-10 border-none rounded-3xl text-gray-400 text-lg bg-white py-0 pl-3 pr-7 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
         >
           <option value="" disabled></option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+          {billboards.map((billboard, index) =>
+            <option key={index} value={billboard.land_id.district_id}>{billboard.land_id.district_id}</option>
+          )}
         </select>
-        <div className="absolute inset-y-0 right-0 flex items-end pr-7 pointer-events-none">
+        {/* <div className="absolute inset-y-0 right-0 flex items-end pr-7 pointer-events-none">
           <i className="fas fa-chevron-down text-gray-400"></i>
-        </div>
+        </div> */}
       </div>
 
-
-
       <PieChart />
+
       <div className='p-5 text-left text-sky-950'>
         <div
           className='underline text-xl font-prompt font-semibold text-sky-950'><p>ผลการสำรวจ</p></div>
-        {displayedYears.map((year, index) => (
-          <div key={year}>
-            <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
-            <div>
-              {cardData[year].slice(0, 3).map((card) => (
-                <div key={card.id} onClick={() => handleCardClick(card)}>
-                  <Card
-                    landCode={card.landCode}
-                    ownerName={card.owner_name}
-                    signCount={card.signCount}
-                  />
+          {sortedYears.map((year, index) => (
+            <div key={year}>
+              <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
+              <div>
+                {sortedBillboards.filter(billboard => new Date(billboard.created_date).getFullYear() === year)
+                  .map(billboard => (
+                    <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
+                    <Card
+                        landCode={billboard.land_id}
+                        ownerName={billboard.owner_name}
+                        signCount={billboard.data_billboards.length}
+                    />
                 </div>
-              ))}
-              {index < displayedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
-            </div>
+                  ))}
+              </div>
+              {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
           </div>
         ))}
         {sortedYears.length > 2 && (
@@ -131,8 +151,8 @@ export default function Home() {
 
 function Navbar({ toggleSidebar }) {
   return (
-    <nav className='sticky top-0 bg-sky-800 h-14 fixed top-0 left-0 w-full '>
-      <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-4 " onClick={toggleSidebar}></i>
+    <nav className='sticky top-0 bg-sky-800 h-14 fixed top-0 left-0 w-full z-50'>
+      <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-4 pt-3" onClick={toggleSidebar}></i>
     </nav>
   );
 }
@@ -170,10 +190,10 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
   };
 
   return (
-    <div className={`fixed z-50 top-0 left-0 w-[250px] h-full bg-sky-800 text-white font-prompt font-bold overflow-hidden flex flex-col justify-between transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+    <div className={`fixed z-50 top-0 left-0 w-[250px] h-full bg-sky-800 text-white  font-prompt font-bold overflow-hidden flex flex-col justify-between transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div>
         <nav className='bg-sky-800 h-14'>
-          <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-4 " onClick={toggleSidebar}></i>
+          <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-3 " onClick={toggleSidebar}></i>
         </nav>
         <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/home')}>
           <i className="fas fa-home mr-2.5" ></i>

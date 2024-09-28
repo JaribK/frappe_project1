@@ -51,14 +51,13 @@
    "fieldname": "billboard_status",
    "fieldtype": "Select",
    "label": "billboard_status",
-   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e41\u0e25\u0e49\u0e27\n\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e41\u0e25\u0e49\u0e27",
-   "reqd": 1
+   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e41\u0e25\u0e49\u0e27\n\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e41\u0e25\u0e49\u0e27"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-27 21:04:10.741861",
+ "modified": "2024-09-28 09:16:58.333745",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Data2",

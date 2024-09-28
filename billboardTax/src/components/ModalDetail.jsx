@@ -84,14 +84,15 @@ const CardDetailPage = () => {
   
 
   const [formData, setFormData] = useState({
-    land_id: '',
-    owner_cid: '',
-    owner_name: '',
-    no_receipt: '',
-    research_by: '',
-    payment_status: '',
-    data_billboards: [{ picture: '', width: '', height: '', type_of_billboards: '', billboard_status: '' }]
+      land_id: '',
+      owner_cid: '',
+      owner_name: '',
+      no_receipt: '',
+      research_by: '',
+      payment_status: '',
+      data_billboards: [{ picture: '', width: '', height: '', type_of_billboards: '', billboard_status: '' }]
   });
+  console.log('test :'+ JSON.stringify(formData))
 
   useEffect(() => {
     const billboradData = () =>{
@@ -105,7 +106,8 @@ const CardDetailPage = () => {
       console.log(formData)
       if (!formData) return;
       call.put("maechan.api.update_billboard_document", {
-          formdata: JSON.stringify(formData)
+          name:billboard.name,
+          data: JSON.stringify(formData)
       }).then(r =>{
         setLoading(false);
         console.log(r.message)

@@ -71,8 +71,17 @@ const CardDetailPage = () => {
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
-    console.log(`Selected status: ${status}`);
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      data_billboards: [
+        {
+          ...prevFormData.data_billboards[0],
+          billboard_status: status  
+        }
+      ]
+    }));
   };
+  
 
   const [formData, setFormData] = useState({
     land_id: '',
@@ -86,26 +95,32 @@ const CardDetailPage = () => {
 
   useEffect(() => {
     const billboradData = () =>{
-    setLoading(true);
-    console.log(formData)
-    if (!formData) return;
-     call.post("maechan.post_billboard_document", {
-        formdata: formData
-    }).then(r =>{
-      setLoading(false);
-      console.log(r.message)
-    })
-    .catch(err => {
-      setError('Error post billboard data'); 
-      if (err.r && err.r.data && err.r.data.message) {
-        console.log(err.r.data.message);
-      } else {
-        console.log(err);
+
+      if (!billboard.land_id || !billboard.owner_cid || !billboard.owner_name) {
+        console.error('Form data is incomplete');
+        return;
       }
-      setLoading(false);  
-    });
-  };
-    billboradData();
+
+      setLoading(true);
+      console.log(formData)
+      if (!formData) return;
+      call.put("maechan.api.update_billboard_document", {
+          formdata: JSON.stringify(formData)
+      }).then(r =>{
+        setLoading(false);
+        console.log(r.message)
+      })
+      .catch(err => {
+        setError('Error post billboard data'); 
+        if (err.r && err.r.data && err.r.data.message) {
+          console.log(err.r.data.message);
+        } else {
+          console.log(err);
+        }
+        setLoading(false);  
+      });
+    };
+      billboradData();
   },[formData])
 
   return (
@@ -135,25 +150,30 @@ const CardDetailPage = () => {
           </div>
           
           
-          <div className='mt-3'>
-            <p>สถานะของป้าย</p>
-            <div className="flex flex-col ">
+         <div className='mt-3'>
+          <p>สถานะของป้าย</p>
+          <div className="flex flex-col ">
             <div
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base  overflow-hidden ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'active' : ''}`}
+              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'active' : ''}`}
               onClick={() => handleStatusChange('เปลี่ยนแปลงแล้ว')}
             >
-                <span className={` inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}></span>
-                <span >เปลี่ยนแปลง</span>
+              <span
+                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
+              ></span>
+              <span>เปลี่ยนแปลง</span>
             </div>
             <div
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden  ${selectedStatus === 'ยกเลิกแล้ว' ? 'active' : ''}`}
+              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden ${selectedStatus === 'ยกเลิกแล้ว' ? 'active' : ''}`}
               onClick={() => handleStatusChange('ยกเลิกแล้ว')}
             >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500': 'bg-white'}`}></span>
-                <span >ยกเลิก</span>
-            </div>
+              <span
+                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
+              ></span>
+              <span>ยกเลิก</span>
             </div>
           </div>
+        </div>
+
 
           {isCancelPopupOpen && (
             <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5 z-50'>

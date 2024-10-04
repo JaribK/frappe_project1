@@ -43,7 +43,7 @@
         <h2 class="text-center text-xl font-semibold mb-6">ตรวจสอบการเสียภาษีป้าย</h2>
         <form id="searchForm" method="POST" class="space-y-4 pb-2">
             <label for="owner_cid" class="block text-gray-700">เลขบัตรประชาชน 13 หลัก</label>
-            <input type="text" id="owner_cid" name="owner_cid" placeholder="กรอกเลขบัตรประชาชนที่นี่..." type="number" minlength="13" maxlength="13" required class="w-full px-4 py-2 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="owner_cid" name="owner_cid" placeholder="กรอกเลขบัตรประชาชนที่นี่..." type="number" minlength="13" required class="w-full px-4 py-2 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <button type="submit" class="w-full bg-gray-300 text-gray-700 py-2 rounded hover:bg-gray-400">ยืนยัน</button>
         </form>
         <form id="clearForm" method="GET">
@@ -67,6 +67,7 @@
                                 <p>ความสูง: {{ i.height }} เซนติเมตร</p>
                                 <p>ประเภท: {{ i.type_of_billboards }}</p>
                                 <p>ราคา: {{ i.price }} บาท</p>
+                                <p>สถานะป้าย: {{i.billboard_status}}</p>
                             </div>
                         </li>
                     {% endfor %}

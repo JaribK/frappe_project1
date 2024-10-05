@@ -9,9 +9,6 @@ export default function Fromsurvey({ onClose }) {
   const [selectedType, setSelectedType] = useState('');
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [image, setImage] = useState('');
-  const [width, setWidth] = useState('')
-  const [height, setHeight] = useState('')
-  const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const fileInputRef = useRef(null);
   const [isCameraPopupOpen, setIsCameraPopupOpen] = useState(false);
@@ -32,32 +29,10 @@ export default function Fromsurvey({ onClose }) {
     if (onClose) onClose(); 
   };
 
-  //const handleTypeChange = (event) => setSelectedType(event.target.value);
-
-  // useEffect(() => {
-  //   if (isCameraOn) {
-  //     navigator.mediaDevices.getUserMedia({ video: true })
-  //       .then(stream => {
-  //         if (videoRef.current) {
-  //           videoRef.current.srcObject = stream;
-  //         }
-  //       })
-  //       .catch(err => console.error("Error accessing camera: ", err));
-  //   } else {
-  //     if (videoRef.current) {
-  //       const stream = videoRef.current.srcObject;
-  //       if (stream) {
-  //         const tracks = stream.getTracks();
-  //         tracks.forEach(track => track.stop());
-  //       }
-  //     }
-  //   }
-  // }, [isCameraOn]);
-
-  const handleCapture = () => {
+  const handleCapture = (image) => {
     setNewBillboard(prevData => ({
       ...prevData,
-      picture: capturedImage,
+      picture: image,
     }));
     
     setIsCameraOn(false);
@@ -100,9 +75,6 @@ const handleFileChange = async (event) => {
 
  const [dataBillboards, setDataBillboards] = useState(billboard.data_billboards || []);
 
-  const [formData, setFormData] = useState({
-    data_billboards: [], 
-  });
   const [newBillboard, setNewBillboard] = useState({
     picture: '',
     width: '',
@@ -113,25 +85,8 @@ const handleFileChange = async (event) => {
   const data ={
     ...billboard,
   }
-  const newdata =  data.data_billboards
-
-  const data01 ={
-    picture: image,
-    width: width, 
-    height: height, 
-    type_of_billboards: selectedType, 
-    billboard_status: "",
-    payment_status: ''
-  }
-  //newdata.push(data01)
-  //console.log(newdata)
 
   const handleSave = () => {
-    console.log(data)
-    console.log(newdata)
-    console.log()
-    //setDataBillboards((prev) => [...prev, newBillboard]);
-
     setDataBillboards((prev) => {
       const updatedData = [...prev, newBillboard];
       const paymentStatus = newBillboard.payment_status || '';
@@ -150,10 +105,9 @@ const handleFileChange = async (event) => {
       for (const key in updatedBillboard) {
         if (updatedBillboard[key] === undefined || updatedBillboard[key] === null) {
           console.error(`Field ${key} is not valid:`, updatedBillboard[key]);
-          return; // หรือแสดงข้อผิดพลาดให้ผู้ใช้ทราบ
+          return; 
         }
       }
-      // เรียก API เพื่ออัปเดตข้อมูล
       call.put('maechan.api.update_billboard_document', {
         name: billboard.name,
         data: updatedBillboard
@@ -181,25 +135,6 @@ const handleFileChange = async (event) => {
       billboard_status: '',
     });
   
-    
-    // const updatedBillboard = {
-    //   ...billboard,
-    //   data_billboards: [...dataBillboards, newBillboard],
-    // };
-    // console.log(updatedBillboard);
-
-    // call.put('maechan.api.update_billboard_document', {
-    //   name:billboard.name,
-    //   data: updatedBillboard
-    // })
-    // .then(response => {
-    //   console.log('Data saved successfully:', response);
-    //   closeAddSignModal();
-    // })
-    // .catch(error => {
-    //   console.error('Error saving data:', error.response ? error.response.data : error.message);
-    //   // แสดงข้อผิดพลาดให้ผู้ใช้ทราบที่ UI ถ้าจำเป็น
-    // });
   };
 
   const  handleChange = (name, value, ) => {
@@ -263,22 +198,15 @@ const handleFileChange = async (event) => {
           <div className='grid grid-cols-2 gap-2 mx-4 my-2 h-40'>
             <div className="flex justify-center items-center aspect-w-1 aspect-h-1 h-10/12 w-36 border-2 border-gray-300 bg-gray-300 rounded-md  overflow-hidden">
               {image ? (
-                <img className='w-full h-full object-cover  ' src={image} alt="Selected" />
+                <img className='w-full h-full object-cover' src={image} alt="Selected" />
               ) : (
                 <i className="fa-solid fa-plus text-red-600 text-2xl border-2 border-dashed border-gray-400 p-8"></i>
               )}
             </div>
             <div className="flex flex-col justify-end">
-              {isCameraOn ? (
-                <>
-                  <video ref={videoRef} autoPlay></video>
-                  <button onClick={handleCapture}>จับภาพ</button>
-                  <button onClick={() => setIsCameraOn(false)}>ปิดกล้อง</button>
-                </>
-              ) : (
                 <>
                   <button onClick={handleOpenCameraPopup} className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded '>เปิดกล้อง</button>
-                  <CameraPopup isOpen={isCameraPopupOpen} onClose={handleCloseCameraPopup} />
+                  <CameraPopup isOpen={isCameraPopupOpen} onClose={handleCloseCameraPopup} onCapture={handleCapture} />
                   <button className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded' onClick={() => fileInputRef.current.click()}>แนบไฟล์</button>
                   <input 
                     className='mb-2.5 '
@@ -290,7 +218,7 @@ const handleFileChange = async (event) => {
                     onChange={(e) => handleFileChange(e)}
                   />
                 </>
-              )}
+              
             </div>
             <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
           </div>

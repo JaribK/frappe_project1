@@ -29,6 +29,7 @@ const CardDetailPage = () => {
       no_receipt: billboard.no_receipt,
       research_by: billboard.research_by,
       payment_status: selectedStatus,
+      billboard_status: selectedStatus,
       data_billboards: []
   });  
   

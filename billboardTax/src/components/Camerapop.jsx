@@ -11,8 +11,15 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
   //!!ปรับขนาด จอรูป
 
   useEffect(() => {
+    if (isOpen) {
+      setIsCameraOn(true); 
+      console.log('setIsCameraOn(true)')
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    let stream;
     if (isCameraOn) {
-      setIsCameraOn(true)
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
           if (videoRef.current) {
@@ -27,8 +34,15 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
           const tracks = stream.getTracks();
           tracks.forEach(track => track.stop());
         }
+        videoRef.current.srcObject = null; 
       }
     }
+    return () => {
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+      }
+    };
   }, [isCameraOn]);
 
   const handleCapture = () => {
@@ -71,7 +85,11 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
           )}
         </div>
         <div className="flex flex-col items-center">
-          {isCameraOn ? ( null) : image ? (
+          {isCameraOn ? (
+            <div>
+              <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleCapture}>จับภาพ</button>
+            </div>
+          ) : image ? (
             <div>
               <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleUseImage}>ใช้ภาพนี้</button>
               <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleRetake}>ถ่ายใหม่</button>

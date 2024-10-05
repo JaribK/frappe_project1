@@ -16,7 +16,8 @@
   "lat",
   "lng",
   "moo",
-  "payment_status"
+  "payment_status",
+  "billboard_status"
  ],
  "fields": [
   {
@@ -82,11 +83,17 @@
    "fieldtype": "Select",
    "label": "payment_status",
    "options": "\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e08\u0e48\u0e32\u0e22\n\u0e08\u0e48\u0e32\u0e22\u0e41\u0e25\u0e49\u0e27"
+  },
+  {
+   "fieldname": "billboard_status",
+   "fieldtype": "Select",
+   "label": "billboard_status",
+   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e41\u0e25\u0e49\u0e27\n\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e41\u0e25\u0e49\u0e27"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-27 20:41:54.209801",
+ "modified": "2024-10-06 01:25:26.271102",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

@@ -9,7 +9,7 @@ def get_context(context):
         # Fetch all parent data for the specified owner_cid
         parent_data = frappe.get_all('Billboard Document2',
                                       filters={'owner_cid': owner_cid},
-                                      fields=['name', "land_id", 'owner_name', 'total_price', 'no_receipt', 'research_by'])
+                                      fields=['name', "land_id", 'owner_name', 'total_price', 'no_receipt', 'research_by','billboard_status'])
 
         if parent_data:
             context['results'] = []  # Initialize a list to store results
@@ -20,7 +20,7 @@ def get_context(context):
                 
                 billboard_data = frappe.get_all('Billboard Data2',
                                                  filters={'parent': parent_name},
-                                                 fields=['picture', 'width', 'height', 'type_of_billboards', 'price','billboard_status'])
+                                                 fields=['picture', 'width', 'height', 'type_of_billboards', 'price'])
 
                 billboard_count = len(billboard_data)
 

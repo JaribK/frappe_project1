@@ -58,7 +58,8 @@ def post_billboard_document(data):
             'owner_name': data.get('owner_name'),
             'no_receipt': data.get('no_receipt'),
             'research_by': data.get('research_by'),
-            'payment_status': data.get('payment_status')
+            'payment_status': data.get('payment_status'),
+            'billboard_status': data.get('billboard_status')
         })
 
         for billboard in data.get('data_billboards', []):
@@ -68,7 +69,6 @@ def post_billboard_document(data):
                     'width': billboard.get('width'),
                     'height': billboard.get('height'),
                     'type_of_billboards': billboard.get('type_of_billboards'),
-                    'billboard_status': billboard.get('billboard_status')
                 })
 
         doc.insert()
@@ -96,7 +96,6 @@ def get_billboard_document(name):
                 "height": data.height,
                 "price": data.price,
                 "type_of_billboards": data.type_of_billboards,
-                "billboard_status": data.billboard_status
             })
         response = {
             "name": doc.name,
@@ -108,6 +107,8 @@ def get_billboard_document(name):
             "no_receipt": doc.no_receipt,
             "research_by": doc.research_by,
             "payment_status": doc.payment_status,
+            "billboard_status": doc.billboard_status,
+            "moo":doc.moo,
             "lat":doc.lat,
             "lng":doc.lng,
             "data_billboards": data_billboards_entries
@@ -127,7 +128,7 @@ def get_all_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
-            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'no_receipt', 'research_by', 'creation', "lat", "lng", "payment_status"],
+            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'no_receipt', 'research_by', 'creation', 'moo', "lat", "lng", "payment_status"],
         )
 
         results = []
@@ -143,7 +144,6 @@ def get_all_billboard_documents():
                     "height": data.height,
                     "price": data.price,
                     "type_of_billboards": data.type_of_billboards,
-                    "billboard_status": data.billboard_status
                 })
 
             response = {
@@ -156,6 +156,8 @@ def get_all_billboard_documents():
                 "no_receipt": detailed_doc.no_receipt,
                 "research_by": detailed_doc.research_by,
                 "payment_status": detailed_doc.payment_status,
+                "billboard_status": detailed_doc.billboard_status,
+                "moo":detailed_doc.moo,
                 "lat":detailed_doc.lat,
                 "lng":detailed_doc.lng,
                 "data_billboards": data_billboards_entries
@@ -184,6 +186,7 @@ def update_billboard_document(name, data):
         doc.no_receipt = data.get('no_receipt')
         doc.research_by = data.get('research_by')
         doc.payment_status = data.get('payment_status')
+        doc.billboard_status = data.get('billboard_status')
 
         doc.set('data_billboards', [])
 
@@ -194,7 +197,6 @@ def update_billboard_document(name, data):
                     'width': billboard.get('width'),
                     'height': billboard.get('height'),
                     'type_of_billboards': billboard.get('type_of_billboards'), 
-                    'billboard_status': billboard.get('billboard_status')
                 })
 
         doc.save()

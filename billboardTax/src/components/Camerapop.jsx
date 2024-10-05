@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
-  const [isCameraOn, setIsCameraOn] = useState(true);
+  const [isCameraOn, setIsCameraOn] = useState(false);
   const [image, setImage] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -12,6 +12,7 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
 
   useEffect(() => {
     if (isCameraOn) {
+      setIsCameraOn(true)
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
           if (videoRef.current) {
@@ -70,16 +71,16 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
           )}
         </div>
         <div className="flex flex-col items-center">
-          {isCameraOn ? (
-            <div>
-              <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleCapture}>จับภาพ</button>
-            </div>
-          ) : image ? (
+          {isCameraOn ? ( null) : image ? (
             <div>
               <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleUseImage}>ใช้ภาพนี้</button>
               <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleRetake}>ถ่ายใหม่</button>
             </div>
-          ) : null
+          ) : (
+            <div>
+              <button className="m-1 bg-alto-200 p-1.5 rounded-md text-curious-blue-950" onClick={handleCapture}>จับภาพ</button>
+            </div>
+          )
         }
         </div>
         <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>

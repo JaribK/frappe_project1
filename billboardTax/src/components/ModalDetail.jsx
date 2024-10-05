@@ -21,16 +21,18 @@ const CardDetailPage = () => {
 
 
   console.log(billboard)
-  // const handleStatusChange = (status) => {
-  //   setSelectedStatus(status);
-  //   if (status === 'cancel') {
-  //     setIsCancelPopupOpen(true);
-  //   }
-  //   console.log(`Selected status: ${status}`);
-  // };
-
+  console.log('moo is',billboard.moo)
+  const [formData, setFormData] = useState({
+      land_id: billboard.land_id,
+      owner_cid: billboard.owner_cid,
+      owner_name: billboard.owner_name,
+      no_receipt: billboard.no_receipt,
+      research_by: billboard.research_by,
+      payment_status: selectedStatus,
+      data_billboards: []
+  });  
+  
   const closeCancelPopup = () => setIsCancelPopupOpen(false);
-
   useEffect(() => {
     if (isCancelPopupOpen) {
       const timer = setTimeout(() => {
@@ -56,43 +58,25 @@ const CardDetailPage = () => {
     setIsConfirmPopupOpen(false);
   };
 
-  // const handleConfirmSurvey = () => {
-  //   setFormData
-  //   console.log('Survey confirmed')
-  // };
-
   const handleAddSign = () => setIsAddSignModalOpen(true);
 
-  
   useEffect(() => {
     if (billboard && billboard.status) {
+      console.log('สถานะจาก billboard:', billboard.status);
       setSelectedStatus(billboard.status);
     }
   }, [billboard]);
+  
+  useEffect(() => {
+    console.log('สถานะที่อัปเดต:', selectedStatus);
+  }, [selectedStatus]);  
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
-    // setFormData(prevFormData => ({
-    //   ...prevFormData,
-    //   data_billboards: [
-    //     {
-    //       ...prevFormData.data_billboards[0],
-    //       billboard_status: status  
-    //     }
-    //   ]
-    // }));
+    console.log('status',selectedStatus)
   };
   
 
-  const [formData, setFormData] = useState({
-      land_id: billboard.land_id,
-      owner_cid: billboard.owner_cid,
-      owner_name: billboard.owner_name,
-      no_receipt: billboard.no_receipt,
-      research_by: billboard.research_by,
-      payment_status: selectedStatus,
-      data_billboards: []
-  });
   //console.log('test :'+ JSON.stringify(formData))
 
 
@@ -144,10 +128,6 @@ const CardDetailPage = () => {
             onCancel={handleCancelClose}
             />
           <div className='text-center py-10 text-2xl font-medium'><p>ข้อมูลการสำรวจ</p></div>
-          {/* <div className='Position'>
-            <p>ที่ตั้ง (พิกัด)</p>
-              <p>{`${card.position.latitude}, ${card.position.longitude}`}</p>
-          </div> */}
           <div>
             <p>รหัสที่ดิน</p>
             <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{billboard.land_id}</p>
@@ -167,7 +147,10 @@ const CardDetailPage = () => {
             >
               <span
               value={billboard.billboard_status}
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
+                className={`
+                  inline-flex items-center justify-center w-5 h-5 rounded-full mr-2
+                  ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'
+                  }`}
               ></span>
               <span>เปลี่ยนแปลง</span>
             </div>
@@ -176,8 +159,7 @@ const CardDetailPage = () => {
               onClick={() => handleStatusChange('ยกเลิกแล้ว')}
             >
               <span
-              value={billboard.billboard_status}
-
+                value={billboard.billboard_status}
                 className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
               ></span>
               <span>ยกเลิก</span>

@@ -54,10 +54,10 @@ export default function Fromsurvey({ onClose }) {
   //   }
   // }, [isCameraOn]);
 
-  const handleCapture = () => {
+  const handleCapture = (image) => {
     setNewBillboard(prevData => ({
       ...prevData,
-      picture: capturedImage,
+      picture: image,
     }));
     
     setIsCameraOn(false);
@@ -269,16 +269,9 @@ const handleFileChange = async (event) => {
               )}
             </div>
             <div className="flex flex-col justify-end">
-              {isCameraOn ? (
-                <>
-                  <video ref={videoRef} autoPlay></video>
-                  <button onClick={handleCapture}>จับภาพ</button>
-                  <button onClick={() => setIsCameraOn(false)}>ปิดกล้อง</button>
-                </>
-              ) : (
                 <>
                   <button onClick={handleOpenCameraPopup} className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded '>เปิดกล้อง</button>
-                  <CameraPopup isOpen={isCameraPopupOpen} onClose={handleCloseCameraPopup} />
+                  <CameraPopup isOpen={isCameraPopupOpen} onClose={handleCloseCameraPopup} onCapture={handleCapture} />
                   <button className='px-4 py-2 m-2.5 mt-0 bg-alto-200 text-black rounded' onClick={() => fileInputRef.current.click()}>แนบไฟล์</button>
                   <input 
                     className='mb-2.5 '
@@ -290,7 +283,7 @@ const handleFileChange = async (event) => {
                     onChange={(e) => handleFileChange(e)}
                   />
                 </>
-              )}
+              
             </div>
             <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
           </div>

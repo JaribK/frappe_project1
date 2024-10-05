@@ -12,7 +12,7 @@ import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 
 function App() {
   return (
-    <div className="bg-sky-500">
+    <div className="min-h-screen">
       <FrappeProvider>
         <Router>
           <Routes>
@@ -79,12 +79,12 @@ function Login() {
     // setIsLogin(false)
   }
 
-  const doLogout = async () => {
-    await isLoginWrapper(async () => {
-      let result = await logout()
-      console.log(result)
-    })
-  }
+  // const doLogout = async () => {
+  //   await isLoginWrapper(async () => {
+  //     let result = await logout()
+  //     console.log(result)
+  //   })
+  // }
 
   const handleHome = async (e) => {
     e.preventDefault()
@@ -99,9 +99,9 @@ function Login() {
     navigate('/home')
   } else {
     return (
-      <header className="w-full h-svh justify-center flex">
+      <header className="w-full  min-h-screen justify-center flex flex-col bg-curious-blue-500">
         <div className='flex flex-col justify-center items-center'>
-          <img src={logo} className="w-3/12 rounded-full" alt="logo" />
+          <img src={logo} className="max-w-[15rem]  md:max-w-sm lg:max-w-md rounded-3xl my-8" alt="logo" />
           <form className="mt-5 text-left" onSubmit={handleHome}>
             <label className='mb-1.5 block font-Inter font-bold text-sky-950'>Userame</label>
             <input
@@ -120,9 +120,9 @@ function Login() {
               value={credentials.password} onChange={handleChange}
               placeholder="Enter your password"
             /><br />
-            <div className="text-center">
+            <div >
               <button type="submit"
-                className='py-3.5 px-10 my-4 mx-8 bg-red-50 text-sky-950 font-Inter font-bold border-none rounded-xl text-xl hover:bg-customBlue hover:text-red-50'>Login</button>
+                className='py-3.5 px-10 my-4 mx-8 bg-seashell-peach-50 text-custom-blue-950 font-Inter font-bold border-none rounded-xl text-xl hover:bg-curious-blue-600 hover:text-curious-blue-50 transition duration-300'>Login</button>
             </div>
             {errorMessage && <p className='text-red-700 '>{errorMessage}</p>}
           </form>

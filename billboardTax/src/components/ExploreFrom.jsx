@@ -21,19 +21,19 @@ export default function ExploreFrom() {
   const [landNumber, setLandNumber] = useState('');
 
 
-  useEffect(() => {
-    if (location.state && location.state.landNumber) {
-      setLandNumber(location.state.landNumber);
-    }
-  }, [location.state]);
+  // useEffect(() => {
+  //   if (location.state && location.state.landNumber) {
+  //     setLandNumber(location.state.landNumber);
+  //   }
+  // }, [location.state]);
 
-  const handleStatusChange = (status) => {
-    setSelectedStatus(status);
-    if (status === 'cancel') {
-      setIsCancelPopupOpen(true);
-    }
-    console.log(`Selected status: ${status}`);
-  };
+  // const handleStatusChange = (status) => {
+  //   setSelectedStatus(status);
+  //   if (status === 'cancel') {
+  //     setIsCancelPopupOpen(true);
+  //   }
+  //   console.log(`Selected status: ${status}`);
+  // };
 
   const closeCancelPopup = () => setIsCancelPopupOpen(false);
 
@@ -98,7 +98,7 @@ export default function ExploreFrom() {
           </div>
           
           
-          <div className='mt-3'>
+          {/* <div className='mt-3'>
             <p>สถานะของป้าย</p>
             <div className="flex flex-col ">
               <p
@@ -126,7 +126,7 @@ export default function ExploreFrom() {
                
               </div>
             </div>
-          )}
+          )} */}
           
           <div className="mt-3">
             <p>สถานะการจ่ายเงิน</p>
@@ -184,9 +184,9 @@ export default function ExploreFrom() {
             <input type="text" className='bg-inherit border-b ml-2  border-curious-blue-950 focus:border-curious-blue-700 outline-none'/>
           </div> */}
 
-          <div className='mt-3 inline-flex'>
+          <div className='mt-3 inline-flex text-sm'>
             <p>จำนวนเงินทั้งหมด (บาท) :</p>
-            <input type="text" className='bg-inherit border-b ml-2  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/>
+            <input type="text" className='bg-inherit border-b ml-1  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/>
 
           </div>
 
@@ -195,9 +195,9 @@ export default function ExploreFrom() {
             <button className='self-end  px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
 
-          <div className=''>
+          {/* <div className=''>
             <SignCard/>
-          </div>
+          </div> */}
 
           {isAddSignModalOpen && (
             <Fromsurvey onClose={() => setIsAddSignModalOpen(false)} />

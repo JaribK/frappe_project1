@@ -15,6 +15,8 @@ const Map = () => {
   const [inputLng,setInputLng] = useState(''); 
   const [landNumber, setLandNumber] = useState('');
   const navigate = useNavigate();
+  
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -107,6 +109,8 @@ const Map = () => {
     navigate('/explorefrom');
 
   };
+
+  console.log('map')
   return (
     <div className='font-prompt'>
       <button className="fixed bottom-1 left-1/2 transform -translate-x-1/2 z-[1000]  p-2  bg-sky-700 text-white border-none rounded  w-12 h-9" onClick={handleShowForm}>
@@ -131,7 +135,7 @@ const Map = () => {
       </div>
       
       {showFormLand &&(
-        <div className='fixed h-1/4 w-full bottom-0 rounded-t-3xl bg-curious-blue-700 p-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out'>
+        <div className='fixed h-screen w-full bottom-0 rounded-t-3xl bg-curious-blue-700 p-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out'>
           <div className='flex flex-col items-center'>
             <button  onClick={OnClose} className='absolute top-5 right-7'>
               <i className="fa fa-times text-2xl text-white" aria-hidden="true"></i>
@@ -154,7 +158,7 @@ const Map = () => {
         <MapContainer
           center={currentPosition}
           zoom={13}
-          className="map-container"
+          className="map-container h-screen"
           maxBounds={[[5.5, 97.3], [20.5, 105.9]]}
         >
           <TileLayer
@@ -195,7 +199,7 @@ function CustomMarker({ position }) {
     const iconSize = Math.max(baseSize, baseSize * zoomFactor);
     return new L.DivIcon({
       className: 'custom-icon',
-      html: `<i class="fa-solid fa-location-dot custom-iconI" style="font-size: ${iconSize}px;"></i>`,
+      html: `<i class="fa-solid fa-location-dot custom-iconI " style="font-size: ${iconSize}px; color: red;"></i>`,
       iconSize: [iconSize, iconSize],
       iconAnchor: [iconSize / 2, iconSize],
       popupAnchor: [0, -iconSize],

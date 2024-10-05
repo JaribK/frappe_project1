@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "@material-tailwind/react": "^2.1.10",
     "@studiometa/vue-mapbox-gl": "^2.2.0",
     "dayjs": "^1.11.10",
     "mapbox-gl": "^2.15.0",
+    "react-select": "^3.2.0",
     "underscore": "^1.13.6",
     "utm-latlng": "^1.0.7",
     "vue": "^3.3.4",

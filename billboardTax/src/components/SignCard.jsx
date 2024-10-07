@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 export default function SignCard() {
   const location = useLocation();
   const billboard = location.state?.billboard; 
-  const [signs, setSigns] = useState(billboard.data_billboards || []);
+  const [signs, setSigns] = useState([]);
 
   const handleDeleteCard = (index) => {
     const updatedSigns = signs.filter((_, i) => i !== index);

@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import Home from './page/Home'
 import CardDetail from './components/ModalDetail'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext  } from 'react';
 import Explore from './page/Explore';
 import ExploreFrom from './components/ExploreFrom';
 import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
+import Map from './components/Map';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path='/card-detail/:billboardname' element={<CardDetail />} />
             <Route path='/explorefrom/:landNumber' element={<ExploreFrom />} />
             <Route path='/explorefrom' element={<ExploreFrom />} />
+            <Route path='/map' element={<Map/>} />
           </Routes>
         </Router>
       </FrappeProvider>
@@ -49,7 +51,6 @@ function Login() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [credentials, setCredentials] = useState({ username: '', password: '' });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials(prevCredentials => ({
@@ -65,7 +66,10 @@ function Login() {
       try {
         // setLoginError({ message: '' })
         let result = await login(credentials)
+
+        updateCurrentUser({ username: credentials.username });
         console.log('doLogin result', result)
+        console.log(result)
         navigate('/home')
       } catch (error) {
         console.log('doLogin error', error)

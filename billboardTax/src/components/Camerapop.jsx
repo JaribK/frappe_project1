@@ -56,13 +56,41 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
     setImage(canvas.toDataURL('image/png'));
     setIsCameraOn(false);
   };
+  
+  const uploadImageToCloudinary = async (imageData) => {
+    const cloudName = 'dhtq4rtgu'; 
+    const uploadPreset = 'forproject'; 
+  
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        file: imageData,
+        upload_preset: uploadPreset,
+      }),
+    });
+  
+    if (!response.ok) {
+      throw new Error('Failed to upload image');
+    }
+  
+    const data = await response.json();
+    return data.secure_url; 
+  };
+  
 
-  const handleUseImage = () => {
+  const handleUseImage = async () => {
     if (image) {
-      onCapture(image); 
+      try {
+        const uploadedImageUrl = await uploadImageToCloudinary(image);
+        console.log('Uploaded Image URL:', uploadedImageUrl);
+        onCapture(uploadedImageUrl); 
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
     onClose(); 
   };
+  
 
   const handleRetake = () => {
     setImage(null); 

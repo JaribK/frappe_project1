@@ -11,14 +11,11 @@ const CardDetailPage = () => {
   const billboard = location.state?.billboard; 
   const navigate = useNavigate();
   const { call } = useContext(FrappeContext);
-  const [selectedStatus, setSelectedStatus] = useState('');
   const [isAddSignModalOpen, setIsAddSignModalOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
-  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState('');
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
 
   console.log(billboard)
   console.log('moo is',billboard.moo)
@@ -28,10 +25,13 @@ const CardDetailPage = () => {
       owner_name: billboard.owner_name,
       no_receipt: billboard.no_receipt,
       research_by: billboard.research_by,
-      payment_status: selectedStatus,
-      billboard_status: selectedStatus,
-      data_billboards: []
+      payment_status: '',
+      billboard_status: '',
+      data_billboards: billboard.data_billboards || []
   });  
+  const [selectedStatus, setSelectedStatus] = useState(billboard.billboard_status || '');
+  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(billboard.payment_status || '');
+  console.log('formdata',formData)
   
   const closeCancelPopup = () => setIsCancelPopupOpen(false);
   useEffect(() => {
@@ -45,6 +45,10 @@ const CardDetailPage = () => {
 
   const handlePaymentStatusChange = (status) => {
     setSelectedPaymentStatus(status);
+    setFormData((prevState) => ({
+      ...prevState,
+      payment_status: status
+    }));
   };
 
   const onClose = () => {
@@ -62,11 +66,8 @@ const CardDetailPage = () => {
   const handleAddSign = () => setIsAddSignModalOpen(true);
 
   useEffect(() => {
-    if (billboard && billboard.status) {
-      console.log('สถานะจาก billboard:', billboard.status);
-      setSelectedStatus(billboard.status);
-    }
-  }, [billboard]);
+    console.log('สถานะจ่ายเงินที่อัปเดต:', selectedPaymentStatus);
+  }, [selectedPaymentStatus]);  
   
   useEffect(() => {
     console.log('สถานะที่อัปเดต:', selectedStatus);
@@ -74,20 +75,33 @@ const CardDetailPage = () => {
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
-    console.log('status',selectedStatus)
+    setFormData((prevState) => ({
+      ...prevState,
+      billboard_status: status
+    }));
   };
+  
+
+  useEffect(() => {
+    setFormData(prevState => ({
+      ...prevState,
+      payment_status: selectedPaymentStatus,
+      billboard_status: selectedStatus
+    }));
+  }, [selectedPaymentStatus, selectedStatus]);
   
 
   //console.log('test :'+ JSON.stringify(formData))
 
 
     const handleConfirmSurvey = () =>{
-      // if (!billboard.land_id || !billboard.owner_cid || !billboard.owner_name) {
-      //   console.error('Form data is incomplete');
-      //   return;
-      // }
+      if (!billboard.land_id || !billboard.owner_name) {
+        console.error('Form data is incomplete');
+        return;
+      }
       setLoading(true);
-      console.log(JSON.stringify(formData))
+      console.log(formData)
+      console.log(billboard.name)
       if (!formData) return;
       call.put("maechan.api.update_billboard_document", {
           name:billboard.name,
@@ -114,6 +128,40 @@ const CardDetailPage = () => {
         [name]: value
       }));
     };
+    
+
+    const addSign = (newSign) => {
+      setFormData((prevState) => {
+        const updatedSigns = [...prevState.data_billboards, newSign];
+        return {
+          ...prevState,
+          data_billboards: updatedSigns
+        };
+      });
+    };
+    
+      const removeSign = (indexToRemove) => {
+        setFormData((prevState) => {
+          const updatedSigns = prevState.data_billboards.filter((_, index) => index !== indexToRemove);
+          return {
+            ...prevState,
+            data_billboards: updatedSigns
+          };
+        });
+      };
+      
+      // การอัปเดตข้อมูลที่มีอยู่ใน formData
+      const updateSign = (indexToUpdate, updatedSign) => {
+        setFormData((prevState) => {
+          const updatedSigns = prevState.data_billboards.map((sign, index) =>
+            index === indexToUpdate ? updatedSign : sign
+          );
+          return {
+            ...prevState,
+            data_billboards: updatedSigns
+          };
+        });
+      };
     
 
   return (
@@ -245,11 +293,13 @@ const CardDetailPage = () => {
           </div>
 
           <div className=''>
-            <SignCard/>
+          {formData.data_billboards.map((sign, index) => (
+            <SignCard key={index} index={index} sign={sign} onRemove={() => removeSign(index)} onUpdate={(updatedSign) => updateSign(index, updatedSign)}/>
+          ))}
           </div>
 
           {isAddSignModalOpen && (
-            <Fromsurvey onClose={() => setIsAddSignModalOpen(false)} />
+            <Fromsurvey onClose={() => setIsAddSignModalOpen(false)} addSign={addSign}/>
           )}
         </div>
       ) : (

@@ -2,11 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '@fontsource/inter';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import PieChart from '../components/ChartSwitcher';
+import Chart from '../components/Chart';
 import Card from '../components/CardSurvey';
 import axios from 'axios';
 import { FrappeContext, useSWR } from 'frappe-react-sdk';
 import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
+import Select from 'react-select';
 
 // !dropdown ทำแก้ 
 // *placeholder="Search..."
@@ -20,7 +21,7 @@ import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 export default function Home() {
   const { call } = useContext(FrappeContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedMoo, setSelectedMoo] = useState(null);
   const [showAllCards, setShowAllCards] = useState(false);
   const [billboards, setBillboards] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,9 +33,14 @@ export default function Home() {
     setSidebarOpen(prev => !prev);
   };
 
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  const handleSelectChange = (selectedOption) => {
+    if (selectedOption) {
+        setSelectedMoo(selectedOption.value); 
+        console.log("Selected Value:", selectedMoo); 
+    } else {
+        console.error("Selected option is null/undefined");
+    }
+};
 
   //useSWR()
 
@@ -62,30 +68,18 @@ export default function Home() {
   }, [call]);
 
 
-  
-  //const displayedYears = showAllCards ? sortedYears : sortedYears.slice(0, 1);
-
   const handleToggleShowAll = () => {
     setShowAllCards(prev => !prev);
   };
 
   const handleCardClick = (billboard) => {
     console.log(billboard)
-    navigate(`/card-detail/${billboard.name}`, { state: { billboard } });
+    console.log(billboard.name)
+    const encodedName = encodeURIComponent(billboard.name);
+    navigate(`/card-detail/${encodedName}`, { state: { billboard } });
   };
 
-  // const handleCloseModal = () => {
-  //   setSelectedCard(null);
-  // };
 
-  // const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   return date.toLocaleDateString('th-TH', { 
-  //     year: 'numeric',
-  //     month: 'long',
-  //     day: 'numeric',
-  //   });
-  // };
   const sortedBillboards = billboards.sort((a, b) => {
       return new Date(a.created_date) - new Date(b.created_date);
   });
@@ -95,56 +89,86 @@ export default function Home() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      border: 'none', 
+      borderRadius: '1.5rem', 
+      backgroundColor: 'white',
+      paddingLeft: '12px',
+      paddingRight: '2px', 
+      boxShadow: state.isFocused ? '0 0 0 2px rgba(79, 70, 229, 0.5)' : 'none', 
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      paddingRight: '8px', 
+    }),
+    indicatorSeparator: () => ({
+      display: 'none', 
+    }),
+  };
+  const options = billboards
+  .map((billboard) => ({
+    value: billboard.moo,
+    label: billboard.moo,
+  }))
+  .filter(
+    (option, index, self) =>
+      index === self.findIndex((o) => o.value === option.value)
+  );
+
   return (
-    <div className='bg-sky-200'>
+    <div className='bg-sky-200 min-h-screen'>
       <Navbar toggleSidebar={toggleSidebar} />
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       
       <div className="relative m-6 flex justify-center items-center">
-        <select
-          value={selectedValue}
+        <Select
+          value={selectedMoo}
           onChange={handleSelectChange}
-          className="w-11/12 h-10 border-none rounded-3xl text-gray-400 text-lg bg-white py-0 pl-3 pr-7 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+          classNamePrefix="tailwind"
+          className="w-11/12 h-10 text-base text-back"
+          styles={customStyles}
+          options={options}
+          placeholder=''
         >
-          <option value="" disabled></option>
-          {billboards.map((billboard, index) =>
-            <option key={index} value={billboard.district_id}>{billboard.district_id}</option>
-          )}
-        </select>
-        {/* <div className="absolute inset-y-0 right-0 flex items-end pr-7 pointer-events-none">
-          <i className="fas fa-chevron-down text-gray-400"></i>
-        </div> */}
+        </Select>
       </div>
+      {selectedMoo ? (
+        <>
+        <Chart />
 
-      <PieChart />
-
-      <div className='p-5 text-left text-sky-950'>
-        <div
-          className='underline text-xl font-prompt font-semibold text-sky-950'><p>ผลการสำรวจ</p></div>
-          {sortedYears.map((year, index) => (
-            <div key={year}>
-              <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
-              <div>
-                {sortedBillboards.filter(billboard => new Date(billboard.created_date).getFullYear() === year)
+        <div className='p-5 text-left text-sky-950 '>
+          <div
+            className='underline text-xl font-prompt font-semibold text-sky-950'><p>ผลการสำรวจ</p></div>
+            {sortedYears.map((year, index) => (
+              <div key={year}>
+                <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
+                <div className=''>
+                  {sortedBillboards
+                  .filter(billboard => new Date(billboard.created_date).getFullYear() === year && 
+                  billboard.moo === selectedMoo)
                   .map(billboard => (
-                    <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
-                    <Card
-                        landCode={billboard.land_id}
-                        ownerName={billboard.owner_name}
-                        signCount={billboard.data_billboards.length}
-                    />
+                      <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
+                      <Card
+                          landCode={billboard.land_id}
+                          ownerName={billboard.owner_name}
+                          signCount={billboard.data_billboards.length}
+                      />
+                  </div>
+                    ))}
                 </div>
-                  ))}
-              </div>
-              {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
-          </div>
-        ))}
-        {sortedYears.length > 2 && (
-          <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
-            {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
-          </p>
-        )}
-      </div>
+                {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
+            </div>
+          ))}
+          {sortedYears.length > 2 && (
+            <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
+              {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
+            </p>
+          )}
+        </div>
+      </>
+      ) : null}
     </div>
   )
 }

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, useMap, useMapEvent } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import L from 'leaflet';
+import { FrappeContext, useSWR } from 'frappe-react-sdk';
 import axios from 'axios';
 
 const Map = () => {
@@ -15,9 +16,12 @@ const Map = () => {
   const [inputLng,setInputLng] = useState(''); 
   const [landNumber, setLandNumber] = useState('');
   const navigate = useNavigate();
+  const { call } = useContext(FrappeContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [billboards, setBillboards] = useState([]);
+
   
-
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -32,6 +36,36 @@ const Map = () => {
       { enableHighAccuracy: true }
     );
   }, []);
+  console.log(inputLat)
+  console.log(inputLng)
+
+  useEffect(() => {
+    if (inputLat && inputLng) {
+      console.log("Input Latitude:", inputLat);
+      console.log("Input Longitude:", inputLng);
+      setLoading(true);
+      call.get("maechan.api.get_all_billboard_documents")
+      .then(response => {
+        console.log("Response Data:", response.message);
+        if (response.message && Array.isArray(response.message)) {
+          const matchingBillboards = response.message.filter(billboard => 
+            Number(billboard.lat) === Number(inputLat) && Number(billboard.lng) === Number(inputLng)
+          );
+          console.log(response.message)
+          setBillboards(matchingBillboards);
+        } else {
+          console.error("Invalid data structure:", response.data);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching billboards:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+}, [inputLat, inputLng]);
+
 
   const handleMapClick = (e) => {
     const { lat, lng } = e.latlng;
@@ -69,85 +103,69 @@ const Map = () => {
     setShowFormLand(false)
   }
 
-  const handleCurrentPositionSubmit = async () => {
-    // if (inputLat && inputLng) {
-    //   try {
-    //     const response = await axios.post('/api/save-location', {
-    //       latitude: inputLat,
-    //       longitude: inputLng,
-    //     });
+  const handleCurrentPositionSubmit = async (e) => {
+    e.preventDefault();
+    const latitude = inputLat;
+    const longitude = inputLng;
+    
+    const landId = billboards.length > 0 ? billboards[0].land_id : null; 
 
-    //     console.log('ตำแหน่งถูกส่งไปยังฐานข้อมูลแล้ว', response.data);
-
-    //     const landResponse = await axios.get(`/api/get-land-number?lat=${inputLat}&lng=${inputLng}`);
-    //     const landNumber = landResponse.data;
-
-    //     navigate('/explore/:landNumber', { state: { landNumber } });
-
-
-    //   } catch (error) {
-    //     console.error('เกิดข้อผิดพลาดในการส่งตำแหน่งหรือดึงเลขที่ดิน:', error);
-    //   }
-    // }
-    navigate('/explorefrom');
+    if (landId) {
+        navigate('/explorefrom', { state: { landNumber: landId } });
+    } else {
+        navigate('/explorefrom', { state: { latitude, longitude } });
+    } };
   };
 
-  const handleLandSubmit = async () => {
-    // if (landNumber) {
-    //   try {
-    //     const landResponse = await axios.get(`/api/get-land-number?lat=${inputLat}&lng=${inputLng}`);
-        
-    //     const landNumber = landResponse.data;
-
-    //     navigate('/explore/:landNumber', { state: { landNumber } });
-
-
-    //   } catch (error) {
-    //     console.error('เกิดข้อผิดพลาดในการค้นหาข้อมูลโฉนด:', error);
-    //   }
-    // }
-    navigate('/explorefrom');
+  const handleLandSubmit = async (e) => {
+    e.preventDefault();
+    navigate('/explorefrom',{ state: { landNumber } });
 
   };
 
-  console.log('map')
+
   return (
-    <div className='font-prompt'>
+    <div className='font-prompt min-h-screen'>
+      <button onClick={onClose} className='absolute top-4 right-6 text-3xl z-[1000]'>
+          <i className="fa fa-times" aria-hidden="true"></i>
+      </button>
       <button className="fixed bottom-1 left-1/2 transform -translate-x-1/2 z-[1000]  p-2  bg-sky-700 text-white border-none rounded  w-12 h-9" onClick={handleShowForm}>
         <i className="fa fa-angle-up text-lg  relative top-[-2px] " aria-hidden="true"></i>
       </button>
       <div 
-        className={`fixed h-1/4 w-full rounded-t-3xl bg-curious-blue-700 p-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out  
-          ${showForm ? 'bottom-0' : 'bottom-[-100%]'
+        className={`fixed h-1/3 mb-0 w-full rounded-t-3xl bg-curious-blue-700 px-5 pt-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out  
+          ${showForm ? 'bottom-0 ' : 'bottom-[-100%]'
         } `}
       >
-        <form className='flex flex-col items-center j'>      
+        <form className='flex flex-col items-center my-8'>      
           <button onClick={onClose} className='absolute top-5 right-7'>
             <i className="fa fa-times text-2xl text-white" aria-hidden="true"></i>
           </button>
           <button 
             type="Current_Position" 
             onClick={handleCurrentPositionSubmit}
-            className='bg-white p-2.5 m-7 mb-3 text-sky-950 rounded-xl w-7/12 font-normal text-xl'           
+            className='h-14 bg-white p-2.5 m-8 mb-3 text-curious-blue-950 rounded-xl w-8/12 font-normal text-2xl'           
           >เลือกตำแหน่งปัจจุบัน</button>
-          <button type="Land_Location" className='bg-white p-2.5 m-7  text-sky-950 rounded-xl w-7/12 font-normal text-xl' onClick={handleShowFormLand}>เลือกตำแหน่งที่ดิน</button>
+          <button 
+            type="Land_Location" 
+            className='h-14 bg-white p-2.5 m-8 text-curious-blue-950 rounded-xl w-8/12 font-normal text-2xl' onClick={handleShowFormLand}>เลือกตำแหน่งที่ดิน</button>
         </form>
       </div>
       
       {showFormLand &&(
-        <div className='fixed h-screen w-full bottom-0 rounded-t-3xl bg-curious-blue-700 p-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out'>
+        <div className='fixed h-1/3 w-full bottom-0 rounded-t-3xl bg-curious-blue-700 p-5 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]  z-[1001] transition-[bottom] duration-100 ease-in-out'>
           <div className='flex flex-col items-center'>
             <button  onClick={OnClose} className='absolute top-5 right-7'>
               <i className="fa fa-times text-2xl text-white" aria-hidden="true"></i>
             </button>
-            <p className='text-white font-medium text-2xl m-4'>เลือกจากตำแหน่งที่ดิน</p>
+            <p className='text-white font-medium text-2xl m-8'>เลือกจากตำแหน่งที่ดิน</p>
             <input 
               type="text" 
               value={landNumber}
-              readOnly
-              placeholder='เลขที่โฉนด' 
-              className='h-12 w-3/4 p-2 mt-2 m-4 rounded-md text-lg bg-linen-50' />
-            <button className='h-12 w-1/3 text-xl rounded-lg bg-linen-50' onClick={handleLandSubmit} >ยืนยัน</button>
+              placeholder='เลขที่โฉนด'
+              onChange={(e)=>setLandNumber(e.target.value)} 
+              className='h-12 w-3/4 p-2 mt-4 m-8 rounded-md text-lg bg-linen-50' />
+            <button className='h-12 w-1/3 text-xl m-4 rounded-lg bg-linen-50' onClick={handleLandSubmit} >ยืนยัน</button>
           </div>
         </div>
       )}

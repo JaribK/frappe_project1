@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext  } from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import SignCard from './SignCard';
-import Fromsurvey from './Fromsurvey';
+import SignCardNew  from './signcardNew';
+import Fromsurveynew from './Fromsurveynew';
 import ConfirmPopup from './Confirmpop';
-
+import { useFrappeAuth,FrappeContext } from 'frappe-react-sdk';
 
 
 export default function ExploreFrom() {
@@ -17,23 +17,62 @@ export default function ExploreFrom() {
   const [idCardNumber, setIdCardNumber] = useState('');
   const [receiptNumber, setReceiptNumber] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [billboard , setBillboard] = useState()
   const location = useLocation();
-  const [landNumber, setLandNumber] = useState('');
+  //const {Totleprice} = location.state?.billboard;
+  const { landNumber } = location.state || { landNumber: '' };
+  const { currentUser } = useFrappeAuth();
+  const [ownerName,setOwnerName] = useState('')
+  const [signs, setSigns] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const { call } = useContext(FrappeContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
 
-  // useEffect(() => {
-  //   if (location.state && location.state.landNumber) {
-  //     setLandNumber(location.state.landNumber);
-  //   }
-  // }, [location.state]);
+  console.log(currentUser)
+  console.log(landNumber)
+  console.log(selectedPaymentStatus)
+  console.log(idCardNumber)
+  
+  const data = {
+    land_id: landNumber,
+    owner_cid: idCardNumber,
+    owner_name: ownerName, 
+    no_receipt: receiptNumber,
+    research_by: currentUser, 
+    payment_status: selectedPaymentStatus,
+    billboard_status: selectedStatus,
+    data_billboards: signs
+  };
+  console.log(data)
+  console.log(signs)
 
-  // const handleStatusChange = (status) => {
-  //   setSelectedStatus(status);
-  //   if (status === 'cancel') {
-  //     setIsCancelPopupOpen(true);
-  //   }
-  //   console.log(`Selected status: ${status}`);
-  // };
+  const calculateTotalPrice = () => {
+    const total = signs.reduce((acc, sign) => acc + (parseFloat(sign.price) || 0), 0); 
+    setTotalPrice(Number(total).toFixed(2));
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [signs]);
+
+  //   const fetchData = () => {
+  //     setLoading(true);
+  //     call.get("maechan.api.get_billboard_documents", {
+  //       name : name
+  //     }) .then(response => {
+  //       console.log("Fetched Data:", response.data);
+  //       setBillboard(response.data);
+  //       setLoading(false); 
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching billboard documents:", error);
+  //       setLoading(false); 
+  //     });
+  //   };
+  
+  
 
   const closeCancelPopup = () => setIsCancelPopupOpen(false);
 
@@ -46,14 +85,16 @@ export default function ExploreFrom() {
   };
   const handleConfirmClose = () => {
     setIsConfirmPopupOpen(false);
-    navigate('/home');
+    navigate('/map');
   };
 
   const handleCancelClose = () => {
     setIsConfirmPopupOpen(false);
   };
 
-
+  const addSign = (newSign) => {
+    setSigns((prevSigns) => [...prevSigns, newSign]);
+  };
 
   const handleAddSign = () => setIsAddSignModalOpen(true);
 
@@ -61,9 +102,79 @@ export default function ExploreFrom() {
   const handleConfirmSurvey = () => {
     setShowPopup(true);
     setTimeout(() => {
-      setShowPopup(false); 
+      setShowPopup(false);
     }, 3000);
+    if (!landNumber) {
+      console.error("landNumber ไม่ถูกต้อง");
+    }
+    if (!idCardNumber) {
+      console.error("idCardNumber ไม่ถูกต้อง");
+    }
+    if (!ownerName) {
+      console.error("ownerName ไม่ถูกต้อง");
+    }
+    if (!receiptNumber) {
+      console.error("receiptNumber ไม่ถูกต้อง");
+    }
+    if (!currentUser.username) {
+      console.error("currentUser.username ไม่ถูกต้อง");
+    }
+    if (!selectedPaymentStatus) {
+      console.error("selectedPaymentStatus ไม่ถูกต้อง");
+    }
+    if (!selectedStatus) {
+      console.error("selectedStatus ไม่ถูกต้อง");
+    }
+    if (!signs) {
+      console.error("signs ไม่ถูกต้อง");
+    }
+    if (!landNumber ||  !ownerName ||  !selectedPaymentStatus  || !signs) {
+      console.error("ข้อมูลไม่ครบถ้วน");
+      return;
+    }
+  
+    setLoading(true);
+    const data = {
+      land_id: landNumber,
+      owner_cid: idCardNumber,
+      owner_name: ownerName,
+      no_receipt: receiptNumber,
+      research_by: currentUser,
+      payment_status: selectedPaymentStatus,
+      billboard_status: selectedStatus,
+      data_billboards: signs,
+    };
+    console.log("Data to be sent:", data);
+  
+    call.post("maechan.api.post_billboard_document", { data })
+      .then(response => {
+        setLoading(false);
+        console.log("Response from API:", response); 
+        if (response.data && response.data.message) {
+          setShowPopup(true);
+        } else {
+          console.error("Unexpected response structure:", response.data);
+        }
+      })
+      .catch(error => {
+        console.error("Error creating billboard document:", error);
+        setLoading(false);
+      });
+    console.log('post success');
   };
+   
+    useEffect(() => {
+      if (landNumber && idCardNumber && receiptNumber && ownerName) {
+        createRenew();
+      }
+    }, [landNumber, idCardNumber, receiptNumber, ownerName]);
+    
+
+  const removeSign = (index) => {
+    setSigns((prevSigns) => prevSigns.filter((_, i) => i !== index));
+  };
+  
+
   
   return (
     
@@ -77,75 +188,47 @@ export default function ExploreFrom() {
             onConfirm={handleConfirmClose}
             onCancel={handleCancelClose}
             />
+
           <div className='text-center py-10 text-2xl font-medium'><p>ข้อมูลการสำรวจ</p></div>
-          {/* <div className='PositionII'>
-            <p>ที่ตั้ง (พิกัด)</p>
-            <input type="text" />
-          </div> */}
-          <div>
-          <p>รหัสที่ดิน</p>
-            <input 
+            <div>
+              <p>รหัสที่ดิน</p>
+              {landNumber ? (
+              <p className='mt-1 w-full h-8 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{landNumber}</p>
+            ) : (
+              <input 
               type="text" 
               value={landNumber} 
-              className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' />
-          </div>
-          <div className='mt-3'>
-            <p>ชื่อเจ้าของกิจการ/บริษัท</p>
-            <input type="text"
-              
-              className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' 
-            />
-          </div>
-          
-          
-          {/* <div className='mt-3'>
-            <p>สถานะของป้าย</p>
-            <div className="flex flex-col ">
-              <p
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base  overflow-hidden ${selectedStatus === 'change' ? 'active' : ''}`}
-              onClick={() => handleStatusChange('change')}
-              >
-                <span className={` inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'change' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}></span>
-                <span >เปลี่ยนแปลง</span>
-              </p>
-              <p
-              className={`flex items-center border-none rounded-full px-4 py-2 text-base overflow-hidden  ${selectedStatus === 'cancel' ? 'active' : ''}`}
-              onClick={() => handleStatusChange('cancel')}
-              >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'cancel' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500': 'bg-white'}`}></span>
-                <span >ยกเลิก</span>
-              </p>
-            </div>
-          </div>
-
-          {isCancelPopupOpen && (
-            <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 p-5 z-50 '>
-              <div className='bg-gray-300 w-1/2 p-4 rounded-lg text-center shadow-lg'>
-                <i className="fa-regular fa-circle-xmark custom-size text-red-700"></i>
-                <p>ยกเลิกแล้ว</p>
-               
+              className='mt-1 w-full h-8 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'
+              />
+            )}
               </div>
-            </div>
-          )} */}
-          
+            <div className='mt-3'>
+              <p>ชื่อเจ้าของกิจการ/บริษัท</p>
+              <input type="text"
+                value={ownerName} 
+                onChange={(e) => setOwnerName(e.target.value)}
+                className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' 
+              />
+          </div>
+                  
           <div className="mt-3">
             <p>สถานะการจ่ายเงิน</p>
-            <div className="flex flex-col ">
-            <p
-              className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${
-                selectedPaymentStatus === 'not_paid' ? '' : ''}
-              }`}
-              onClick={() => handlePaymentStatusChange('not_paid')}
-            >
-              <span
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
-                  selectedPaymentStatus === 'not_paid' ? 'bg-curious-blue-500' : 'bg-white'
-                }`}
-              ></span>
-              <span>ยังไม่ได้ชำระ</span>
+              <div className="flex flex-col ">
+                <p
+                  className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${
+                    selectedPaymentStatus === 'ยังไม่จ่าย' ? '' : ''}
+                  }`}
+                  onClick={() => handlePaymentStatusChange('ยังไม่จ่าย')}
+                >
+                <span
+                  className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
+                    selectedPaymentStatus === 'ยังไม่จ่าย' ? 'bg-curious-blue-500' : 'bg-white'
+                  }`}
+                ></span>
+                <span>ยังไม่ได้ชำระ</span>
             </p>
 
-              {selectedPaymentStatus === 'not_paid' && (
+              {selectedPaymentStatus === 'ยังไม่จ่าย' && (
                 <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
                   <p>เลขบัตรประชาชน</p>
                   <input 
@@ -158,14 +241,16 @@ export default function ExploreFrom() {
               )}
 
               <p
-                className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${selectedPaymentStatus === 'paid' ? 'active' : ''}`}
-                onClick={() => handlePaymentStatusChange('paid')}
+                className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden 
+                  ${selectedPaymentStatus === 'จ่ายแล้ว' ? '' : ''}`}
+                onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
               >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedPaymentStatus === 'paid' ? 'bg-blue-500' : 'bg-white'}`}></span>
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 
+                  ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
                 <span >ชำระแล้ว</span>
               </p>
 
-              {selectedPaymentStatus === 'paid' && (
+              {selectedPaymentStatus === 'จ่ายแล้ว' && (
                 <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
                   <p>เลขที่ใบเสร็จชำระเงิน</p>
                   <input 
@@ -186,8 +271,8 @@ export default function ExploreFrom() {
 
           <div className='mt-3 inline-flex text-sm'>
             <p>จำนวนเงินทั้งหมด (บาท) :</p>
-            <input type="text" className='bg-inherit border-b ml-1  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/>
-
+            {/* <input type="text" className='bg-inherit border-b ml-1  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/> */}
+            <p className='bg-inherit  ml-1  '>{totalPrice.toLocaleString()}</p>
           </div>
 
           <div className='flex flex-col items-center mt-4'>
@@ -195,12 +280,14 @@ export default function ExploreFrom() {
             <button className='self-end  px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
 
-          {/* <div className=''>
-            <SignCard/>
-          </div> */}
+          <div className=''>
+          {signs.map((sign, index) => (
+            <SignCardNew  key={index} sign={sign} onRemove={() => removeSign(index)}/> 
+          ))}
+          </div>
 
           {isAddSignModalOpen && (
-            <Fromsurvey onClose={() => setIsAddSignModalOpen(false)} />
+            <Fromsurveynew onClose={() => setIsAddSignModalOpen(false)} addSign={addSign}/>
           )}
           
           {showPopup && (

@@ -115,7 +115,7 @@ const Map = () => {
     } else {
         navigate('/explorefrom', { state: { latitude, longitude } });
     } };
-  };
+  
 
   const handleLandSubmit = async (e) => {
     e.preventDefault();

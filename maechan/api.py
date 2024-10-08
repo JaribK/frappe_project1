@@ -60,7 +60,7 @@ def post_billboard_document(data):
             'research_by': data.get('research_by'),
             'payment_status': data.get('payment_status'),
             'billboard_status': data.get('billboard_status'),
-            'is_doctype_copy': 'true'
+            'is_doctype_copy': 'false'
         })
 
         for billboard in data.get('data_billboards', []):
@@ -72,13 +72,13 @@ def post_billboard_document(data):
                     'type_of_billboards': billboard.get('type_of_billboards'),
                 })
 
+
         doc.insert()
 
         newcopy = frappe.copy_doc(doc)
+        newcopy.is_doctype_copy = 'true'
 
-        newcopy.is_doctype_copy = 'false'
-
-        newcopy.save()
+        newcopy.insert()
         frappe.db.commit()
 
         return {"message": "Document created successfully", "name": doc.name}
@@ -132,12 +132,11 @@ def get_billboard_document(name):
         frappe.throw(_("An error occurred while fetching the Billboard Document"))
 
 @frappe.whitelist(allow_guest=True)
-def get_all_billboard_documents():
+def get_all_new_billboard_documents():
     try:
-        # Query only documents where is_doctype_copy is 'false'
         documents = frappe.get_all(
             'Billboard Document2',
-            filters={'is_doctype_copy': 'false'},  # Apply filter here
+            filters={'is_doctype_copy': 'false'},
             fields=[
                 'name', 'is_doctype_copy', 'land_id', 'owner_cid', 'owner_name', 
                 'total_price', 'no_receipt', 'research_by', 'creation', 'moo',
@@ -186,6 +185,112 @@ def get_all_billboard_documents():
         frappe.log_error(frappe.get_traceback(), _("Error fetching Billboard Documents"))
         frappe.throw(_("An error occurred while fetching the Billboard Documents"))
 
+@frappe.whitelist(allow_guest=True)
+def get_all_old_billboard_documents():
+    try:
+        documents = frappe.get_all(
+            'Billboard Document2',
+            filters={'is_doctype_copy': 'true'},
+            fields=[
+                'name', 'is_doctype_copy', 'land_id', 'owner_cid', 'owner_name', 
+                'total_price', 'no_receipt', 'research_by', 'creation', 'moo',
+                'lat', 'lng', 'payment_status'
+            ]
+        )
+
+        results = []
+
+        for doc in documents:
+            detailed_doc = frappe.get_doc('Billboard Document2', doc['name'])
+            data_billboards_entries = []
+            for data in detailed_doc.data_billboards:
+                data_billboards_entries.append({
+                    "picture": data.picture,
+                    "width": data.width,
+                    "height": data.height,
+                    "price": data.price,
+                    "type_of_billboards": data.type_of_billboards,
+                })
+            response = {
+                "name": detailed_doc.name,
+                "is_doctype_copy": detailed_doc.is_doctype_copy,
+                "land_id": detailed_doc.land_id,
+                "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
+                "owner_cid": detailed_doc.owner_cid,
+                "owner_name": detailed_doc.owner_name,
+                "total_price": detailed_doc.total_price,
+                "no_receipt": detailed_doc.no_receipt,
+                "research_by": detailed_doc.research_by,
+                "payment_status": detailed_doc.payment_status,
+                "billboard_status": detailed_doc.billboard_status,
+                "moo": detailed_doc.moo,
+                "lat": detailed_doc.lat,
+                "lng": detailed_doc.lng,
+                "data_billboards": data_billboards_entries
+            }
+            results.append(response)
+
+        return results
+
+    except frappe.DoesNotExistError:
+        frappe.throw(_("Billboard Document not found"), frappe.DoesNotExistError)
+
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), _("Error fetching Billboard Documents"))
+        frappe.throw(_("An error occurred while fetching the Billboard Documents"))
+
+@frappe.whitelist(allow_guest=True)
+def get_all_billboard_documents():
+    try:
+        documents = frappe.get_all(
+            'Billboard Document2',
+            fields=[
+                'name', 'is_doctype_copy', 'land_id', 'owner_cid', 'owner_name', 
+                'total_price', 'no_receipt', 'research_by', 'creation', 'moo',
+                'lat', 'lng', 'payment_status'
+            ]
+        )
+
+        results = []
+
+        for doc in documents:
+            detailed_doc = frappe.get_doc('Billboard Document2', doc['name'])
+            data_billboards_entries = []
+            for data in detailed_doc.data_billboards:
+                data_billboards_entries.append({
+                    "picture": data.picture,
+                    "width": data.width,
+                    "height": data.height,
+                    "price": data.price,
+                    "type_of_billboards": data.type_of_billboards,
+                })
+            response = {
+                "name": detailed_doc.name,
+                "is_doctype_copy": detailed_doc.is_doctype_copy,
+                "land_id": detailed_doc.land_id,
+                "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
+                "owner_cid": detailed_doc.owner_cid,
+                "owner_name": detailed_doc.owner_name,
+                "total_price": detailed_doc.total_price,
+                "no_receipt": detailed_doc.no_receipt,
+                "research_by": detailed_doc.research_by,
+                "payment_status": detailed_doc.payment_status,
+                "billboard_status": detailed_doc.billboard_status,
+                "moo": detailed_doc.moo,
+                "lat": detailed_doc.lat,
+                "lng": detailed_doc.lng,
+                "data_billboards": data_billboards_entries
+            }
+            results.append(response)
+
+        return results
+
+    except frappe.DoesNotExistError:
+        frappe.throw(_("Billboard Document not found"), frappe.DoesNotExistError)
+
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), _("Error fetching Billboard Documents"))
+        frappe.throw(_("An error occurred while fetching the Billboard Documents"))
 
 @frappe.whitelist(allow_guest=True)
 def update_billboard_document(name, data):
@@ -201,6 +306,7 @@ def update_billboard_document(name, data):
         doc.research_by = data.get('research_by')
         doc.payment_status = data.get('payment_status')
         doc.billboard_status = data.get('billboard_status')
+        doc.is_doctype_copy = 'false'
 
         doc.set('data_billboards', [])
 
@@ -214,6 +320,11 @@ def update_billboard_document(name, data):
                 })
 
         doc.save()
+
+        newcopy = frappe.copy_doc(doc)
+        newcopy.is_doctype_copy = 'true'
+
+        newcopy.save()
         frappe.db.commit()
 
         return {"message": "Document updated successfully"}

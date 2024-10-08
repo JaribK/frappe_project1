@@ -55,6 +55,8 @@
   {
    "fieldname": "land_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "land_id",
    "options": "Land"
   },
@@ -77,11 +79,15 @@
    "fetch_if_empty": 1,
    "fieldname": "moo",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "moo"
   },
   {
    "fieldname": "payment_status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "payment_status",
    "options": "\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e08\u0e48\u0e32\u0e22\n\u0e08\u0e48\u0e32\u0e22\u0e41\u0e25\u0e49\u0e27"
   },
@@ -102,7 +108,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-08 16:51:00.049999",
+ "modified": "2024-10-08 19:19:47.121519",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

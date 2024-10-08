@@ -30,4 +30,22 @@ class BillboardDocument2(Document):
 		total_price: DF.Float
 	# end: auto-generated types
 
-	pass
+	def before_save(self):
+          calculate_billboard_prices(self)
+          cal_total_price(self)
+
+def calculate_billboard_prices(doc):
+    for row in doc.data_billboards:
+        if row.width and row.height:
+            price = (((row.width * row.height) / 500) * 3)
+            row.price = round(price, 2)
+        else:
+            row.price = 0
+            
+def cal_total_price(doc):
+    total_price_cal = 0
+    for row in doc.data_billboards:
+        total_price_cal += row.price
+
+    doc.total_price = total_price_cal
+

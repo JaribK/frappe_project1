@@ -60,7 +60,7 @@ def post_billboard_document(data):
             'research_by': data.get('research_by'),
             'payment_status': data.get('payment_status'),
             'billboard_status': data.get('billboard_status'),
-            'is_doctype_copy': 'false'
+            "is_doctype_copy" : 'false'
         })
 
         for billboard in data.get('data_billboards', []):
@@ -72,13 +72,7 @@ def post_billboard_document(data):
                     'type_of_billboards': billboard.get('type_of_billboards'),
                 })
 
-
-        doc.insert()
-
-        newcopy = frappe.copy_doc(doc)
-        newcopy.is_doctype_copy = 'true'
-
-        newcopy.insert()
+        doc.insert(ignore_permissions=True)
         frappe.db.commit()
 
         return {"message": "Document created successfully", "name": doc.name}
@@ -298,6 +292,9 @@ def update_billboard_document(name, data):
         data = frappe.parse_json(data)
 
         doc = frappe.get_doc('Billboard Document2', name)
+        newcopy = frappe.copy_doc(doc)
+        newcopy.is_doctype_copy = 'true'
+        newcopy.save(ignore_permissions=True)
 
         doc.land_id = data.get('land_id')
         doc.owner_cid = data.get('owner_cid')
@@ -306,7 +303,6 @@ def update_billboard_document(name, data):
         doc.research_by = data.get('research_by')
         doc.payment_status = data.get('payment_status')
         doc.billboard_status = data.get('billboard_status')
-        doc.is_doctype_copy = 'false'
 
         doc.set('data_billboards', [])
 
@@ -320,11 +316,6 @@ def update_billboard_document(name, data):
                 })
 
         doc.save()
-
-        newcopy = frappe.copy_doc(doc)
-        newcopy.is_doctype_copy = 'true'
-
-        newcopy.save()
         frappe.db.commit()
 
         return {"message": "Document updated successfully"}

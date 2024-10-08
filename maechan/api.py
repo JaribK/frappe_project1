@@ -140,7 +140,7 @@ def get_all_billboard_documents():
             filters={'is_doctype_copy': 'false'},  # Apply filter here
             fields=[
                 'name', 'is_doctype_copy', 'land_id', 'owner_cid', 'owner_name', 
-                'total_price', 'no_receipt', 'research_by', 'creation', 'moo', 
+                'total_price', 'no_receipt', 'research_by', 'creation', 'moo',
                 'lat', 'lng', 'payment_status'
             ]
         )

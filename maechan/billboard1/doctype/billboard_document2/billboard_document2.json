@@ -95,13 +95,14 @@
    "fieldname": "is_doctype_copy",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "is_doctype_copy",
    "options": "true\nfalse"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-08 16:00:12.287575",
+ "modified": "2024-10-08 16:51:00.049999",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

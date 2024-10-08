@@ -17,7 +17,8 @@
   "lng",
   "moo",
   "payment_status",
-  "billboard_status"
+  "billboard_status",
+  "is_doctype_copy"
  ],
  "fields": [
   {
@@ -89,11 +90,18 @@
    "fieldtype": "Select",
    "label": "billboard_status",
    "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e41\u0e25\u0e49\u0e27\n\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e41\u0e25\u0e49\u0e27"
+  },
+  {
+   "fieldname": "is_doctype_copy",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "is_doctype_copy",
+   "options": "true\nfalse"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-06 01:25:26.271102",
+ "modified": "2024-10-08 16:00:12.287575",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

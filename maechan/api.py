@@ -59,7 +59,8 @@ def post_billboard_document(data):
             'no_receipt': data.get('no_receipt'),
             'research_by': data.get('research_by'),
             'payment_status': data.get('payment_status'),
-            'billboard_status': data.get('billboard_status')
+            'billboard_status': data.get('billboard_status'),
+            'is_doctype_copy': 'true'
         })
 
         for billboard in data.get('data_billboards', []):
@@ -72,6 +73,12 @@ def post_billboard_document(data):
                 })
 
         doc.insert()
+
+        newcopy = frappe.copy_doc(doc)
+
+        newcopy.is_doctype_copy = 'false'
+
+        newcopy.save()
         frappe.db.commit()
 
         return {"message": "Document created successfully", "name": doc.name}
@@ -99,6 +106,7 @@ def get_billboard_document(name):
             })
         response = {
             "name": doc.name,
+            "is_doctype_copy": doc.is_doctype.copy,
             "land_id": doc.land_id,
             "created_date": doc.creation,
             "owner_cid": doc.owner_cid,
@@ -126,16 +134,21 @@ def get_billboard_document(name):
 @frappe.whitelist(allow_guest=True)
 def get_all_billboard_documents():
     try:
+        # Query only documents where is_doctype_copy is 'false'
         documents = frappe.get_all(
             'Billboard Document2',
-            fields=['name', 'land_id', 'owner_cid', 'owner_name', 'total_price', 'no_receipt', 'research_by', 'creation', 'moo', "lat", "lng", "payment_status"],
+            filters={'is_doctype_copy': 'false'},  # Apply filter here
+            fields=[
+                'name', 'is_doctype_copy', 'land_id', 'owner_cid', 'owner_name', 
+                'total_price', 'no_receipt', 'research_by', 'creation', 'moo', 
+                'lat', 'lng', 'payment_status'
+            ]
         )
 
         results = []
 
         for doc in documents:
             detailed_doc = frappe.get_doc('Billboard Document2', doc['name'])
-
             data_billboards_entries = []
             for data in detailed_doc.data_billboards:
                 data_billboards_entries.append({
@@ -145,9 +158,9 @@ def get_all_billboard_documents():
                     "price": data.price,
                     "type_of_billboards": data.type_of_billboards,
                 })
-
             response = {
                 "name": detailed_doc.name,
+                "is_doctype_copy": detailed_doc.is_doctype_copy,
                 "land_id": detailed_doc.land_id,
                 "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
                 "owner_cid": detailed_doc.owner_cid,
@@ -157,12 +170,11 @@ def get_all_billboard_documents():
                 "research_by": detailed_doc.research_by,
                 "payment_status": detailed_doc.payment_status,
                 "billboard_status": detailed_doc.billboard_status,
-                "moo":detailed_doc.moo,
-                "lat":detailed_doc.lat,
-                "lng":detailed_doc.lng,
+                "moo": detailed_doc.moo,
+                "lat": detailed_doc.lat,
+                "lng": detailed_doc.lng,
                 "data_billboards": data_billboards_entries
             }
-
             results.append(response)
 
         return results
@@ -174,12 +186,14 @@ def get_all_billboard_documents():
         frappe.log_error(frappe.get_traceback(), _("Error fetching Billboard Documents"))
         frappe.throw(_("An error occurred while fetching the Billboard Documents"))
 
+
 @frappe.whitelist(allow_guest=True)
 def update_billboard_document(name, data):
     try:
         data = frappe.parse_json(data)
 
         doc = frappe.get_doc('Billboard Document2', name)
+
         doc.land_id = data.get('land_id')
         doc.owner_cid = data.get('owner_cid')
         doc.owner_name = data.get('owner_name')

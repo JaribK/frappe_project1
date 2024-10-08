@@ -17,6 +17,7 @@ class BillboardDocument2(Document):
 
 		billboard_status: DF.Literal["\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e41\u0e25\u0e49\u0e27", "\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e41\u0e25\u0e49\u0e27"]
 		data_billboards: DF.Table[BillboardData2]
+		is_doctype_copy: DF.Literal["true", "false"]
 		land_id: DF.Link | None
 		lat: DF.Data | None
 		lng: DF.Data | None

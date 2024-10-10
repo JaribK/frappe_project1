@@ -27,6 +27,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [oldBillboards,setOldBillboards] = useState([])
   // const [selectedCard, setSelectedCard] = useState(null); 
 
   const toggleSidebar = () => {
@@ -35,12 +36,16 @@ export default function Home() {
 
   const handleSelectChange = (selectedOption) => {
     if (selectedOption) {
+      console.log("Selected Option:", selectedOption);
         setSelectedMoo(selectedOption.value); 
         console.log("Selected Value:", selectedMoo); 
     } else {
         console.error("Selected option is null/undefined");
     }
-};
+  };
+  useEffect(() => {
+    console.log("Updated selectedMoo:", selectedMoo);
+  }, [selectedMoo]);
 
   //useSWR()
 
@@ -49,8 +54,30 @@ export default function Home() {
     setLoading(true);
     call.get("maechan.api.get_all_billboard_documents")
     .then(response => {
-      console.log(response.message)
       setBillboards(response.message);  
+      console.log(response.message)
+      setLoading(false);  
+    })
+    .catch(err => {
+      setError('Error fetching billboard data'); 
+      if (err.response && err.response.data && err.response.data.message) {
+        console.log(err.response.data.message);
+      } else {
+        console.log(err);
+      }
+      setLoading(false);  
+    });
+  };
+    fetchData();
+  }, [call]);
+
+  
+ useEffect(() => {
+  const fetchData = () => {
+    setLoading(true);
+    call.get("maechan.api.get_all_old_billboard_documents")
+    .then(response => {
+      setOldBillboards(response.message);  
       console.log(response.message)
       setLoading(false);  
     })
@@ -124,10 +151,10 @@ export default function Home() {
       
       <div className="relative m-6 flex justify-center items-center">
         <Select
-          value={selectedMoo}
+          value={options.find(option => option.value === selectedMoo) || null}
           onChange={handleSelectChange}
           classNamePrefix="tailwind"
-          className="w-11/12 h-10 text-base text-back"
+          className="w-11/12 h-10 text-base text-black"
           styles={customStyles}
           options={options}
           placeholder=''
@@ -136,7 +163,7 @@ export default function Home() {
       </div>
       {selectedMoo ? (
         <>
-        <Chart />
+        <Chart selectedMoo={selectedMoo}/>
 
         <div className='p-5 text-left text-sky-950 '>
           <div
@@ -145,7 +172,7 @@ export default function Home() {
               <div key={year}>
                 <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
                 <div className=''>
-                  {sortedBillboards
+                  {oldBillboards
                   .filter(billboard => new Date(billboard.created_date).getFullYear() === year && 
                   billboard.moo === selectedMoo)
                   .map(billboard => (

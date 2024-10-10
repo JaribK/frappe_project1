@@ -29,8 +29,8 @@ const CardDetailPage = () => {
       billboard_status: '',
       data_billboards: billboard.data_billboards || []
   });  
-  const [selectedStatus, setSelectedStatus] = useState(billboard.billboard_status || '');
-  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState(billboard.payment_status || '');
+  const [selectedStatus, setSelectedStatus] = useState('');
+  const [selectedPaymentStatus, setSelectedPaymentStatus] = useState('');
   console.log('formdata',formData)
   
   const closeCancelPopup = () => setIsCancelPopupOpen(false);

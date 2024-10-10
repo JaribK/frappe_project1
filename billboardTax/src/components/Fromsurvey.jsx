@@ -77,7 +77,7 @@ export default function Fromsurvey({ onClose,addSign }) {
       } catch (error) {
         console.error('Error uploading image:', error);
       }
-    } else {
+    } else { 
       console.error('No file selected');
     }
   };

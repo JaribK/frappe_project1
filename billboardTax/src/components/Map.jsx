@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import L from 'leaflet';
 import { FrappeContext, useSWR } from 'frappe-react-sdk';
 import axios from 'axios';
+import ConfirmPopup from './Confirmpop';
 
 const Map = () => {
   const [currentPosition, setCurrentPosition] = useState(null);
@@ -20,7 +21,7 @@ const Map = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [billboards, setBillboards] = useState([]);
-
+  const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);   
   
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -123,12 +124,33 @@ const Map = () => {
 
   };
 
+  const onClosed = () => {
+    console.log('เปิด'); 
+    setConfirmPopupOpen(true); 
+};
+
+const handleConfirmClose = () => {
+    navigate('/home');
+    console.log('ยืนยันการปิด');
+    setConfirmPopupOpen(false);
+};
+
+const handleCancelClose = () => {
+    console.log('ยกเลิกการปิด');
+    setConfirmPopupOpen(false);
+};
+
 
   return (
     <div className='font-prompt min-h-screen'>
-      <button onClick={onClose} className='absolute top-4 right-6 text-3xl z-[1000]'>
+      <button onClick={onClosed} className='absolute top-4 right-6 text-3xl z-[1000]'>
           <i className="fa fa-times" aria-hidden="true"></i>
       </button>
+      <ConfirmPopup
+            isOpen={isConfirmPopupOpen}
+            onConfirm={handleConfirmClose}
+            onCancel={handleCancelClose}
+            />
       <button className="fixed bottom-1 left-1/2 transform -translate-x-1/2 z-[1000]  p-2  bg-sky-700 text-white border-none rounded  w-12 h-9" onClick={handleShowForm}>
         <i className="fa fa-angle-up text-lg  relative top-[-2px] " aria-hidden="true"></i>
       </button>

@@ -104,35 +104,7 @@ export default function ExploreFrom() {
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
-    if (!landNumber) {
-      console.error("landNumber ไม่ถูกต้อง");
-    }
-    if (!idCardNumber) {
-      console.error("idCardNumber ไม่ถูกต้อง");
-    }
-    if (!ownerName) {
-      console.error("ownerName ไม่ถูกต้อง");
-    }
-    if (!receiptNumber) {
-      console.error("receiptNumber ไม่ถูกต้อง");
-    }
-    if (!currentUser.username) {
-      console.error("currentUser.username ไม่ถูกต้อง");
-    }
-    if (!selectedPaymentStatus) {
-      console.error("selectedPaymentStatus ไม่ถูกต้อง");
-    }
-    if (!selectedStatus) {
-      console.error("selectedStatus ไม่ถูกต้อง");
-    }
-    if (!signs) {
-      console.error("signs ไม่ถูกต้อง");
-    }
-    if (!landNumber ||  !ownerName ||  !selectedPaymentStatus  || !signs) {
-      console.error("ข้อมูลไม่ครบถ้วน");
-      return;
-    }
-  
+    
     setLoading(true);
     const data = {
       land_id: landNumber,

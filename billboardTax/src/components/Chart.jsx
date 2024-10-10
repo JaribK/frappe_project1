@@ -1,46 +1,77 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
+import { FrappeContext } from 'frappe-react-sdk';
+
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, ArcElement, Tooltip, Legend); // ลงทะเบียนประเภทกราฟที่ใช้
 
-const Chart = () => {
+const Chart = ({ selectedMoo }) => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
-  const [chartType, ] = useState('bar'); // สถานะสำหรับเลือกประเภทของกราฟ, ค่าเริ่มต้นเป็น 'bar'
+  const [chartType, ] = useState('bar'); 
   const location = useLocation();
   const billboard = location.state?.billboard; 
+  const { call } = useContext(FrappeContext);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [dataOld, setDataOld] = useState([]);
+  const [dataNew, setDataNew] = useState([]);
+
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const data = [
-          { month: 'หมู่ 1', salesA: 23, salesB: 30 },
-          { month: 'หมู่ 2', salesA: 53, salesB: 40 },
-          { month: 'หมู่ 3', salesA: 85, salesB: 70 },
-          { month: 'หมู่ 4', salesA: 41, salesB: 60 },
-          { month: 'หมู่ 5', salesA: 44, salesB: 50 },
-          { month: 'หมู่ 6', salesA: 65, salesB: 80 },
-          { month: 'หมู่ 7', salesA: 56, salesB: 90 },
-        ];
-        const labels = data.map(item => item.month);
-        const salesData = data.map(item => item.sales);
+        const oldResponse = await call.get("maechan.api.get_all_old_billboard_documents");
+        const newResponse = await call.get("maechan.api.get_all_new_billboard_documents");
+
+        setDataOld(oldResponse.message);
+        setDataNew(newResponse.message);
+
+        const landidCountOld = {};
+        const landidCountNew = {};
+
+        oldResponse.message.forEach((item) => {
+          if (selectedMoo && item.moo === selectedMoo) {
+            if (!landidCountOld[item.landid]) {
+              landidCountOld[item.landid] = 0;
+            }
+            landidCountOld[item.landid] += 1;
+          }
+        });
+
+        newResponse.message.forEach((item) => {
+          if (selectedMoo && item.moo === selectedMoo) {
+            if (!landidCountNew[item.landid]) {
+              landidCountNew[item.landid] = 0;
+            }
+            landidCountNew[item.landid] += 1;
+          }
+        });
+        console.log(landidCountOld)
+        console.log('new',landidCountNew)
+
+        const labels = [selectedMoo];
 
         setChartData({
           labels: labels,
           datasets: [
             {
               label: 'ผลการสำรวจ A',
-              data: data.map(item => item.salesA),
+              data: Object.values(landidCountOld),
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 1,
+              barThickness: 70,
             },
             {
               label: 'ผลการสำรวจ B',
-              data: data.map(item => item.salesB),
+              data: Object.values(landidCountNew),
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1,
+              barThickness: 70,
             },
           ],
         });
@@ -50,7 +81,7 @@ const Chart = () => {
     };
   
     fetchData();
-  }, [chartType]);
+  }, [chartType,selectedMoo]);
 
   const options = useMemo(() => ({
     responsive: true,
@@ -62,7 +93,8 @@ const Chart = () => {
       tooltip: {
         callbacks: {
           label: function (tooltipItem) {
-            return `ผลการสำรวจ: ${tooltipItem.raw}`;
+            const value =  Math.round(tooltipItem.raw);
+            return `ผลการสำรวจ: ${value} ครั้ง`;
           },
         },
       },
@@ -79,6 +111,10 @@ const Chart = () => {
           title: {
             display: true,
             text: 'ผลการสำรวจ',
+          },
+          ticks: {
+            beginAtZero: true,
+            precision: 0, 
           },
         },
       },

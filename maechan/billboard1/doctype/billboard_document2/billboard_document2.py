@@ -19,8 +19,8 @@ class BillboardDocument2(Document):
 		data_billboards: DF.Table[BillboardData2]
 		is_doctype_copy: DF.Literal["true", "false"]
 		land_id: DF.Link | None
-		lat: DF.Data | None
-		lng: DF.Data | None
+		lat: DF.Float
+		lng: DF.Float
 		moo: DF.Data | None
 		no_receipt: DF.Data | None
 		owner_cid: DF.Data | None

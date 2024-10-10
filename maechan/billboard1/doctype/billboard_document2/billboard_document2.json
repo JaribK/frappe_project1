@@ -64,15 +64,17 @@
    "fetch_from": "land_id.lat",
    "fetch_if_empty": 1,
    "fieldname": "lat",
-   "fieldtype": "Data",
-   "label": "lat"
+   "fieldtype": "Float",
+   "label": "lat",
+   "precision": "6"
   },
   {
    "fetch_from": "land_id.lng",
    "fetch_if_empty": 1,
    "fieldname": "lng",
-   "fieldtype": "Data",
-   "label": "lng"
+   "fieldtype": "Float",
+   "label": "lng",
+   "precision": "6"
   },
   {
    "fetch_from": "land_id.district_id",
@@ -108,7 +110,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-08 19:19:47.121519",
+ "modified": "2024-10-10 21:34:23.508952",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

@@ -111,7 +111,7 @@ export default function Home() {
       return new Date(a.created_date) - new Date(b.created_date);
   });
   const uniqueYears = [...new Set(billboards.map(billboard => new Date(billboard.created_date).getFullYear()))];
-  const sortedYears = uniqueYears.sort((a, b) => a - b);
+  const sortedYears = uniqueYears.sort((a, b) => b - a);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

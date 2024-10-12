@@ -75,7 +75,7 @@ export default function Home() {
  useEffect(() => {
   const fetchData = () => {
     setLoading(true);
-    call.get("maechan.api.get_all_old_billboard_documents")
+    call.get("maechan.api.get_all_false_billboard_documents")
     .then(response => {
       setOldBillboards(response.message);  
       console.log(response.message)
@@ -143,6 +143,7 @@ export default function Home() {
     (option, index, self) =>
       index === self.findIndex((o) => o.value === option.value)
   );
+  
 
   return (
     <div className='bg-sky-200 min-h-screen'>
@@ -173,7 +174,7 @@ export default function Home() {
                 <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
                 <div className=''>
                   {oldBillboards
-                  .filter(billboard => new Date(billboard.created_date).getFullYear() === year && 
+                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
                   billboard.moo === selectedMoo)
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
@@ -181,6 +182,7 @@ export default function Home() {
                           landCode={billboard.land_id}
                           ownerName={billboard.owner_name}
                           signCount={billboard.data_billboards.length}
+                          Lastupdate={billboard.modified_date}
                       />
                   </div>
                     ))}

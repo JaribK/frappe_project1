@@ -23,30 +23,41 @@ const Chart = ({ selectedMoo }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const oldResponse = await call.get("maechan.api.get_all_old_billboard_documents");
-        const newResponse = await call.get("maechan.api.get_all_new_billboard_documents");
-
-        setDataOld(oldResponse.message);
-        setDataNew(newResponse.message);
+        const Response = await call.get("maechan.api.get_all_billboard_documents");
+        const date = new Date()
+        const thisyear = date.getFullYear()
+        const oldyear = date.getFullYear()-1
+        console.log('this year', thisyear)
+        console.log('last year', oldyear)
+        console.log('re', Response.message)
+        setDataOld(Response.message);
+        setDataNew(Response.message);
 
         const landidCountOld = {};
         const landidCountNew = {};
 
-        oldResponse.message.forEach((item) => {
+        const year = new Date(Response.message[0].modified_date).getFullYear()
+        console.log('year', year)
+        Response.message.forEach((item) => {
+          const itemYear = new Date(item.modified_date).getFullYear(); // Move year check inside the loop
           if (selectedMoo && item.moo === selectedMoo) {
-            if (!landidCountOld[item.landid]) {
-              landidCountOld[item.landid] = 0;
+            if (itemYear === oldyear) {
+              if (!landidCountOld[item.landid]) {
+                landidCountOld[item.landid] = 0;
+              }
+              landidCountOld[item.landid] += 1;
             }
-            landidCountOld[item.landid] += 1;
           }
         });
-
-        newResponse.message.forEach((item) => {
+        Response.message.forEach((item) => {
+          const itemYear = new Date(item.modified_date).getFullYear(); // Move year check inside the loop
           if (selectedMoo && item.moo === selectedMoo) {
-            if (!landidCountNew[item.landid]) {
-              landidCountNew[item.landid] = 0;
+            if (itemYear === thisyear) {
+              if (!landidCountNew[item.landid]) {
+                landidCountNew[item.landid] = 0;
+              }
+              landidCountNew[item.landid] += 1;
             }
-            landidCountNew[item.landid] += 1;
           }
         });
         console.log(landidCountOld)
@@ -58,7 +69,7 @@ const Chart = ({ selectedMoo }) => {
           labels: labels,
           datasets: [
             {
-              label: 'ผลการสำรวจ A',
+              label: oldyear,
               data: Object.values(landidCountOld),
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -66,7 +77,7 @@ const Chart = ({ selectedMoo }) => {
               barThickness: 70,
             },
             {
-              label: 'ผลการสำรวจ B',
+              label: year,
               data: Object.values(landidCountNew),
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',

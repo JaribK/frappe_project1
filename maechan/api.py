@@ -102,6 +102,7 @@ def get_billboard_document(name):
             "name": doc.name,
             "is_doctype_copy": doc.is_doctype.copy,
             "land_id": doc.land_id,
+            "modified": doc.modified,
             "created_date": doc.creation,
             "owner_cid": doc.owner_cid,
             "owner_name": doc.owner_name,
@@ -126,7 +127,7 @@ def get_billboard_document(name):
         frappe.throw(_("An error occurred while fetching the Billboard Document"))
 
 @frappe.whitelist(allow_guest=True)
-def get_all_new_billboard_documents():
+def get_all_false_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
@@ -156,6 +157,7 @@ def get_all_new_billboard_documents():
                 "is_doctype_copy": detailed_doc.is_doctype_copy,
                 "land_id": detailed_doc.land_id,
                 "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
+                "modified_date": detailed_doc.modified.strftime('%Y-%m-%d %H:%M:%S'),
                 "owner_cid": detailed_doc.owner_cid,
                 "owner_name": detailed_doc.owner_name,
                 "total_price": detailed_doc.total_price,
@@ -180,7 +182,7 @@ def get_all_new_billboard_documents():
         frappe.throw(_("An error occurred while fetching the Billboard Documents"))
 
 @frappe.whitelist(allow_guest=True)
-def get_all_old_billboard_documents():
+def get_all_true_billboard_documents():
     try:
         documents = frappe.get_all(
             'Billboard Document2',
@@ -210,6 +212,7 @@ def get_all_old_billboard_documents():
                 "is_doctype_copy": detailed_doc.is_doctype_copy,
                 "land_id": detailed_doc.land_id,
                 "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
+                "modified_date": detailed_doc.modified.strftime('%Y-%m-%d %H:%M:%S'),
                 "owner_cid": detailed_doc.owner_cid,
                 "owner_name": detailed_doc.owner_name,
                 "total_price": detailed_doc.total_price,
@@ -262,6 +265,7 @@ def get_all_billboard_documents():
                 "name": detailed_doc.name,
                 "is_doctype_copy": detailed_doc.is_doctype_copy,
                 "land_id": detailed_doc.land_id,
+                "modified_date": detailed_doc.modified.strftime('%Y-%m-%d %H:%M:%S'),
                 "created_date": detailed_doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
                 "owner_cid": detailed_doc.owner_cid,
                 "owner_name": detailed_doc.owner_name,

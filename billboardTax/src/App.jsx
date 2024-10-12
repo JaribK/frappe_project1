@@ -96,7 +96,13 @@ function Login() {
   }
 
   if(isLoading) {
-    return (<div>Loading...</div>)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg p-4">
+          <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
+      </div>
+    </div>  
+    )
   }
 
   if (currentUser) {

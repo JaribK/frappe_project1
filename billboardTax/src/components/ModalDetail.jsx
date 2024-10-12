@@ -16,6 +16,9 @@ const CardDetailPage = () => {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   console.log(billboard)
   console.log('moo is',billboard.moo)
@@ -24,7 +27,7 @@ const CardDetailPage = () => {
       owner_cid: billboard.owner_cid,
       owner_name: billboard.owner_name,
       no_receipt: billboard.no_receipt,
-      research_by: billboard.research_by,
+      research_by: billboard.research_by || '',
       payment_status: '',
       billboard_status: '',
       data_billboards: billboard.data_billboards || []
@@ -95,10 +98,87 @@ const CardDetailPage = () => {
 
 
     const handleConfirmSurvey = () =>{
-      if (!billboard.land_id || !billboard.owner_name) {
-        console.error('Form data is incomplete');
+      const fieldNames = {
+        land_id: 'รหัสที่ดิน',
+        owner_cid: 'หมายเลขประจำตัวประชาชน',
+        owner_name: 'ชื่อเจ้าของ',
+        no_receipt: 'หมายเลขใบเสร็จ',
+        research_by: 'ผู้วิจัย',
+        payment_status: 'สถานะการชำระเงิน',
+        billboard_status: 'สถานะของป้าย',
+      };
+      const billboardFieldNames = {
+        picture: 'ภาพ',
+        width: 'ความกว้าง',
+        height: 'ความสูง',
+        price: 'ราคา',
+        type_of_billboards: 'ประเภทของป้าย',
+      };
+      const missingFields = [];
+      if (!formData.land_id) {
+        missingFields.push('land_id');
+      }
+      if (!formData.owner_name) {
+        missingFields.push('owner_name');
+      }
+      if (formData.payment_status) {
+      if (!formData.no_receipt && !formData.owner_cid) {
+        missingFields.push('no_receipt และ owner_cid');
+      }
+    }
+      // if (!formData.research_by) {
+      //   missingFields.push('research_by');
+      // }
+      if (!formData.payment_status) {
+        missingFields.push('payment_status');
+      }
+      if (!formData.billboard_status) {
+        missingFields.push('billboard_status');
+      }
+
+      // ตรวจสอบ data_billboards
+      if (!Array.isArray(formData.data_billboards) || formData.data_billboards.length === 0) {
+        missingFields.push('ไม่มีข้อมูลป้าย');
+      } else {
+        // ตรวจสอบแต่ละรายการใน data_billboards
+        formData.data_billboards.forEach((sign, index) => {
+          if (!sign.picture) {
+            missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.picture}`);
+          }
+          if (!sign.width) {
+            missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.width}`);
+          }
+          if (!sign.height) {
+            missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.height}`);
+          }
+          // if (!sign.price || sign.price === '0.00') {
+          //   missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.price}`);
+          // }
+          if (!sign.type_of_billboards) {
+            missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.type_of_billboards}`);
+          }
+        });
+      }
+      if (missingFields.length > 0) {
+        const friendlyMissingFields = missingFields.map(field => {
+          if (field === 'ไม่มีข้อมูลป้าย') {
+            return field; 
+          }
+          if (field.startsWith('data_billboards')) {
+            const [_, fieldName] = field.split('].'); 
+            const index = fieldName.includes('[') ? fieldName.split('[')[1].replace(']', '') : null; 
+            const displayIndex = index !== null ? `ป้ายที่ ${parseInt(index) + 1}` : "ป้ายที่ ?";
+            return `${displayIndex}: ${billboardFieldNames[fieldName.replace('data_billboards[0].', '')] || fieldName}`;
+          }
+          return fieldNames[field] || field;
+        }).join(', ');
+        const errorMessage = `ข้อมูลที่ไม่ครบถ้วน ได้แก่ \n${friendlyMissingFields}`;
+        console.log('เกิดข้อผิดพลาด: ข้อมูลที่ไม่ครบถ้วน ได้แก่',errorMessage)
+        showModalWithMessage(errorMessage); 
+        setIsSuccess(false);
         return;
       }
+
       setLoading(true);
       console.log(formData)
       console.log(billboard.name)
@@ -109,6 +189,8 @@ const CardDetailPage = () => {
       }) .then((response) => {
         setLoading(false);
         console.log(response.message);
+        showModalWithMessage('ยืนยันการสำรวจ');
+        setIsSuccess(true);
       })
       .catch((err) => {
         setError('Error post billboard data'); 
@@ -150,7 +232,6 @@ const CardDetailPage = () => {
         });
       };
       
-      // การอัปเดตข้อมูลที่มีอยู่ใน formData
       const updateSign = (indexToUpdate, updatedSign) => {
         setFormData((prevState) => {
           const updatedSigns = prevState.data_billboards.map((sign, index) =>
@@ -161,6 +242,14 @@ const CardDetailPage = () => {
             data_billboards: updatedSigns
           };
         });
+      };
+      const showModalWithMessage = (message) => {
+        setPopupMessage(message);
+        setShowModal(true);
+      };
+    
+      const closeModal = () => {
+        setShowModal(false); 
       };
     
 
@@ -291,6 +380,39 @@ const CardDetailPage = () => {
             <button className='mb-5 mt-2 px-3 py-4 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
             <button className='self-end mb-5 px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
+
+          {showModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="bg-white rounded-lg p-6 max-w-sm w-5/6 shadow-lg">
+              {isSuccess ? (
+                <>
+                  <i className="fa-solid fa-circle-check text-cruise-500 text-6xl mb-4 flex justify-center items-center"></i>
+                  <p className="mb-2 text-2xl font-semibold flex justify-center items-center text-cruise-500">{popupMessage}</p>
+                  <button
+                    onClick={() => {
+                      closeModal(); 
+                      navigate('/home'); 
+                    }}
+                    className="w-full px-4 py-2 bg-none underline text-alto-700 rounded hover:bg-cruise-600"
+                  >
+                    กลับหน้าหลัก
+                  </button>
+                </>
+              ) : (
+                <>
+                  <i className="fa-solid fa-triangle-exclamation text-red-500 text-5xl mb-4 flex justify-center items-center"></i>
+                  <p className="mb-4 text-lg font-semibold px-1 pl-2">{popupMessage}</p>
+                  <button
+                    onClick={closeModal}
+                    className="w-full px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    ปิด
+                  </button>
+                </>
+              )}
+              </div>
+            </div>
+          )}
 
           <div className=''>
           {formData.data_billboards.map((sign, index) => (

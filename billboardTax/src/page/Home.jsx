@@ -18,6 +18,8 @@ import Select from 'react-select';
 // !totolpice ยังใช้ไม่ได้
 // *get success
 
+
+
 export default function Home() {
   const { call } = useContext(FrappeContext);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -111,7 +113,7 @@ export default function Home() {
       return new Date(a.created_date) - new Date(b.created_date);
   });
   const uniqueYears = [...new Set(billboards.map(billboard => new Date(billboard.modified_date).getFullYear()))];
-  const sortedYears = uniqueYears.sort((a, b) => b - a);
+  const sortedYears = uniqueYears.sort((a, b) => a - b);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -143,7 +145,13 @@ export default function Home() {
     (option, index, self) =>
       index === self.findIndex((o) => o.value === option.value)
   );
+  const filteredBillboards = oldBillboards
+    .filter(billboard =>
+      billboard.billboard_status   !== 'ยกเลิกแล้ว'
+    )
+    .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date));
   
+  const displayedBillboards = showAllCards ? filteredBillboards : filteredBillboards.slice(0, 4);
 
   return (
     <div className='bg-sky-200 min-h-screen'>
@@ -173,9 +181,12 @@ export default function Home() {
               <div key={year}>
                 <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
                 <div className=''>
-                  {oldBillboards
+                  {displayedBillboards
                   .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
-                  billboard.moo === selectedMoo)
+                  billboard.moo === selectedMoo &&
+                  billboard.billboard_status   !== 'ยกเลิกแล้ว'
+                  )
+                  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
                       <Card
@@ -186,6 +197,11 @@ export default function Home() {
                       />
                   </div>
                     ))}
+                    {displayedBillboards.length > 2 && (
+                      <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
+                        {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
+                      </p>
+                    )}
                 </div>
                 {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
             </div>

@@ -156,8 +156,8 @@ export default function Fromsurvey({ onClose,addSign }) {
     setNewBillboard((prev) => ({
       ...prev,
       [name]: (name === 'width' || name === 'height')
-        ? (value === '' ? '' : parseInt(value)) // ถ้าเป็นค่าว่าง ให้คงไว้เป็นค่าว่าง แต่ถ้าไม่ใช่ ให้แปลงเป็น int
-        : value, // สำหรับฟิลด์อื่นให้คงไว้เป็น string
+        ? (value === '' ? '' : parseInt(value)) 
+        : value,
     }));
  };
   

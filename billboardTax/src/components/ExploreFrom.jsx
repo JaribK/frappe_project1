@@ -28,6 +28,9 @@ export default function ExploreFrom() {
   const { call } = useContext(FrappeContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
 
   console.log(currentUser)
@@ -101,9 +104,9 @@ export default function ExploreFrom() {
   
   const handleConfirmSurvey = () => {
     setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 3000);
+    // setTimeout(() => {
+    //   setShowPopup(false);
+    // }, 3000);
     
     setLoading(true);
     const data = {
@@ -117,22 +120,99 @@ export default function ExploreFrom() {
       data_billboards: signs,
     };
     console.log("Data to be sent:", data);
+
+    const fieldNames = {
+      land_id: 'รหัสที่ดิน',
+      owner_cid: 'หมายเลขประจำตัวประชาชน',
+      owner_name: 'ชื่อเจ้าของ',
+      no_receipt: 'หมายเลขใบเสร็จ',
+      research_by: 'ผู้วิจัย',
+      payment_status: 'สถานะการชำระเงิน',
+    };
+    const billboardFieldNames = {
+      picture: 'ภาพ',
+      width: 'ความกว้าง',
+      height: 'ความสูง',
+      price: 'ราคา',
+      type_of_billboards: 'ประเภทของป้าย',
+    };
   
-    call.post("maechan.api.post_billboard_document", { data })
-      .then(response => {
-        setLoading(false);
-        console.log("Response from API:", response); 
-        if (response.data && response.data.message) {
-          setShowPopup(true);
-        } else {
-          console.error("Unexpected response structure:", response.data);
+    const missingFields = [];
+
+    // เช็คข้อมูลแต่ละฟิลด์
+    if (!data.land_id) missingFields.push(fieldNames.land_id);
+    if (!data.owner_name) missingFields.push(fieldNames.owner_name);
+    if (data.payment_status) {
+      if (!data.no_receipt && !data.owner_cid) {
+        missingFields.push(`${fieldNames.no_receipt} และ ${fieldNames.owner_cid}`); // แจ้งว่าขาดทั้งคู่
+      } 
+    }
+    if (!data.payment_status) missingFields.push(fieldNames.payment_status);
+
+    // ตรวจสอบ data_billboards
+    if (!Array.isArray(data.data_billboards) || data.data_billboards.length === 0) {
+      missingFields.push('ไม่มีข้อมูลป้าย');
+    } else {
+      data.data_billboards.forEach((sign, index) => {
+        if (!sign.picture) {
+          missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.picture}`);
         }
-      })
-      .catch(error => {
-        console.error("Error creating billboard document:", error);
-        setLoading(false);
+        if (!sign.width) {
+          missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.width}`);
+        }
+        if (!sign.height) {
+          missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.height}`);
+        }
+        if (!sign.price) {
+          missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.price}`);
+        }
+        if (!sign.type_of_billboards) {
+          missingFields.push(`ป้ายที่ ${index + 1}: ${billboardFieldNames.type_of_billboards}`);
+        }
       });
-    console.log('post success');
+    }
+
+    // ถ้ามีฟิลด์ที่ขาด
+    if (missingFields.length > 0) {
+      const friendlyMissingFields = missingFields.map(field => {
+        if (field === 'ไม่มีข้อมูลป้าย') {
+          return field; 
+        }
+        
+        if (field.startsWith('data_billboards')) {
+          const index = field.match(/\d+/) ? field.match(/\d+/)[0] : null; 
+          const displayIndex = index !== null ? `ป้ายที่ ${parseInt(index) + 1}` : "ป้ายที่ ?";
+          return `${displayIndex}: ขาดข้อมูล`;
+        }
+        return fieldNames[field] || field;
+      }).join(', ');
+      const errorMessage = `ข้อมูลที่ไม่ครบถ้วน ได้แก่ \n${friendlyMissingFields}`;
+      showModalWithMessage(errorMessage); 
+      console.log('เกิดข้อผิดพลาด: ข้อมูลที่ไม่ครบถ้วน ได้แก่',errorMessage)
+      setIsSuccess(false);
+      setLoading(false); 
+      return; 
+    }
+
+    call.post("maechan.api.post_billboard_document", { data })
+    .then(response => {
+      setLoading(false);
+      console.log("Response from API:", response);
+        showModalWithMessage('ยืนยันการสำรวจ');
+        setIsSuccess(true);
+      if (response.data && response.data.message) {
+        showModalWithMessage('ยืนยันการสำรวจ');
+        setIsSuccess(true);
+      } else {
+        console.error("Unexpected response structure:", response.data);
+      }
+    })
+    .catch(error => {
+      console.error("Error creating billboard document:", error);
+      setLoading(false);
+    });
+  
+    console.log('Post success');
   };
    
     useEffect(() => {
@@ -146,7 +226,14 @@ export default function ExploreFrom() {
     setSigns((prevSigns) => prevSigns.filter((_, i) => i !== index));
   };
   
+  const showModalWithMessage = (message) => {
+    setPopupMessage(message);
+    setShowModal(true);
+  };
 
+  const closeModal = () => {
+    setShowModal(false); 
+  };
   
   return (
     
@@ -262,11 +349,40 @@ export default function ExploreFrom() {
             <Fromsurveynew onClose={() => setIsAddSignModalOpen(false)} addSign={addSign}/>
           )}
           
-          {showPopup && (
-            <div className="">
-              <p>บันทึกสำเร็จ</p>
+          
+          {showModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="bg-white rounded-lg p-6 max-w-sm w-5/6 shadow-lg">
+              {isSuccess ? (
+                <>
+                  <i className="fa-solid fa-circle-check text-cruise-500 text-6xl mb-4 flex justify-center items-center"></i>
+                  <p className="mb-2 text-2xl font-semibold flex justify-center items-center text-cruise-500">{popupMessage}</p>
+                  <button
+                    onClick={() => {
+                      closeModal(); 
+                      navigate('/home'); 
+                    }}
+                    className="w-full px-4 py-2 bg-none underline text-alto-700 rounded hover:bg-cruise-600"
+                  >
+                    กลับหน้าหลัก
+                  </button>
+                </>
+              ) : (
+                <>
+                  <i className="fa-solid fa-triangle-exclamation text-red-500 text-5xl mb-4 flex justify-center items-center"></i>
+                  <p className="mb-4 text-lg font-semibold px-1 pl-2">{popupMessage}</p>
+                  <button
+                    onClick={closeModal}
+                    className="w-full px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    ปิด
+                  </button>
+                </>
+              )}
+              </div>
             </div>
           )}
+
           </div>
     </div>
   );

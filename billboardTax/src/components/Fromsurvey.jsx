@@ -31,6 +31,7 @@ export default function Fromsurvey({ onClose,addSign }) {
   };
 
   const handleCapture = (image) => {
+    setImage(image);
     setNewBillboard(prevData => ({
       ...prevData,
       picture: image,

@@ -100,10 +100,10 @@ def get_billboard_document(name):
             })
         response = {
             "name": doc.name,
-            "is_doctype_copy": doc.is_doctype.copy,
+            "is_doctype_copy": doc.is_doctype_copy,
             "land_id": doc.land_id,
-            "modified": doc.modified,
-            "created_date": doc.creation,
+            "modified_date": doc.modified.strftime('%Y-%m-%d %H:%M:%S'),
+            "created_date": doc.creation.strftime('%Y-%m-%d %H:%M:%S'),
             "owner_cid": doc.owner_cid,
             "owner_name": doc.owner_name,
             "total_price": doc.total_price,

@@ -303,6 +303,7 @@ def update_billboard_document(name, data):
         doc.research_by = data.get('research_by')
         doc.payment_status = data.get('payment_status')
         doc.billboard_status = data.get('billboard_status')
+        doc.is_doctype_copy = 'false'
 
         doc.set('data_billboards', [])
 

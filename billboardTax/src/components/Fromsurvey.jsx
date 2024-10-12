@@ -3,7 +3,7 @@ import { useLocation,  } from 'react-router-dom';
 import { FrappeContext } from 'frappe-react-sdk';
 import CameraPopup from './Camerapop';
 import Select from 'react-select';
-import sha1 from 'js-sha1';
+// import sha1 from 'js-sha1';
 
 
 export default function Fromsurvey({ onClose,addSign }) {
@@ -106,7 +106,7 @@ export default function Fromsurvey({ onClose,addSign }) {
         billboard_status : billboardStatus,
         data_billboards: [...dataBillboards, 
           {
-          ...newBillboard,
+            ...newBillboard
         }],
       };
   
@@ -149,11 +149,15 @@ export default function Fromsurvey({ onClose,addSign }) {
     onClose()
 
   };
-
   
   const  handleChange = (name, value, ) => {
     console.log(`Updating: ${name}, Value: ${value}, `); 
-    setNewBillboard(prev => ({ ...prev, [name]: value }));
+    setNewBillboard((prev) => ({
+      ...prev,
+      [name]: (name === 'width' || name === 'height')
+        ? (value === '' ? '' : parseInt(value)) // ถ้าเป็นค่าว่าง ให้คงไว้เป็นค่าว่าง แต่ถ้าไม่ใช่ ให้แปลงเป็น int
+        : value, // สำหรับฟิลด์อื่นให้คงไว้เป็น string
+    }));
  };
   
  const calculatePrice = () => {
@@ -197,7 +201,7 @@ useEffect(() => {
           <div className='flex flex-col'>
             <p className='mb-1'>กว้าง (ตร.ซม.)</p>
             <input 
-              type="text" 
+              type="number" 
               value={newBillboard.width} 
               onChange={(e) => handleChange('width',e.target.value)}
               name='width'
@@ -208,7 +212,7 @@ useEffect(() => {
           <div className='flex flex-col'>
             <p className='mb-1'>ยาว (ตร.ซม.)</p>
             <input 
-              type="text" 
+              type="number" 
               onChange={(e) => handleChange('height',e.target.value)}
               value={newBillboard.height}
               className='px-2 border rounded-md text-curious-blue-800'

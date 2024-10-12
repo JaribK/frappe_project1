@@ -58,23 +58,50 @@ const CameraPopup = ({ isOpen, onClose, onCapture  }) => {
   };
   
   const uploadImageToCloudinary = async (imageData) => {
+    // const cloudName = 'dhtq4rtgu'; 
+    // const uploadPreset = 'forproject'; 
+  
+    // const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+    //   method: 'POST',
+    //   body: new URLSearchParams({
+    //     file: imageData,
+    //     upload_preset: uploadPreset,
+    //   }),
+    // });
+  
+    // if (!response.ok) {
+    //   throw new Error('Failed to upload image');
+    // }
+  
+    // const data = await response.json();
+    // return data.secure_url; 
     const cloudName = 'dhtq4rtgu'; 
     const uploadPreset = 'forproject'; 
-  
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: 'POST',
-      body: new URLSearchParams({
-        file: imageData,
-        upload_preset: uploadPreset,
-      }),
-    });
-  
-    if (!response.ok) {
-      throw new Error('Failed to upload image');
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+    const formData = new FormData();
+    formData.append('file', imageData);
+    formData.append('upload_preset', uploadPreset);
+    
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        console.error('Upload failed:', data);
+        return;
+      }
+      
+      console.log('Uploaded Image URL:', data.secure_url);
+      return data.secure_url;
+      
+    } catch (error) {
+      console.error('Error uploading image:', error);
     }
-  
-    const data = await response.json();
-    return data.secure_url; 
   };
   
 

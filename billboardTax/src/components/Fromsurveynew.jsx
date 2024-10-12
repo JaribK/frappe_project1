@@ -28,6 +28,7 @@ export default function Fromsurveynew({ onClose,addSign  }) {
   };
 
   const handleCapture = (image) => {
+    setImage(image);
     setNewBillboard(prevData => ({
       ...prevData,
       picture: image,
@@ -105,8 +106,8 @@ export default function Fromsurveynew({ onClose,addSign  }) {
   const handleSave = () => {
     const newSign = {
       picture: newBillboard.picture,
-      width: newBillboard.width,
-      height: newBillboard.height,
+      width: parseInt(newBillboard.width),
+      height: parseInt(newBillboard.height),
       price : newBillboard.price,
       type_of_billboards: newBillboard.type_of_billboards,
     };
@@ -172,7 +173,7 @@ export default function Fromsurveynew({ onClose,addSign  }) {
           <div className='flex flex-col'>
             <p className='mb-1'>กว้าง (ตร.ซม.)</p>
             <input 
-              type="text" 
+              type="number" 
               value={newBillboard.width} 
               onChange={(e) => handleChange('width', e.target.value)}
               name='width'
@@ -183,7 +184,7 @@ export default function Fromsurveynew({ onClose,addSign  }) {
           <div className='flex flex-col'>
             <p className='mb-1'>ยาว (ตร.ซม.)</p>
             <input 
-              type="text" 
+              type="number" 
               onChange={(e) => handleChange('height', e.target.value)}
               value={newBillboard.height}
               className='px-2 border rounded-md text-curious-blue-800'

@@ -8,7 +8,7 @@ def get_context(context):
         
         # Fetch all parent data for the specified owner_cid
         parent_data = frappe.get_all('Billboard Document2',
-                                      filters={'owner_cid': owner_cid},
+                                      filters={'owner_cid': owner_cid,'is_doctype_copy':'false'},
                                       fields=['name', "land_id", 'owner_name', 'total_price', 'no_receipt', 'research_by','billboard_status'])
 
         if parent_data:

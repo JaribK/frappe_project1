@@ -33,6 +33,7 @@ class BillboardDocument2(Document):
 	def before_save(self):
           calculate_billboard_prices(self)
           cal_total_price(self)
+          true_moo(self)
 
 def calculate_billboard_prices(doc):
     for row in doc.data_billboards:
@@ -49,3 +50,6 @@ def cal_total_price(doc):
 
     doc.total_price = total_price_cal
 
+def true_moo(doc):
+    tmoo = int(doc.moo) + 1
+    doc.moo = str(tmoo)

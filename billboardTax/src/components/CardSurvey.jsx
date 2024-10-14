@@ -4,7 +4,8 @@ export default function CardSurvey({ landCode, ownerName, signCount,Lastupdate }
   const LastupDate = new Date(Lastupdate).toLocaleDateString('th-TH', {
     day: '2-digit',
     month: '2-digit',
-    year: 'numeric'
+    year: 'numeric',
+    calendar: 'gregory'
 });
 
   return (

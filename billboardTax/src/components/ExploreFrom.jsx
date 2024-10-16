@@ -204,7 +204,7 @@ export default function ExploreFrom() {
         showModalWithMessage('ยืนยันการสำรวจ');
         setIsSuccess(true);
       } else {
-        console.error("Unexpected response structure:", response.data);
+        //console.error("Unexpected response structure:", response.data);
       }
     })
     .catch(error => {

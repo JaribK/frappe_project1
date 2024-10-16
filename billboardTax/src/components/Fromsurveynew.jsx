@@ -93,7 +93,17 @@ export default function Fromsurveynew({ onClose,addSign  }) {
 
   const calculatePrice = () => {
     const { width, height } = newBillboard;
-    return (width && height) ? ((width * height / 500) * 3).toFixed(2) : '0.00';
+    let real_price = 0;
+    
+    if (width && height) {
+      const cal_price = ((width * height / 500) * 3).toFixed(2)
+      if (cal_price < 200) {
+        real_price = 200
+      } else {
+        real_price = cal_price
+      }
+    }
+    return real_price
   };
 
   useEffect(() => {

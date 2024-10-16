@@ -18,7 +18,8 @@
   "moo",
   "payment_status",
   "billboard_status",
-  "is_doctype_copy"
+  "is_doctype_copy",
+  "lastest_update"
  ],
  "fields": [
   {
@@ -106,11 +107,17 @@
    "in_standard_filter": 1,
    "label": "is_doctype_copy",
    "options": "true\nfalse"
+  },
+  {
+   "fieldname": "lastest_update",
+   "fieldtype": "Datetime",
+   "in_standard_filter": 1,
+   "label": "lastest_update"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-13 21:26:03.723771",
+ "modified": "2024-10-16 11:46:04.579872",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

@@ -147,11 +147,12 @@ export default function Home() {
   );
   const filteredBillboards = oldBillboards
     .filter(billboard =>
-      billboard.billboard_status   !== 'ยกเลิกแล้ว'
+      billboard.billboard_status   !== 'ยกเลิกแล้ว' &&
+      billboard.moo === selectedMoo
     )
     .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date));
   
-  const displayedBillboards = showAllCards ? filteredBillboards : filteredBillboards.slice(0, 4);
+  const displayedBillboards = showAllCards ? filteredBillboards : filteredBillboards.slice(0, 3);
 
   return (
     <div className='bg-sky-200 min-h-screen'>
@@ -182,11 +183,7 @@ export default function Home() {
                 <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
                 <div className=''>
                   {displayedBillboards
-                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
-                  billboard.moo === selectedMoo &&
-                  billboard.billboard_status   !== 'ยกเลิกแล้ว'
-                  )
-                  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
+                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year )
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
                       <Card
@@ -197,7 +194,7 @@ export default function Home() {
                       />
                   </div>
                     ))}
-                    {displayedBillboards.length > 2 && (
+                    {displayedBillboards.length > 0 && (
                       <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
                         {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
                       </p>
@@ -206,7 +203,7 @@ export default function Home() {
                 {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
             </div>
           ))}
-          {sortedYears.length > 2 && (
+          {sortedYears.length > 3 && (
             <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
               {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
             </p>

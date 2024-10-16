@@ -57,6 +57,7 @@
                 <p>ชื่อเจ้าของกิจการ: {{ result.owner_name }}</p>
                 <p>รหัสที่ดิน: {{ result.land_id }}</p>
                 <p>จำนวนป้าย: {{ result.billboard_count }}</p>
+                <p>สถานะการจ่ายเงิน: {{ result.payment_status}}</p>
                 <p>รายละเอียดป้าย:</p>
                 <ul class="space-y-4">
                     {% for i in result.data_billboards %}

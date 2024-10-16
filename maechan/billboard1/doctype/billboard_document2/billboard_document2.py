@@ -1,8 +1,9 @@
 # Copyright (c) 2024, Frappe Technologies and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
+import frappe.utils
 
 
 class BillboardDocument2(Document):
@@ -19,6 +20,7 @@ class BillboardDocument2(Document):
 		data_billboards: DF.Table[BillboardData2]
 		is_doctype_copy: DF.Literal["true", "false"]
 		land_id: DF.Link | None
+		lastest_update: DF.Datetime | None
 		lat: DF.Float
 		lng: DF.Float
 		moo: DF.Data | None
@@ -34,14 +36,19 @@ class BillboardDocument2(Document):
           calculate_billboard_prices(self)
           cal_total_price(self)
           true_moo(self)
+          timeupdate(self)
 
 def calculate_billboard_prices(doc):
     for row in doc.data_billboards:
         if row.width and row.height:
-            price = (((row.width * row.height) / 500) * 3)
-            row.price = round(price, 2)
+            price = ((row.width * row.height) / 500) * 3
+            if price < 200:
+                row.price = 200
+            else:
+                row.price = round(price, 2)
         else:
             row.price = 0
+
             
 def cal_total_price(doc):
     total_price_cal = 0
@@ -54,4 +61,6 @@ def true_moo(doc):
     if int(doc.moo) >= 6 and int(doc.moo) < 8:
         tmoo = int(doc.moo) + 1
         doc.moo = str(tmoo)
-
+        
+def timeupdate(doc):
+    doc.lastest_update = frappe.utils.now()

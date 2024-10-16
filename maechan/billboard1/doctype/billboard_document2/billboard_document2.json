@@ -19,7 +19,7 @@
   "payment_status",
   "billboard_status",
   "is_doctype_copy",
-  "lastest_update"
+  "lastest_year_update"
  ],
  "fields": [
   {
@@ -109,15 +109,15 @@
    "options": "true\nfalse"
   },
   {
-   "fieldname": "lastest_update",
-   "fieldtype": "Datetime",
+   "fieldname": "lastest_year_update",
+   "fieldtype": "Data",
    "in_standard_filter": 1,
-   "label": "lastest_update"
+   "label": "lastest_year_update"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-16 11:46:04.579872",
+ "modified": "2024-10-16 12:11:34.039639",
  "modified_by": "Administrator",
  "module": "Billboard1",
  "name": "Billboard Document2",

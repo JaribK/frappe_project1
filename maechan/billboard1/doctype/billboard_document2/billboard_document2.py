@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-import frappe.utils
+from frappe.utils import now_datetime
 
 
 class BillboardDocument2(Document):
@@ -20,7 +20,7 @@ class BillboardDocument2(Document):
 		data_billboards: DF.Table[BillboardData2]
 		is_doctype_copy: DF.Literal["true", "false"]
 		land_id: DF.Link | None
-		lastest_update: DF.Datetime | None
+		lastest_year_update: DF.Data | None
 		lat: DF.Float
 		lng: DF.Float
 		moo: DF.Data | None
@@ -63,4 +63,4 @@ def true_moo(doc):
         doc.moo = str(tmoo)
         
 def timeupdate(doc):
-    doc.lastest_update = frappe.utils.now()
+    doc.lastest_year_update = now_datetime().year

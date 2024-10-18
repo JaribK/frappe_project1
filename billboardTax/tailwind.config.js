@@ -56,6 +56,19 @@ export default {
           900: '#3a3c3f',
           950: '#242628',
         },
+        'Fountain-Blue': {
+          50: '#f0fafb',
+          100: '#daf2f3',
+          200: '#bae4e7',
+          300: '#8acfd6',
+          400: '#63bac4',
+          500: '#3796a3',
+          600: '#307b8a',
+          700: '#2d6471',
+          800: '#2c535e',
+          900: '#284751',
+          950: '#162e36',
+        },
         'cruise': {
           50: '#eefbf6',
           100: '#d7f4e8',
@@ -85,7 +98,8 @@ export default {
       },
       fontFamily: {
         'Inter': ['Inter', 'sans-serif'],
-        'prompt' : ['Prompt', 'sans-serif']
+        'prompt' : ['Prompt', 'sans-serif'],
+        'Roboto' : ['Roboto', 'sans-serif']
       }
     },
   },

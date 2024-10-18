@@ -221,7 +221,15 @@ export default function ExploreFrom() {
       }
     }, [landNumber, idCardNumber, receiptNumber, ownerName]);
     
-
+    if (loading) return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center">
+          <i className="fa-solid fa-spinner animate-spin text-5xl mb-2"></i>
+          <p className='text-center'>Loading...</p>
+        </div>
+      </div>
+    );
+    
   const removeSign = (index) => {
     setSigns((prevSigns) => prevSigns.filter((_, i) => i !== index));
   };
@@ -269,7 +277,17 @@ export default function ExploreFrom() {
                 className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' 
               />
           </div>
-                  
+          
+          <div>
+            <p>เลขบัตรประชาชน</p>
+            <input 
+                className='h-8 w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1' 
+                type="text" 
+              value={idCardNumber} 
+              onChange={(e) => setIdCardNumber(e.target.value)} 
+            />
+          </div>  
+
           <div className="mt-3">
             <p>สถานะการจ่ายเงิน</p>
               <div className="flex flex-col ">
@@ -287,30 +305,18 @@ export default function ExploreFrom() {
                 <span>ยังไม่ได้ชำระ</span>
             </p>
 
-              {selectedPaymentStatus === 'ยังไม่จ่าย' && (
-                <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
-                  <p>เลขบัตรประชาชน</p>
-                  <input 
-                    className='rounded-md bg-seashellpeach-50 h-5'
-                    type="text" 
-                    value={idCardNumber} 
-                    onChange={(e) => setIdCardNumber(e.target.value)} 
-                  />
-                </div>
-              )}
-
-              <p
-                className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden 
-                  ${selectedPaymentStatus === 'จ่ายแล้ว' ? '' : ''}`}
-                onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
-              >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 
-                  ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
-                <span >ชำระแล้ว</span>
-              </p>
+            <p
+              className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden 
+                ${selectedPaymentStatus === 'จ่ายแล้ว' ? '' : ''}`}
+              onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
+            >
+              <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 
+                ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
+              <span >ชำระแล้ว</span>
+            </p>
 
               {selectedPaymentStatus === 'จ่ายแล้ว' && (
-                <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
+                <div className="w-9/12 mx-8 rounded-xl px-4 py-4 bg-curious-blue-300">
                   <p>เลขที่ใบเสร็จชำระเงิน</p>
                   <input 
                     className='rounded-md bg-seashellpeach-50 h-5'
@@ -329,9 +335,9 @@ export default function ExploreFrom() {
           </div> */}
 
           <div className='mt-3 inline-flex text-sm'>
-            <p>จำนวนเงินทั้งหมด (บาท) :</p>
+            <p>จำนวนเงินทั้งหมด :</p>
             {/* <input type="text" className='bg-inherit border-b ml-1  border-curious-blue-700 focus:border-curious-blue-700 outline-none'/> */}
-            <p className='bg-inherit  ml-1  '>{totalPrice.toLocaleString()}</p>
+            <p className='bg-inherit  ml-1  '>{totalPrice.toLocaleString()} บาท</p>
           </div>
 
           <div className='flex flex-col items-center mt-4'>

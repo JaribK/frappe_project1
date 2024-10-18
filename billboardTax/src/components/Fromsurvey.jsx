@@ -216,7 +216,7 @@ useEffect(() => {
               value={newBillboard.width} 
               onChange={(e) => handleChange('width',e.target.value)}
               name='width'
-              className='px-2 border rounded-md text-curious-blue-800'
+              className='px-2 border rounded-md text-curious-blue-950'
             />
           </div>
 
@@ -226,7 +226,7 @@ useEffect(() => {
               type="number" 
               onChange={(e) => handleChange('height',e.target.value)}
               value={newBillboard.height}
-              className='px-2 border rounded-md text-curious-blue-800'
+              className='px-2 border rounded-md text-curious-blue-950'
             />
           </div>
         </div>

@@ -21,9 +21,9 @@ const handleUpdate = (newData) => {
               <img src={sign.picture} alt={`Sign ${index + 1}`} className='rounded-md w-full h-full object-cover' />
             </div> 
             <div className='flex-1 mt-4 text-sky-950 mr-1 '>
-              <p><strong>ขนาด :</strong> {localSign.width * localSign.height}</p>
+              <p><strong>ขนาด :</strong> {localSign.width * localSign.height} ตร.ซม.</p>
               <p><strong>ประเภท :</strong> {localSign.type_of_billboards}</p>
-              <p><strong>ราคา :</strong> {localSign.price}</p>
+              <p><strong>ราคา :</strong> {localSign.price} บาท</p>
             </div>
             <div className='mt-1'>
               <i 

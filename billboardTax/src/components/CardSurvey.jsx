@@ -9,7 +9,7 @@ export default function CardSurvey({ landCode, ownerName, signCount,Lastupdate }
 });
 
   return (
-    <div className="flex items-center bg-white rounded-2xl border-none p-2.5 my-4">
+    <div className="flex items-center bg-white border-2 rounded-2xl  p-2.5 my-4">
         <div className="text-sm font-prompt font-normal">
           <p>รหัสที่ดิน: {landCode}</p>
           <p>ชื่อเจ้าของกิจการ: {ownerName}</p>

@@ -67,13 +67,13 @@ const Chartall = () => {
           label: 'จำนวนผลการสำรวจ',
           data: data,
           backgroundColor: [
-            'rgba(246, 213, 218, 0.2)',
-            'rgba(246, 176, 123, 0.2)',
-            'rgba(186, 228, 231, 0.2)',
-            'rgba(75, 188, 157, 0.2)',
-            'rgba(147, 196, 230, 0.2)',
-            'rgba(252, 229, 139, 0.2)',
-            'rgba(217, 206, 255, 0.2)',
+            'rgba(246, 213, 218, 1)',
+            'rgba(246, 176, 123, 1)',
+            'rgba(186, 228, 231, 1)',
+            'rgba(75, 188, 157, 1)',
+            'rgba(147, 196, 230, 1)',
+            'rgba(252, 229, 139, 1)',
+            'rgba(217, 206, 255, 1)'
           ].slice(0, data.length),
           borderColor: [
             'rgba(246, 213, 218, 1)',
@@ -139,7 +139,7 @@ const Chartall = () => {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <div className="w-full max-w-[800px] h-[500px] border-2 border-gray-300 bg-gray-50 p-5 mb-5 rounded-lg box-border ">
+      <div className="w-full max-w-[800px] h-[500px] border-2 border-gray-300 bg-linen-50 p-5 mb-5 rounded-lg box-border ">
         {chartType === 'bar' ? (
           <Pie data={chartData} options={options} />
         ) : (null)}

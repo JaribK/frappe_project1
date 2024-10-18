@@ -245,7 +245,7 @@ export default function ExploreFrom() {
   
   return (
     
-    <div className='flex justify-center min-h-screen bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 '>
+    <div className='flex justify-center min-h-screen  font-prompt font-normal text-curious-blue-950 '>
       <div className='w-5/6'>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
             <i className="fa fa-times" aria-hidden="true"></i>
@@ -298,7 +298,7 @@ export default function ExploreFrom() {
                   onClick={() => handlePaymentStatusChange('ยังไม่จ่าย')}
                 >
                 <span
-                  className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
+                  className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500 ${
                     selectedPaymentStatus === 'ยังไม่จ่าย' ? 'bg-curious-blue-500' : 'bg-white'
                   }`}
                 ></span>
@@ -310,7 +310,7 @@ export default function ExploreFrom() {
                 ${selectedPaymentStatus === 'จ่ายแล้ว' ? '' : ''}`}
               onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
             >
-              <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 
+              <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500
                 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
               <span >ชำระแล้ว</span>
             </p>

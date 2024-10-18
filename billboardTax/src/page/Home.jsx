@@ -286,7 +286,7 @@ export default function Home() {
                 <div className=''>
                 {Object.entries(groupedBillboards).map(([landCode, billboards]) => (
                 <div key={landCode}>
-                <h3 className='font-semibold font-prompt'>หมู่: {landCode}</h3>
+                <h3 className='font-semibold font-prompt'>หมู่ : {landCode}</h3>
                   {billboards
                   .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
                   billboard.billboard_status   !== 'ยกเลิกแล้ว'

@@ -263,7 +263,7 @@ const CardDetailPage = () => {
       
 
   return (
-    <div className='min-h-screen bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 flex justify-center'>
+    <div className='min-h-screen  font-prompt  font-normal text-curious-blue-950 flex justify-center'>
       {billboard ? (
         <div className='w-5/6'>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
@@ -304,7 +304,7 @@ const CardDetailPage = () => {
               <span
               value={billboard.billboard_status}
                 className={`
-                  inline-flex items-center justify-center w-5 h-5 rounded-full mr-2
+                  inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500
                   ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'
                   }`}
               ></span>
@@ -316,7 +316,7 @@ const CardDetailPage = () => {
             >
               <span
                 value={billboard.billboard_status}
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
+                className={`inline-flex items-center justify-center w-5 h-5 border-2 border-alto-500 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
               ></span>
               <span>ยกเลิก</span>
             </div>
@@ -343,7 +343,7 @@ const CardDetailPage = () => {
               onClick={() => handlePaymentStatusChange('ยังไม่จ่าย')}
             >
               <span
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
+                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500 ${
                   selectedPaymentStatus === 'ยังไม่จ่าย' ? 'bg-curious-blue-500' : 'bg-white'
                 }`}
               ></span>
@@ -354,7 +354,7 @@ const CardDetailPage = () => {
                 className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'active' : ''}`}
                 onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
               >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
                 <span >ชำระแล้ว</span>
               </p>
 

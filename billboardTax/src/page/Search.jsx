@@ -136,7 +136,7 @@ export default function Home() {
       border: '1px solid  #adadad', 
       fontFamily: 'prompt, sans-serif',
       borderRadius: '1.5rem', 
-      backgroundColor: state.isFocused ? '#ededed' : 'white', 
+      backgroundColor: state.isFocused ? '#ededed' : '#fef4eb', 
       paddingLeft: '12px',
       paddingRight: '2px', 
       boxShadow: state.isFocused ? '0 0 0 2px rgba(79, 70, 229, 0.5)' : 'none', 

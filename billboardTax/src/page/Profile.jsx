@@ -39,31 +39,31 @@ const handleNavigate = (path) => {
     <Navbar/>
     <div className="flex-grow overflow-auto">
     
-     <div className='flex items-center justify-center mt-6'>
-      <i className="fa-regular fa-circle-user text-6xl "></i>
+     <div className='flex items-center justify-center my-6'>
+      <i className="fa-regular fa-circle-user text-7xl "></i>
      </div>
-      <h3 className="text-lg  flex items-center justify-center my-3">ชื่อผู้ใช้ : {currentUser}</h3>
-      <div className='bg-curious-blue-100 rounded-md m-4'>
+      <h3 className="text-xl  flex items-center justify-center my-6">ชื่อผู้ใช้ : {currentUser}</h3>
+      <div className='bg-linen-50 rounded-md m-4'>
         <div className='flex items-center px-5 py-2.5 font-prompt ' onClick={() => handleNavigate('/setting')}>
           <p>ตั้งค่าการแสดงผล</p>
         </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-Fountain-Blue-200 ' onClick={() => handleNavigate('/setting')}>
+        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-alto-200 ' onClick={() => handleNavigate('/setting')}>
           <p>ตั้งค่าการประสิทธิภาพ</p>
         </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-Fountain-Blue-200' onClick={() => handleNavigate('/setting')}>
+        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-alto-200' onClick={() => handleNavigate('/setting')}>
           <p>ตั้งค่าความเป็นส่วนตัว</p>
         </div>
       </div>  
-      <div className='bg-curious-blue-100 rounded-md m-4'>
+      <div className='bg-linen-50 rounded-md m-4'>
         <div className='flex items-center px-5 py-2.5 font-prompt ' onClick={() => handleNavigate('/manual')}>
           <p>คู่มือการใช้งาน</p>
         </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-Fountain-Blue-200' onClick={() => handleNavigate('/help')}>
+        <div className='flex items-center px-5 py-2.5 font-prompt border-t-2 border-alto-200' onClick={() => handleNavigate('/help')}>
           <p>ศูนย์ช่วยเหลือ</p>
         </div>
         
       </div>
-      <div className='bg-curious-blue-100 rounded-md m-4' onClick={dologout}>
+      <div className='bg-linen-50 rounded-md m-4' onClick={dologout}>
         {/* <i className="fas fa-sign-out-alt text-2xl m-2.5 px-5" onClick={dologout}></i> */}
         <p className='mt-1 py-2 text-lg text-seashell-peach-600 flex justify-center items-center ' >Logout</p>
       </div>

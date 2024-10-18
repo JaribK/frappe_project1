@@ -52,7 +52,7 @@ export default function Manu() {
             onClick={() => handleNavigate(path)}
           >
             {currentPath === path && (
-              <div className={`absolute -bottom-2 left-0 w-full h-4 rounded-t-full ${getBackgroundColor(path)}`}></div>
+              <div className={`absolute -bottom-2 left-0 w-full h-4 rounded-t-full  flex items-center justify-center ${getBackgroundColor(path)}`}></div>
             )}
             {path === '/home' && <i className="fas fa-home mr-2.5 text-[1.7rem]"></i>}
             {path === '/search' && <i className="fa-solid fa-magnifying-glass mr-2.5 text-[1.7rem]"></i>}

@@ -291,7 +291,7 @@ export default function Home() {
                   .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
                   billboard.billboard_status   !== 'ยกเลิกแล้ว'
                   )
-                  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
+                  .sort((a, b) => new Date(b.modified_date) - new Date(a.modified_date))
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
                       <div ></div>

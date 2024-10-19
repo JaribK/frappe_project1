@@ -212,7 +212,7 @@ export default function Home() {
                   {displayedBillboards
                   .filter(billboard => new Date(billboard.modified_date).getFullYear() === year 
                   )
-                  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
+                  .sort((a, b) => new Date(b.modified_date) - new Date(a.modified_date))
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
                       <Card

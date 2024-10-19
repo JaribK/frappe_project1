@@ -162,15 +162,10 @@ export default function Home() {
       billboard.billboard_status   !== 'ยกเลิกแล้ว' && 
       billboard.moo === selectedMoo 
     )
-    .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date));
   
   const displayedBillboards = showAllCards ? filteredBillboards : filteredBillboards.slice(0, 4);
 
-  const displayedBillboard = oldBillboards
-  .filter(billboard => 
-    billboard.billboard_status !== 'ยกเลิกแล้ว'
-  )
-  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
+
   
 
 

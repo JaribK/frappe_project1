@@ -148,21 +148,8 @@ export default function Home() {
     .filter(billboard => billboard.billboard_status !== 'ยกเลิกแล้ว' &&
       billboard.is_doctype_copy !== 'true'
     )
-    .sort((a, b) => {
-      const aModified = new Date(a.modified_date);
-      const bModified = new Date(b.modified_date);
-      const aCreated = new Date(a.created_date);
-      const bCreated = new Date(b.created_date);
-      if (aModified.getTime() === aCreated.getTime() && bModified.getTime() === bCreated.getTime()) {
-        return bCreated - aCreated;
-      } else if (aModified.getTime() === aCreated.getTime()) {
-        return -1;
-      } else if (bModified.getTime() === bCreated.getTime()) {
-        return 1;
-      } else {
-        return aModified - bModified;
-      }
-    });
+    .sort((a, b) => new Date(b.modified_date) - new Date(a.modified_date))
+
 
   const groupedBillboards = displayedBillboard.reduce((groups, billboard) => {
     const group = groups[billboard.moo] || [];

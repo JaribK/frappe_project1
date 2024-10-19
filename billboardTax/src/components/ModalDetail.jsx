@@ -252,9 +252,18 @@ const CardDetailPage = () => {
         setShowModal(false); 
       };
     
+      if (loading) return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg p-4 flex flex-col items-center">
+            <i className="fa-solid fa-spinner animate-spin text-5xl mb-2"></i>
+            <p className='text-center'>Loading...</p>
+          </div>
+        </div>
+      );
+      
 
   return (
-    <div className='min-h-screen bg-curious-blue-200 font-prompt font-normal text-curious-blue-950 flex justify-center'>
+    <div className='min-h-screen  font-prompt  font-normal text-curious-blue-950 flex justify-center'>
       {billboard ? (
         <div className='w-5/6'>
           <button onClick={onClose} className='absolute top-4 right-6 text-3xl '>
@@ -274,7 +283,16 @@ const CardDetailPage = () => {
             <p>ชื่อเจ้าของกิจการ/บริษัท</p>
             <p className='mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'>{billboard.owner_name}</p>
           </div>
-          
+          <div  className='mt-3'>
+            <p className='mb-1'>เลขบัตรประชาชน</p>
+            <input 
+              className='w-full mt-1 text-gray-500 bg-seashell-peach-50 rounded-md px-2 py-1'              
+              type="text" 
+              name="owner_cid"
+              value={formData.owner_cid} 
+              onChange={handleChange} 
+            />
+          </div>
           
          <div className='mt-3'>
           <p>สถานะของป้าย</p>
@@ -286,7 +304,7 @@ const CardDetailPage = () => {
               <span
               value={billboard.billboard_status}
                 className={`
-                  inline-flex items-center justify-center w-5 h-5 rounded-full mr-2
+                  inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500
                   ${selectedStatus === 'เปลี่ยนแปลงแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'
                   }`}
               ></span>
@@ -298,7 +316,7 @@ const CardDetailPage = () => {
             >
               <span
                 value={billboard.billboard_status}
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
+                className={`inline-flex items-center justify-center w-5 h-5 border-2 border-alto-500 rounded-full mr-2 ${selectedStatus === 'ยกเลิกแล้ว' ? 'shadow-[inset_0_0_0_4px_#4195CC] bg-blue-500' : 'bg-white'}`}
               ></span>
               <span>ยกเลิก</span>
             </div>
@@ -325,31 +343,18 @@ const CardDetailPage = () => {
               onClick={() => handlePaymentStatusChange('ยังไม่จ่าย')}
             >
               <span
-                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${
+                className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500 ${
                   selectedPaymentStatus === 'ยังไม่จ่าย' ? 'bg-curious-blue-500' : 'bg-white'
                 }`}
               ></span>
               <span>ยังไม่ได้ชำระ</span>
             </p>
 
-              {selectedPaymentStatus === 'ยังไม่จ่าย' && (
-                <div className="w-9/12 mx-8 rounded-xl px-5 py-4 bg-curious-blue-300">
-                  <p className='mb-1'>เลขบัตรประชาชน</p>
-                  <input 
-                    className='mt-1 mx-1 px-2 py-0.5 rounded-md bg-seashell-peach-50 w-11/12'
-                    type="text" 
-                    name="owner_cid"
-                    value={formData.owner_cid} 
-                    onChange={handleChange} 
-                  />
-                </div>
-              )}
-
               <p
                 className={`flex items-center px-4 py-2 rounded-full text-base  overflow-hidden ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'active' : ''}`}
                 onClick={() => handlePaymentStatusChange('จ่ายแล้ว')}
               >
-                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full mr-2 border-2 border-alto-500 ${selectedPaymentStatus === 'จ่ายแล้ว' ? 'bg-blue-500' : 'bg-white'}`}></span>
                 <span >ชำระแล้ว</span>
               </p>
 

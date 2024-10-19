@@ -174,7 +174,7 @@ export default function Fromsurveynew({ onClose,addSign  }) {
             value={options.find(option => option.value === selectedType)}
             name="type_of_billboards"
             onChange={(selectedOption) => handleChange('type_of_billboards', selectedOption.value)}          
-            className='text-curious-blue-800'
+            className='text-curious-blue-950'
             placeholder="-- โปรดเลือกประเภทป้าย --"
           />
         </div>
@@ -187,7 +187,7 @@ export default function Fromsurveynew({ onClose,addSign  }) {
               value={newBillboard.width} 
               onChange={(e) => handleChange('width', e.target.value)}
               name='width'
-              className='px-2 border rounded-md text-curious-blue-800'
+              className='px-2 border rounded-md text-curious-blue-950'
             />
           </div>
 

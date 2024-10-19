@@ -12,13 +12,13 @@ export default function SigncardNew({ sign,onRemove  }) {
     </div>
     <div className='flex-1 mt-4 text-sky-950 mr-1'>
       <p>
-        <strong>ขนาด :</strong> {sign.width * sign.height}
+        <strong>ขนาด :</strong> {sign.width * sign.height}  ตร.ซม.
       </p>
       <p>
         <strong>ประเภท :</strong> {sign.type_of_billboards}
       </p>
       <p>
-        <strong>ราคา :</strong> {sign.price}
+        <strong>ราคา :</strong> {sign.price} บาท
       </p>
     </div>
     <div className='mt-1'>

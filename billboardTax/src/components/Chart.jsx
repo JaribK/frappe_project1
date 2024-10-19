@@ -138,7 +138,7 @@ const Chart = ({ selectedMoo }) => {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <div className="w-full max-w-[800px] h-[500px] border-2 border-gray-300 bg-gray-50 p-5 mb-5 rounded-lg box-border ">
+      <div className="w-full max-w-[800px] h-[500px] border-2 border-gray-300 bg-linen-50 p-5 mb-5 rounded-lg box-border ">
         {chartType === 'bar' ? (
           <Bar data={chartData} options={options} />
         ) : (null)}

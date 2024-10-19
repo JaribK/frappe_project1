@@ -9,7 +9,8 @@ import Explore from './page/Explore';
 import ExploreFrom from './components/ExploreFrom';
 import { FrappeProvider, useFrappeAuth } from 'frappe-react-sdk'
 import Map from './components/Map';
-
+import Profile from './page/Profile'
+import Search from './page/Search';
 
 function App() {
   return (
@@ -20,12 +21,12 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
-            <Route path="/manual" element={<Home />} />
-            <Route path="/help" element={<Home />} />
+            <Route path="/search" element={<Search />} />
             <Route path='/card-detail/:billboardname' element={<CardDetail />} />
             <Route path='/explorefrom/:landNumber' element={<ExploreFrom />} />
             <Route path='/explorefrom' element={<ExploreFrom />} />
             <Route path='/map' element={<Map/>} />
+            <Route path='/profile' element={<Profile/>} />
           </Routes>
         </Router>
       </FrappeProvider>

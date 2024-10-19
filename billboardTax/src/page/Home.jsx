@@ -145,7 +145,9 @@ export default function Home() {
 
  
   const displayedBillboard = billboards
-    .filter(billboard => billboard.billboard_status !== 'ยกเลิกแล้ว')
+    .filter(billboard => billboard.billboard_status !== 'ยกเลิกแล้ว' &&
+      billboard.is_doctype_copy !== 'true'
+    )
     .sort((a, b) => {
       const aModified = new Date(a.modified_date);
       const bModified = new Date(b.modified_date);

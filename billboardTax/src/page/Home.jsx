@@ -59,7 +59,7 @@ export default function Home() {
  useEffect(() => {
   const fetchData = () => {
     setLoading(true);
-    console.log('Loading state:', true);
+    //console.log('Loading state:', true);
     call.get("maechan.api.get_all_billboard_documents")
     .then(response => {
       setBillboards(response.message);  
@@ -83,11 +83,11 @@ export default function Home() {
  useEffect(() => {
   const fetchData = () => {
     setLoading(true);
-    console.log('Loading state:', true);
+    //console.log('Loading state:', true);
     call.get("maechan.api.get_all_false_billboard_documents")
     .then(response => {
       setOldBillboards(response.message);  
-      console.log(response.message)
+      //console.log(response.message)
       setLoading(false);  
     })
     .catch(err => {
@@ -104,8 +104,11 @@ export default function Home() {
   }, [call]);
 
 
-  const handleToggleShowAll = () => {
-    setShowAllCards(prev => !prev);
+  const handleToggleShowAll = (landCode) => {
+    setShowAllCards((prev) => ({
+      ...prev,
+      [landCode]: !prev[landCode],
+    }));
   };
 
   const handleCardClick = (billboard) => {
@@ -116,9 +119,6 @@ export default function Home() {
   };
 
 
-  const sortedBillboards = billboards.sort((a, b) => {
-      return new Date(a.created_date) - new Date(b.created_date);
-  });
   const uniqueYears = [...new Set(billboards.map(billboard => new Date(billboard.modified_date).getFullYear()))];
   const sortedYears = uniqueYears.sort((a, b) => a - b);
 
@@ -141,139 +141,40 @@ export default function Home() {
     </div>
   );
   
+  console.log('billboard',billboards)
 
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      border: 'none', 
-      fontFamily: 'prompt, sans-serif',
-      borderRadius: '1.5rem', 
-      backgroundColor: 'white',
-      paddingLeft: '12px',
-      paddingRight: '2px', 
-      boxShadow: state.isFocused ? '0 0 0 2px rgba(79, 70, 229, 0.5)' : 'none', 
-    }),
-    dropdownIndicator: (provided) => ({
-      ...provided,
-      paddingRight: '8px', 
-    }),
-    indicatorSeparator: () => ({
-      display: 'none', 
-    }),
-    option: (provided) => ({
-      ...provided,
-      fontFamily: 'prompt, sans-serif',
-      color: '#13293e',
-    })
-  };
+ 
+  const displayedBillboard = billboards
+    .filter(billboard => billboard.billboard_status !== 'ยกเลิกแล้ว')
+    .sort((a, b) => {
+      const aModified = new Date(a.modified_date);
+      const bModified = new Date(b.modified_date);
+      const aCreated = new Date(a.created_date);
+      const bCreated = new Date(b.created_date);
+      if (aModified.getTime() === aCreated.getTime() && bModified.getTime() === bCreated.getTime()) {
+        return bCreated - aCreated;
+      } else if (aModified.getTime() === aCreated.getTime()) {
+        return -1;
+      } else if (bModified.getTime() === bCreated.getTime()) {
+        return 1;
+      } else {
+        return aModified - bModified;
+      }
+    });
 
-  const options = billboards
-  .map((billboard) => ({
-    value: billboard.moo,
-    label: `หมู่ ${billboard.moo}`,
-  }))
-  .filter(
-    (option, index, self) =>
-      index === self.findIndex((o) => o.value === option.value)
-  );
-
-  const filteredBillboards = oldBillboards
-    .filter(billboard =>
-      billboard.billboard_status   !== 'ยกเลิกแล้ว' && 
-      billboard.moo === selectedMoo 
-    )
-    .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date));
-  
-  const displayedBillboards = showAllCards ? filteredBillboards : filteredBillboards.slice(0, 4);
-
-  const displayedBillboard = oldBillboards
-  .filter(billboard => 
-    billboard.billboard_status !== 'ยกเลิกแล้ว'
-  )
-  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
-  
-
-  const limitedBillboards = showAllCards ? displayedBillboard : displayedBillboard.slice(0, 4);
-
-  const groupedBillboards = limitedBillboards
-  .filter(billboard => 
-    billboard.billboard_status !== 'ยกเลิกแล้ว'
-  )
-  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
-  .reduce((groups, billboard) => {
+  const groupedBillboards = displayedBillboard.reduce((groups, billboard) => {
     const group = groups[billboard.moo] || [];
     group.push(billboard);
     groups[billboard.moo] = group;
     return groups;
   }, {});
 
+  console.log('groupedBillboards',groupedBillboards)
+
   return (
     <div className='flex flex-col min-h-screen'>
       <Navbar toggleSidebar={toggleSidebar} />
-      {/* <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} /> */}
     <div className="flex-grow overflow-auto">
-      
-      {/* <div className="relative m-6 flex justify-center items-center">
-        <Select
-          value={options.find(option => option.value === selectedMoo) || null}
-          onChange={handleSelectChange}
-          classNamePrefix="tailwind"
-          className="w-11/12 h-10 text-base text-black font-promt"
-          styles={customStyles}
-          options={options}
-          defaultValue={options[0]}
-          isDisabled={false}
-          isLoading={false}
-          isClearable={true}
-          isRtl={false}
-          isSearchable={true}
-          placeholder='โปรดเลือกหมู่...'
-        >
-        </Select>
-      </div> */}
-
-      {/* {selectedMoo ? (
-        <>
-        <Chart selectedMoo={selectedMoo}/>
-
-        <div className='p-5 text-left text-sky-950 '>
-          <div
-            className='underline text-xl font-prompt font-semibold text-sky-950'><p>ผลการสำรวจ</p></div>
-            {sortedYears.map((year, index) => (
-              <div key={year}>
-                <h3 className='text-center font-semibold font-prompt'>ปี {year}</h3>
-                <div className=''>
-                  {displayedBillboards
-                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year 
-                  )
-                  .sort((a, b) => new Date(a.modified_date) - new Date(b.modified_date))
-                  .map(billboard => (
-                      <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
-                      <Card
-                          landCode={billboard.land_id}
-                          ownerName={billboard.owner_name}
-                          signCount={billboard.data_billboards.length}
-                          Lastupdate={billboard.modified_date}
-                      />
-                  </div>
-                    ))}
-                    {displayedBillboards.length > 2 && (
-                      <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
-                        {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
-                      </p>
-                    )}
-                </div>
-                {index < sortedYears.length - 1 && <hr className="divide-y border-gray-400 my-5" />}
-            </div>
-          ))}
-          {sortedYears.length > 2 && (
-            <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
-              {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
-            </p>
-          )}
-        </div>
-      </>
-      ) : ( */}
         <>
         <Chartall/>
 
@@ -288,10 +189,8 @@ export default function Home() {
                 <div key={landCode}>
                 <h3 className='font-semibold font-prompt'>หมู่ : {landCode}</h3>
                   {billboards
-                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year && 
-                  billboard.billboard_status   !== 'ยกเลิกแล้ว'
-                  )
-                  .sort((a, b) => new Date(b.modified_date) - new Date(a.modified_date))
+                  .filter(billboard => new Date(billboard.modified_date).getFullYear() === year)
+                  .slice(0, showAllCards[landCode] ? billboards.length : 4)
                   .map(billboard => (
                       <div key={billboard.name} onClick={() => handleCardClick(billboard)}>
                       <div ></div>
@@ -304,8 +203,11 @@ export default function Home() {
                       </div>
                     ))}
                     {billboards.length > 4 && (
-                      <p onClick={handleToggleShowAll} className='underline text-center font-prompt font-semibold text-sky-950'>
-                        {showAllCards ? 'ปิด' : 'ดูเพิ่มเติม'}
+                      <p
+                        onClick={() => handleToggleShowAll(landCode)}
+                        className="underline text-center font-prompt font-semibold text-sky-950 cursor-pointer"
+                      >
+                        {showAllCards[landCode] ? 'ปิด' : 'ดูเพิ่มเติม'}
                       </p>
                     )}
                     </div>
@@ -327,69 +229,69 @@ export default function Home() {
   )
 }
 
-function Sidebar({ isSidebarOpen, toggleSidebar }) {
-  const navigate = useNavigate();
-    const {
-    currentUser,
-    isValidating,
-    isLoading,
-    login,
-    logout,
-    error,
-    updateCurrentUser,
-    getUserCookie,
+// function Sidebar({ isSidebarOpen, toggleSidebar }) {
+//   const navigate = useNavigate();
+//     const {
+//     currentUser,
+//     isValidating,
+//     isLoading,
+//     login,
+//     logout,
+//     error,
+//     updateCurrentUser,
+//     getUserCookie,
 
-  } = useFrappeAuth()
+//   } = useFrappeAuth()
 
-  const dologout = async () => {
-    try {
-      if (!currentUser) {
-        console.error('user not found');
-        return;
-      }
-      await logout();
-      console.log('logout succeed')
-      navigate('/');
-    } catch (error) {
-      console.error('Logout failed', error);
-    }
-  };
+//   const dologout = async () => {
+//     try {
+//       if (!currentUser) {
+//         console.error('user not found');
+//         return;
+//       }
+//       await logout();
+//       console.log('logout succeed')
+//       navigate('/');
+//     } catch (error) {
+//       console.error('Logout failed', error);
+//     }
+//   };
 
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
+//   const handleNavigate = (path) => {
+//     navigate(path);
+//   };
 
-  return (
-      <div 
-        className={`fixed z-50 text-lg top-0 left-0 w-full h-full bg-gray-500 bg-opacity-80 text-white font-prompt font-bold overflow-hidden flex flex-col justify-between transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>    <div className='w-[250px] bg-sky-800 flex flex-col  h-full'
-        onClick={toggleSidebar}
-      >
-        <div className='w-[250px] bg-sky-800 flex flex-col h-full' onClick={(e) => e.stopPropagation()}>
-        <nav className='bg-sky-800 h-14'>
-          <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-3 " onClick={toggleSidebar}></i>
-        </nav> 
-        <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/home')}>
-          <i className="fas fa-home mr-2.5" ></i>
-          <p>หน้าแรก</p>
-        </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/explore')}>
-          <i className="fas fa-compass mr-2.5" ></i>
-          <p>สำรวจ</p>
-        </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/manual')}>
-          <i className="fas fa-book-open mr-2.5" ></i>
-          <p>คู่มือการใช้งาน</p>
-        </div>
-        <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-y-2 ' onClick={() => handleNavigate('/help')}>
-          <i className="fas fa-info-circle mr-2.5"></i>
-          <p>ศูนย์ช่วยเหลือ</p>
-        </div>
-        </div>
-        <div className='flex items-center border-t-2 inline-flex'>
-          <i className="fas fa-sign-out-alt  text-2xl m-2.5 px-5 " onClick={dologout}></i>
-        </div>
+//   return (
+//       <div 
+//         className={`fixed z-50 text-lg top-0 left-0 w-full h-full bg-gray-500 bg-opacity-80 text-white font-prompt font-bold overflow-hidden flex flex-col justify-between transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>    <div className='w-[250px] bg-sky-800 flex flex-col  h-full'
+//         onClick={toggleSidebar}
+//       >
+//         <div className='w-[250px] bg-sky-800 flex flex-col h-full' onClick={(e) => e.stopPropagation()}>
+//         <nav className='bg-sky-800 h-14'>
+//           <i className="fas fa-bars flex text-left w-7 text-white text-2xl px-6 py-3 " onClick={toggleSidebar}></i>
+//         </nav> 
+//         <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/home')}>
+//           <i className="fas fa-home mr-2.5" ></i>
+//           <p>หน้าแรก</p>
+//         </div>
+//         <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/explore')}>
+//           <i className="fas fa-compass mr-2.5" ></i>
+//           <p>สำรวจ</p>
+//         </div>
+//         <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-t-2 ' onClick={() => handleNavigate('/manual')}>
+//           <i className="fas fa-book-open mr-2.5" ></i>
+//           <p>คู่มือการใช้งาน</p>
+//         </div>
+//         <div className='flex items-center px-5 py-2.5 font-prompt font-bold border-y-2 ' onClick={() => handleNavigate('/help')}>
+//           <i className="fas fa-info-circle mr-2.5"></i>
+//           <p>ศูนย์ช่วยเหลือ</p>
+//         </div>
+//         </div>
+//         <div className='flex items-center border-t-2 inline-flex'>
+//           <i className="fas fa-sign-out-alt  text-2xl m-2.5 px-5 " onClick={dologout}></i>
+//         </div>
       
-      </div>
-    </div>
-  );
-}
+//       </div>
+//     </div>
+//   );
+// }

@@ -25,9 +25,9 @@ const Chartall = () => {
         const date = new Date()
         const thisyear = date.getFullYear()
         
-        console.log('this year', thisyear)
+        // console.log('this year', thisyear)
         
-        console.log('re', Response.message)
+        // console.log('re', Response.message)
        
         const filteredData = Response.message.filter(item => {
           const itemYear = new Date(item.modified_date).getFullYear();
@@ -40,11 +40,11 @@ const Chartall = () => {
         
 
         const year = new Date(Response.message[0].modified_date).getFullYear();
-        console.log('year', year)
+        //console.log('year', year)
 
         filteredData.forEach((item) => {
-          console.log('item:', item);
-          console.log('landid:', item.land_id);
+          // console.log('item:', item);
+          // console.log('landid:', item.land_id);
 
           if (!landidCountByMoo[item.moo]) {
             landidCountByMoo[item.moo] = {};
@@ -55,7 +55,7 @@ const Chartall = () => {
           landidCountByMoo[item.moo][item.land_id] += 1;
         });      
         
-        console.log('landidCountByMoo :',landidCountByMoo)
+        //console.log('landidCountByMoo :',landidCountByMoo)
 
         const labels = Object.keys(landidCountByMoo);
         const data = labels.map(moo => {
@@ -130,8 +130,8 @@ const Chartall = () => {
       },
     },
   };
-  console.log('chartData:', chartData);
-  console.log('datasets:', chartData.datasets);
+  // console.log('chartData:', chartData);
+  // console.log('datasets:', chartData.datasets);
 
   // const toggleChartType = () => {
   //   setChartType(prevType => (prevType === 'bar' ? 'pie' : 'bar'));

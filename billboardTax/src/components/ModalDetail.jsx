@@ -382,8 +382,8 @@ const CardDetailPage = () => {
           </div>
 
           <div className='flex flex-col items-center mt-4'>
-            <button className='mb-5 mt-2 px-3 py-4 rounded bg-curious-blue-500 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
-            <button className='self-end mb-5 px-6 py-2 rounded bg-cruise-500 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
+            <button className='mb-5 mt-2 px-3 py-4 rounded bg-curious-blue-400 text-white font-semibold text-xl' onClick={handleConfirmSurvey}>ยืนยันการสำรวจ</button>
+            <button className='self-end mb-5 px-6 py-2 rounded bg-cruise-400 text-white font-semibold text=lg' onClick={handleAddSign}>เพิ่มป้าย</button>
           </div>
 
           {showModal && (
